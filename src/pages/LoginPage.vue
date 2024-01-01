@@ -11,8 +11,10 @@
     </div>
     <div class="h-screen w-[50%]">
       <div class="flex justify-center items-center h-screen">
-        <div class="w-[617px] h-[561px] bg-white rounded-2xl p-7">
-          <div class="mb-10 font-semibold text-primary cursor-pointer text-lg">Login</div>
+        <div class="w-[617px] h-[561px] bg-white rounded-2xl p-7 shadow-lg">
+          <div class="mb-10 font-semibold text-primary cursor-pointer text-lg">
+            Login
+          </div>
 
           <div class="pl-7 pr-7">
             <div class="relative mb-6">
@@ -24,7 +26,7 @@
               <input
                 type="text"
                 id="floating_outlined"
-                class="border-b-2 rounded-md block px-2.5 pb-2.5 pt-4 w-full text-m text-gray-900 bg-transparent border-1 border-primary appearance-none dark:text-white dark:primary dark:focus:border-primary focus:outline-none focus:ring-0 focus:border-primary peer"
+                class="pl-16 border-b-2 rounded-md block px-2.5 pb-2.5 pt-4 w-full text-lg text-black bg-transparent border-1 border-primary appearance-none dark:text-black dark:primary dark:focus:border-primary focus:outline-none focus:ring-0 focus:border-primary peer"
                 placeholder=" "
               />
               <label
@@ -40,9 +42,9 @@
                 <LockClosedIcon class="h-9 w-9 text-gray-500" />
               </div>
               <input
-                type="text"
+                type="password"
                 id="floating_outlined2"
-                class="border-b-2 rounded-md block px-2.5 pb-2.5 pt-4 w-full text-m text-gray-900 bg-transparent border-1 border-primary appearance-none dark:text-white dark:primary dark:focus:border-primary focus:outline-none focus:ring-0 focus:border-primary peer"
+                class="pl-16 text-lg border-b-2 rounded-md block px-2.5 pb-2.5 pt-4 w-full text-gray-900 bg-transparent border-1 border-primary appearance-none dark:text-black dark:primary dark:focus:border-primary focus:outline-none focus:ring-0 focus:border-primary peer"
                 placeholder=" "
               />
               <label
@@ -59,7 +61,7 @@
                 <UserGroupIcon class="h-9 w-9 text-gray-500" />
               </div>
               <select
-                class="border-b-2 rounded-md block text-center px-2.5 pb-2.5 pt-4 w-full text-m text-gray-900 bg-transparent border-1 border-primary appearance-none dark:text-black dark:primary dark:focus:border-primary focus:outline-none focus:ring-0 focus:border-primary peer"
+                class="border-b-2 rounded-md block text-center px-2.5 pb-2.5 pt-4 w-full text-lg text-gray-900 bg-transparent border-1 border-primary appearance-none dark:text-black dark:primary dark:focus:border-primary focus:outline-none focus:ring-0 focus:border-primary peer"
                 name=""
                 id=""
               >
@@ -68,8 +70,22 @@
                 <option value="">Emergency Responder Unit</option>
               </select>
             </div>
-            <button class="w-full h-12 bg-primary text-white rounded-lg font-semibold mb-2" type="submit">Submit</button>
-            <div class="text-center ">Forgot Password? <span class="hover:underline text-blue-500 cursor-pointer"> Click Here</span></div>
+
+            <router-link class="" to="/operatorDashboard">
+              <button
+                class="w-full h-12 bg-primary text-white rounded-lg font-semibold mb-2 hover:bg-white hover:text-primary hover:border-primary border-primary border-2 transition duration-300"
+                type="submit"
+              >
+                Submit
+              </button>
+            </router-link>
+
+            <div class="text-center">
+              Forgot Password?
+              <span class="hover:underline text-blue-500 cursor-pointer">
+                Click Here</span
+              >
+            </div>
           </div>
         </div>
       </div>
@@ -78,6 +94,10 @@
 </template>
 
 <script setup>
+
+import { useRoute } from "vue-router";
+const route = useRoute();
+
 import {
   UserIcon,
   LockClosedIcon,
