@@ -71,7 +71,7 @@
               </select>
             </div>
 
-            <router-link class="" to="/operatorDashboard">
+            <router-link class="" to="/operatorPage">
               <button
                 class="w-full h-12 bg-primary text-white rounded-lg font-semibold mb-2 hover:bg-white hover:text-primary hover:border-primary border-primary border-2 transition duration-300"
                 type="submit"
