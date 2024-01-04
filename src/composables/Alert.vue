@@ -1,7 +1,7 @@
 <template>
   <div>
     <div
-      class="flex items-center w-full h-22 bg-white border-2 rounded-lg mb-4 border-gray-200 shadow-xl hover:shadow-[0_4px_4px_0px_rgba(0,0,0,0.70)] hover:scale-[1.02] p-2"
+      class="flex items-center w-full h-22 bg-white border-2 rounded-lg border-gray-200 shadow-xl hover:shadow-[0_4px_4px_0px_rgba(0,0,0,0.70)] hover:scale-[1.02] p-2"
     >
       <div class="w-[18%]">
         <div
@@ -10,8 +10,8 @@
           <mdicon class="text-white" name="fire" :width="58" :height="58" />
         </div>
       </div>
-      <div class="w-[53%] text-center font-medium text-xl">
-        <div>Balagtas Cebu City</div>
+      <div class="w-[53%] text-center font-medium text-xl ">
+        <div class="text-ternary">Balagtas Cebu City</div>
       </div>
       <div class="w-[29%] ">
         <button
