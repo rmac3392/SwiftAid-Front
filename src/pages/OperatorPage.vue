@@ -8,7 +8,8 @@
         class="h-[75%] w-full flex flex-col items-end text-3xl space-y-2 text-white font-medium"
       >
         <div
-          class="hover:bg-secondary hover:text-primary w-[90%] pl-10 rounded-l-lg"
+          :class="currenTab == 0 ? 'active-tab' : 'general-tab'"
+          @click="currenTab = 0"
         >
           <div class="flex gap-2 cursor-pointer">
             <div>
@@ -19,7 +20,8 @@
         </div>
 
         <div
-          class="hover:bg-secondary hover:text-primary w-[90%] pl-10 rounded-l-lg"
+          :class="currenTab == 1 ? 'active-tab' : 'general-tab'"
+          @click="currenTab = 1"
         >
           <div class="flex gap-2 cursor-pointer">
             <div>
@@ -30,7 +32,8 @@
         </div>
 
         <div
-          class="hover:bg-secondary hover:text-primary w-[90%] pl-10 rounded-l-lg"
+          :class="currenTab == 2 ? 'active-tab' : 'general-tab'"
+          @click="currenTab = 2"
         >
           <div class="flex gap-2 cursor-pointer">
             <div>
@@ -41,7 +44,8 @@
         </div>
 
         <div
-          class="hover:bg-secondary hover:text-primary w-[90%] pl-10 rounded-l-lg"
+          :class="currenTab == 3 ? 'active-tab' : 'general-tab'"
+          @click="currenTab = 3"
         >
           <div class="flex gap-2 cursor-pointer">
             <div>
@@ -55,87 +59,52 @@
     <div class="w-[80%]">
       <div class="h-[13%] w-full p-5">
         <div class="flex w-full h-full bg-white rounded-lg shadow-xl">
-          <div class=" w-[77%] p-3"><div class=" w-[100%] h-full rounded-xl text-primary font-semibold text-4xl flex items-center justify-start">Welcome Back, Ryan</div></div>
-          <div class="flex  w-[23%]">
-            <div class=" w-[25%] flex items-center justify-end">
-              <mdicon class="text-primary" name="account-circle" :width="70" :height="70" />
+          <div class="w-[77%] p-3">
+            <div
+              class="w-[100%] h-full rounded-xl text-primary font-semibold text-4xl flex items-center justify-start"
+            >
+              Welcome Back, Ryan
             </div>
-            <div class=" w-[75%]">
-              <div class="pt-5 h-[50%] text-xl font-medium flex items-center justify-center text-primary"><div>Macawili, Ryan James</div></div>
-              <div class="pb-5 h-[50%] text-l flex items-center justify-center text-primary">Operator</div>
+          </div>
+          <div class="flex w-[23%]">
+            <div class="w-[25%] flex items-center justify-end">
+              <mdicon
+                class="text-primary"
+                name="account-circle"
+                :width="70"
+                :height="70"
+              />
+            </div>
+            <div class="w-[75%]">
+              <div
+                class="pt-5 h-[50%] text-xl font-medium flex items-center justify-center text-primary"
+              >
+                <div>Macawili, Ryan James</div>
+              </div>
+              <div
+                class="pb-5 h-[50%] text-l flex items-center justify-center text-primary"
+              >
+                Operator
+              </div>
             </div>
           </div>
         </div>
       </div>
-      <div class="flex h-[87%] w-full">
-        <div class="w-[100%] h-full pl-3 pr-5 pb-2 flex">
-          <AlertPane />
-          <div class="w-[70%] h-full pl-3">
-            <div class="flex h-[15%] w-[100%] pb-3 gap-6 items-end">
-              <div
-                class="flex h-full w-[25%] bg-white rounded-lg shadow-xl text-primary p-2"
-              >
-                <div class="flex items-center justify-center w-[40%] p-3">
-                  <div class="bg-secondary w-full h-full rounded-md flex items-center justify-center">
-                    <mdicon class="" name="close-thick" :width="45" :height="45" />
-                  </div>
-                </div>
-                <div class="w-[60%] pl-1 pb-3 pt-6">
-                  <div class="h-[50%] flex items-center font-semibold text-5xl ">2</div>
-                  <div class="h-[50%] flex items-center text-ternary">Cancel Reports</div>
-                </div>
-              </div>
-              <div
-                class="flex h-full w-[25%] bg-white rounded-lg shadow-xl text-primary p-2"
-              >
-                <div class="flex items-center justify-center w-[40%] p-3">
-                  <div class="bg-secondary w-full h-full rounded-md flex items-center justify-center">
-                    <mdicon class="" name="send-variant" :width="45" :height="45" />
-                  </div>
-                </div>
-                <div class="w-[60%] pl-1 pb-3 pt-6">
-                  <div class="h-[50%] flex items-center font-semibold text-5xl ">8</div>
-                  <div class="h-[50%] flex items-center text-ternary">Send Reports</div>
-                </div>
-              </div>
-              <div
-                class="flex h-full w-[25%] bg-white rounded-lg shadow-xl text-primary p-2"
-              >
-                <div class="flex items-center justify-center w-[40%] p-3">
-                  <div class="bg-secondary w-full h-full rounded-md flex items-center justify-center">
-                    <mdicon class="" name="receipt-clock" :width="45" :height="45" />
-                  </div>
-                </div>
-                <div class="w-[60%] pl-1 pb-3 pt-6">
-                  <div class="h-[50%] flex items-center font-semibold text-5xl ">3</div>
-                  <div class="h-[50%] flex items-center text-ternary">Pending</div>
-                </div>
-              </div>
-              <div
-                class="flex h-full w-[25%] bg-white rounded-lg shadow-xl text-primary p-2"
-              >
-                <div class="flex items-center justify-center w-[40%] p-3">
-                  <div class="bg-secondary w-full h-full rounded-md flex items-center justify-center">
-                    <mdicon class="" name="check-bold" :width="45" :height="45" />
-                  </div>
-                </div>
-                <div class="w-[60%] pl-1 pb-3 pt-6">
-                  <div class="h-[50%] flex items-center font-semibold text-5xl ">5</div>
-                  <div class="h-[50%] flex items-center text-ternary">Acknowledge</div>
-                </div>
-              </div>
-            </div>
-            <EditReportPane />
-          </div>
-        </div>
-      </div>
+      <!-- Current tab -->
+      <Transition name="fade" mode="out-in">
+        <DashboardTab v-if="currenTab == 0" />
+        <ReportTab v-else-if="currenTab == 1" />
+        <HelpTab v-else-if="currenTab == 2" />
+      </Transition>
     </div>
   </div>
 </template>
 
-
 <script setup>
-import AlertPane from "../components/AlertPane.vue";
-import EditReportPane from "../components/EditReportPane.vue";
-import GraphPane from "../components/GraphPane.vue";
+import { ref } from "vue";
+
+import DashboardTab from "../components/tabs/DashboardTab.vue";
+import HelpTab from "../components/tabs/HelpTab.vue";
+import ReportTab from "../components/tabs/ReportTab.vue";
+const currenTab = ref(0);
 </script>
