@@ -7,9 +7,7 @@
       <div
         class="h-[75%] w-full flex flex-col items-end text-3xl space-y-2 text-white font-medium"
       >
-        <div
-          class="hover:bg-secondary hover:text-primary w-[90%] pl-10 rounded-l-lg"
-        >
+        <div :class="tab === 0 ? 'active-tab' : 'general-tab'" @click="tab = 0">
           <div class="flex gap-2 cursor-pointer">
             <div>
               <mdicon class="" name="view-dashboard" :width="65" :height="65" />
@@ -18,9 +16,7 @@
           </div>
         </div>
 
-        <div
-          class="hover:bg-secondary hover:text-primary w-[90%] pl-10 rounded-l-lg"
-        >
+        <div :class="tab === 1 ? 'active-tab' : 'general-tab'" @click="tab = 1">
           <div class="flex gap-2 cursor-pointer">
             <div>
               <mdicon
@@ -34,9 +30,7 @@
           </div>
         </div>
 
-        <div
-          class="hover:bg-secondary hover:text-primary w-[90%] pl-10 rounded-l-lg"
-        >
+        <div :class="tab === 2 ? 'active-tab' : 'general-tab'" @click="tab = 2">
           <div class="flex gap-2 cursor-pointer">
             <div>
               <mdicon class="" name="help-box" :width="65" :height="65" />
@@ -45,9 +39,7 @@
           </div>
         </div>
 
-        <div
-          class="hover:bg-secondary hover:text-primary w-[90%] pl-10 rounded-l-lg"
-        >
+        <div :class="tab === 3 ? 'active-tab' : 'general-tab'" @click="tab = 3">
           <div class="flex gap-2 cursor-pointer">
             <div>
               <mdicon class="" name="logout" :width="65" :height="65" />
@@ -129,7 +121,12 @@
               <div
                 class="bg-secondary w-full h-full rounded-md flex items-center justify-center"
               >
-                <mdicon class="" name="police-station" :width="45" :height="45" />
+                <mdicon
+                  class=""
+                  name="police-station"
+                  :width="45"
+                  :height="45"
+                />
               </div>
             </div>
             <div class="w-[60%] pl-1 pb-3 pt-6">
@@ -137,7 +134,7 @@
                 2
               </div>
               <div class="h-[50%] flex items-center text-ternary">
-                 Department
+                Department
               </div>
             </div>
           </div>
@@ -212,18 +209,11 @@
       </div>
       <!-- Count Total Departments -->
 
-      <div class="flex w-full h-[75%] gap-5">
-        <div class="w-[27%] bg-white rounded-lg shadow-xl p-6">
-          <EditUserPane/>
-        </div>
-        <div class="w-[50%] bg-white rounded-lg shadow-xl">
-
-        </div>
-        <div class="w-[23%] bg-white rounded-lg shadow-xl">
-
-        </div>
-      </div>
-
+      <!-- This is the admin dashbard page -->
+      <AdminDashboardTab v-if="tab === 0" />
+      <AdminUserTab v-else-if="tab === 1" />
+      <AdminHelpTab v-else-if="tab === 2" />
+      <AdminSignOutTab v-else-if="tab === 3" />
     </div>
   </div>
 </template>
@@ -233,4 +223,10 @@ import AlertPane from "../components/AlertPane.vue";
 import EditReportPane from "../components/EditReportPane.vue";
 import GraphPane from "../components/GraphPane.vue";
 import EditUserPane from "../components/EditUserPane.vue";
+import AdminDashboardTab from "../components/AdminDashboardTab.vue";
+import AdminUserTab from "../components/AdminUserTab.vue";
+import AdminSignOutTab from "../components/AdminSignOutTab.vue";
+import AdminHelpTab from "../components/AdminHelpTab.vue";
+import { ref } from "vue";
+const tab = ref(0);
 </script>

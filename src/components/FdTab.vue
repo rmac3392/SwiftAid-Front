@@ -1,21 +1,25 @@
 <template>
   <div
-    class="bg-active h-[95%] rounded-r-md rounded-b-md border-2 border-stroke"
+    class="bg-active h-[95%] rounded-r-md rounded-b-md border-2 border-stroke overflow-auto"
   >
-    <table :border="tableBorder.value">
+    <table class="w-full ">
       <thead>
         <tr>
-          <th>Header 1</th>
-          <th>Header 2</th>
-          <th>Header 3</th>
+          <th class="border-r-2 border-b-2 border-stroke">Name</th>
+          <th class="border-r-2 border-b-2 border-stroke">Location</th>
+          <th class="border-r-2 border-b-2 border-stroke">Report</th>
+          <th class=" border-b-2 border-stroke">Status</th>
         </tr>
       </thead>
-      <tbody>
-        <tr v-for="(row, index) in tableData" :key="index">
-          <td>{{ row.column1 }}</td>
-          <td>{{ row.column2 }}</td>
-          <td>{{ row.column3 }}</td>
-        </tr>
+      <tbody class="">
+        <tr v-for="(row, index) in tableData" :key="index" :class="{ 'bg-gray-200 border-b border-stroke': index % 2 === 1, 'bg-white border-b border-stroke': index % 2 !== 1 }">
+        <td class="border-r-2 border-stroke">{{ row.column1 }}</td>
+        <td class="border-r-2 border-stroke">{{ row.column2 }}</td>
+        <td class="border-r-2 border-stroke">{{ row.column3 }}</td>
+        <td class="border-stroke flex items-center justify-center">
+          <button class="bg-red-400 w-[70%] h-full rounded-xl font">Pending</button>
+        </td>
+      </tr>
       </tbody>
     </table>
   </div>
@@ -39,7 +43,107 @@ const tableData = [
     column2: "Row 3, Column 2",
     column3: "Row 3, Column 3",
   },
+  {
+    column1: "Row 3, Column 1",
+    column2: "Row 3, Column 2",
+    column3: "Row 3, Column 3",
+  },
+  {
+    column1: "Row 3, Column 1",
+    column2: "Row 3, Column 2",
+    column3: "Row 3, Column 3",
+  },
+  {
+    column1: "Row 3, Column 1",
+    column2: "Row 3, Column 2",
+    column3: "Row 3, Column 3",
+  },
+  {
+    column1: "Row 3, Column 1",
+    column2: "Row 3, Column 2",
+    column3: "Row 3, Column 3",
+  },
+  {
+    column1: "Row 3, Column 1",
+    column2: "Row 3, Column 2",
+    column3: "Row 3, Column 3",
+  },
+  {
+    column1: "Row 3, Column 1",
+    column2: "Row 3, Column 2",
+    column3: "Row 3, Column 3",
+  },
+  {
+    column1: "Row 3, Column 1",
+    column2: "Row 3, Column 2",
+    column3: "Row 3, Column 3",
+  },
+  {
+    column1: "Row 3, Column 1",
+    column2: "Row 3, Column 2",
+    column3: "Row 3, Column 3",
+  },
+  {
+    column1: "Row 3, Column 1",
+    column2: "Row 3, Column 2",
+    column3: "Row 3, Column 3",
+  },
+  {
+    column1: "Row 3, Column 1",
+    column2: "Row 3, Column 2",
+    column3: "Row 3, Column 3",
+  },
+  {
+    column1: "Row 3, Column 1",
+    column2: "Row 3, Column 2",
+    column3: "Row 3, Column 3",
+  },
+  {
+    column1: "Row 3, Column 1",
+    column2: "Row 3, Column 2",
+    column3: "Row 3, Column 3",
+  },
+  {
+    column1: "Row 3, Column 1",
+    column2: "Row 3, Column 2",
+    column3: "Row 3, Column 3",
+  },
+  {
+    column1: "Row 3, Column 1",
+    column2: "Row 3, Column 2",
+    column3: "Row 3, Column 3",
+  },
+  {
+    column1: "Row 3, Column 1",
+    column2: "Row 3, Column 2",
+    column3: "Row 3, Column 3",
+  },
+  {
+    column1: "Row 3, Column 1",
+    column2: "Row 3, Column 2",
+    column3: "Row 3, Column 3",
+  },
+  {
+    column1: "Row 3, Column 1",
+    column2: "Row 3, Column 2",
+    column3: "Row 3, Column 3",
+  },
+  {
+    column1: "Row 3, Column 1",
+    column2: "Row 3, Column 2",
+    column3: "Row 3, Column 3",
+  },
+  {
+    column1: "Row 3, Column 1",
+    column2: "Row 3, Column 2",
+    column3: "Row 3, Column 3",
+  },
+  {
+    column1: "Row 3, Column 1",
+    column2: "Row 3, Column 2",
+    column3: "Row 3, Column 3",
+  },
+  
 ];
 
-const tableBorder = ref("1");
 </script>

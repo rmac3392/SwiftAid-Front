@@ -80,7 +80,7 @@
               <div class="h-[50%] flex items-center font-semibold text-5xl">
                 3
               </div>
-              <div class="h-[50%] flex items-center text-ternary">Pending</div>
+              <div class="h-[50%] flex items-center text-ternary font-semibold">Pending</div>
             </div>
           </div>
           <div

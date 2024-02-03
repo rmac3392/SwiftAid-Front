@@ -95,6 +95,7 @@
         <DashboardTab v-if="currenTab == 0" />
         <ReportTab v-else-if="currenTab == 1" />
         <HelpTab v-else-if="currenTab == 2" />
+        <SignOutTab v-else-if="currenTab == 3" />
       </Transition>
     </div>
   </div>
@@ -106,5 +107,6 @@ import { ref } from "vue";
 import DashboardTab from "../components/tabs/DashboardTab.vue";
 import HelpTab from "../components/tabs/HelpTab.vue";
 import ReportTab from "../components/tabs/ReportTab.vue";
+import SignOutTab from "../components/SignOutTab.vue"
 const currenTab = ref(0);
 </script>
