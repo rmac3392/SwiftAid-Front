@@ -92,10 +92,10 @@
       </div>
       <!-- Current tab -->
       <Transition name="fade" mode="out-in">
-        <DashboardTab v-if="currenTab == 0" />
-        <ReportTab v-else-if="currenTab == 1" />
-        <HelpTab v-else-if="currenTab == 2" />
-        <SignOutTab v-else-if="currenTab == 3" />
+        <OperatorDashboardTab v-if="currenTab == 0" />
+        <OperatorReportTab v-else-if="currenTab == 1" />
+        <OperatorHelpTab v-else-if="currenTab == 2" />
+        <OperatorSignOutTab v-else-if="currenTab == 3" />
       </Transition>
     </div>
   </div>
@@ -104,9 +104,9 @@
 <script setup>
 import { ref } from "vue";
 
-import DashboardTab from "../components/tabs/DashboardTab.vue";
-import HelpTab from "../components/tabs/HelpTab.vue";
-import ReportTab from "../components/tabs/ReportTab.vue";
-import SignOutTab from "../components/SignOutTab.vue"
+import OperatorDashboardTab from "../components/operatorTab/OperatorDashboardTab.vue";
+import OperatorHelpTab from "../components/operatorTab/OperatorHelpTab.vue";
+import OperatorReportTab from "../components/operatorTab/OperatorReportTab.vue";
+import OperatorSignOutTab from "../components/operatorTab/OperatorSignOutTab.vue"
 const currenTab = ref(0);
 </script>

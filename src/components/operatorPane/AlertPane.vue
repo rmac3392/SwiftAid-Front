@@ -15,5 +15,5 @@
   </div>
 </template>
 <script setup>
-import Alert from "../composables/Alert.vue";
+import Alert from "../../composables/Alert.vue";
 </script>

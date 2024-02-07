@@ -144,11 +144,11 @@
                 </div>
               </div>
               <Transition name="fade" mode="out-in">
-                <FdTab v-if="active == 0" />
-                <EmsTab v-else-if="active == 1" />
-                <SrTab v-else-if="active == 2" />
-                <PdTab v-else-if="active == 3" />
-                <CgTab v-else-if="active == 4" />
+                <FireDepartmentView v-if="active == 0" />
+                <EmergencyMedicalView v-else-if="active == 1" />
+                <SearchRescueView v-else-if="active == 2" />
+                <PoliceDepartmentView v-else-if="active == 3" />
+                <CoastGuardView v-else-if="active == 4" />
               </Transition>
             </div>
           </div>
@@ -177,11 +177,11 @@
 </template>
 
 <script setup>
-import FdTab from "../FdTab.vue";
-import EmsTab from "../EmsTab.vue";
-import SrTab from "../SrTab.vue";
-import PdTab from "../PdTab.vue";
-import CgTab from "../CgTab.vue";
+import FireDepartmentView from "../operatorView/FireDepartmentView.vue";
+import EmergencyMedicalView from "../operatorView/EmergencyMedicalView.vue";
+import SearchRescueView from "../operatorView/SearchRescueView.vue";
+import PoliceDepartmentView from "../operatorView/PoliceDepartmentView.vue";
+import CoastGuardView from "../operatorView/CoastGuardView.vue";
 import { Bar } from "vue-chartjs";
 import {
   Chart as ChartJS,

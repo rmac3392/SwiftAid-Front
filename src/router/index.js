@@ -13,14 +13,14 @@ const router = createRouter({
       component: () => import("../pages/OperatorPage.vue"),
     },
     {
-      path: "/adminPage",
-      name: "AdminPage",
-      component: () => import("../pages/AdminPage.vue"),
+      path: "/administratorPage",
+      name: "AdministratorPage",
+      component: () => import("../pages/AdministratorPage.vue"),
     },
     {
         path: "/eruUnit",
         name: "EruUnit",
-        component:() => import("../pages/EruUnit.vue")
+        component:() => import("../pages/ResponderUnitPage.vue")
     },
   ],
 });

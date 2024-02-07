@@ -219,14 +219,14 @@
 </template>
 
 <script setup>
-import AlertPane from "../components/AlertPane.vue";
-import EditReportPane from "../components/EditReportPane.vue";
-import GraphPane from "../components/GraphPane.vue";
-import EditUserPane from "../components/EditUserPane.vue";
-import AdminDashboardTab from "../components/AdminDashboardTab.vue";
-import AdminUserTab from "../components/AdminUserTab.vue";
-import AdminSignOutTab from "../components/AdminSignOutTab.vue";
-import AdminHelpTab from "../components/AdminHelpTab.vue";
+// import AlertPane from "../components/AlertPane.vue";
+// import EditReportPane from "../components/EditReportPane.vue";
+// import GraphPane from "../components/GraphPane.vue";
+// import EditUserPane from "../components/EditUserPane.vue";
+import AdminDashboardTab from "../components/administratorTab/AdminDashboardTab.vue";
+import AdminUserTab from "../components/administratorTab/AdminUserTab.vue";
+import AdminSignOutTab from "../components/administratorTab/AdminSignOutTab.vue";
+import AdminHelpTab from "../components/administratorTab/AdminHelpTab.vue";
 import { ref } from "vue";
 const tab = ref(0);
 </script>

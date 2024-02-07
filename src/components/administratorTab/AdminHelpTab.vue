@@ -34,7 +34,9 @@
       <div
         class="w-[90%] h-full bg-white rounded-lg pt-7 pb-32 text-primary font-bold text-5xl"
       >
-        <div class="flex items-center justify-start h-1/5 ml-5 mr-5">
+        <div
+          class="flex items-center justify-start h-1/5 ml-5 mr-5 font-extrabold"
+        >
           SwiftAid Help Center
         </div>
         <div
