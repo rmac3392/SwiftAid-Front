@@ -18,9 +18,9 @@ const router = createRouter({
       component: () => import("../pages/AdministratorPage.vue"),
     },
     {
-        path: "/eruUnit",
-        name: "EruUnit",
-        component:() => import("../pages/ResponderUnitPage.vue")
+      path: "/responderPage",
+      name: "responderPage",
+      component: () => import("../pages/ResponderUnitPage.vue"),
     },
   ],
 });

@@ -25,7 +25,12 @@
         >
           <div class="flex gap-2 cursor-pointer">
             <div>
-              <mdicon class="" name="chart-box" :width="65" :height="65" />
+              <mdicon
+                class=""
+                name="chart-bar-stacked"
+                :width="65"
+                :height="65"
+              />
             </div>
             <div class="flex items-center">Reports</div>
           </div>
@@ -37,9 +42,14 @@
         >
           <div class="flex gap-2 cursor-pointer">
             <div>
-              <mdicon class="" name="help-box" :width="65" :height="65" />
+              <mdicon
+                class=""
+                name="text-box-multiple"
+                :width="65"
+                :height="60"
+              />
             </div>
-            <div class="flex items-center">Help</div>
+            <div class="flex items-center">Records</div>
           </div>
         </div>
 
@@ -94,7 +104,7 @@
       <Transition name="fade" mode="out-in">
         <OperatorDashboardTab v-if="currenTab == 0" />
         <OperatorReportTab v-else-if="currenTab == 1" />
-        <OperatorHelpTab v-else-if="currenTab == 2" />
+        <OperatorRecordTab v-else-if="currenTab == 2" />
         <OperatorSignOutTab v-else-if="currenTab == 3" />
       </Transition>
     </div>
@@ -105,8 +115,8 @@
 import { ref } from "vue";
 
 import OperatorDashboardTab from "../components/operatorTab/OperatorDashboardTab.vue";
-import OperatorHelpTab from "../components/operatorTab/OperatorHelpTab.vue";
+import OperatorRecordTab from "../components/operatorTab/OperatorRecordTab.vue";
 import OperatorReportTab from "../components/operatorTab/OperatorReportTab.vue";
-import OperatorSignOutTab from "../components/operatorTab/OperatorSignOutTab.vue"
+import OperatorSignOutTab from "../components/operatorTab/OperatorSignOutTab.vue";
 const currenTab = ref(0);
 </script>
