@@ -230,4 +230,3 @@ import AdminHelpTab from "../components/administratorTab/AdminHelpTab.vue";
 import { ref } from "vue";
 const tab = ref(0);
 </script>
- 

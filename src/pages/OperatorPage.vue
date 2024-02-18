@@ -44,12 +44,12 @@
             <div>
               <mdicon
                 class=""
-                name="text-box-multiple"
+                name="MapMarkerQuestion"
                 :width="65"
                 :height="60"
               />
             </div>
-            <div class="flex items-center">Records</div>
+            <div class="flex items-center">Help</div>
           </div>
         </div>
 
@@ -118,5 +118,6 @@ import OperatorDashboardTab from "../components/operatorTab/OperatorDashboardTab
 import OperatorRecordTab from "../components/operatorTab/OperatorRecordTab.vue";
 import OperatorReportTab from "../components/operatorTab/OperatorReportTab.vue";
 import OperatorSignOutTab from "../components/operatorTab/OperatorSignOutTab.vue";
+
 const currenTab = ref(0);
 </script>

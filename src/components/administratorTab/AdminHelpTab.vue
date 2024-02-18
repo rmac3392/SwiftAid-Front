@@ -3,62 +3,65 @@
     <div class="h-full flex bg-white w-full rounded-lg shadow-xl">
       <div class="w-[10%] flex h-full bg-primary rounded-lg">
         <div
-          class="w-[90%] bg-primary h-full rounded-lg pt-32 pb-32 text-white"
+          class="w-[90%] bg-primary h-full rounded-lg text-white flex flex-col justify-center gap-y-10 pb-5"
         >
-          <div class="h-1/4 flex items-center justify-center">
+          <div class="flex items-center justify-center col-span-5">
             <mdicon
               class=""
               name="arrow-right-drop-circle"
-              :width="57.5"
-              :height="57.5"
+              :width="50"
+              :height="50"
             />
           </div>
-          <div class="flex items-center justify-center h-1/4">
+          <div class="flex items-center justify-center">
             <mdicon
               class=""
               name="clipboard-account"
-              :width="57.5"
-              :height="57.5"
+              :width="50"
+              :height="50"
             />
           </div>
-          <div class="flex items-center justify-center h-1/4">
-            <mdicon class="" name="cog" :width="57.5" :height="57.5" />
+          <div class="flex items-center justify-center my-">
+            <mdicon class="" name="cog" :width="50" :height="50" />
           </div>
-          <div class="flex items-center justify-center h-1/4">
-            <mdicon class="" name="update" :width="57.5" :height="57.5" />
-          </div>
+          <!-- <div class="flex items-center justify-center">
+            <mdicon class="" name="update" :width="50" :height="50" />
+          </div> -->
         </div>
         <div class="w-[3%] bg-white h-full"></div>
         <div class="w-[7%] bg-primary"></div>
       </div>
       <div
-        class="w-[90%] h-full bg-white rounded-lg pt-7 pb-32 text-primary font-bold text-5xl"
+        class="w-[90%] h-full bg-white rounded-lg pt-7 pb-32 text-primary font-semibold text-4xl"
       >
         <div
-          class="flex items-center justify-start h-1/5 ml-5 mr-5 font-extrabold"
+          class="flex items-center justify-start h-1/5 mx-5 border-b-2 border-primary"
         >
           SwiftAid Help Center
         </div>
         <div
-          class="flex items-center justify-start h-1/5 pl-5 pr-5 hover:bg-secondary cursor-pointer"
+          class="flex items-center justify-start h-1/5 px-5 my-5 hover:bg-secondary cursor-pointer"
         >
           Getting Started
         </div>
         <div
-          class="flex items-center justify-start h-1/5 pl-5 pr-5 hover:bg-secondary cursor-pointer"
+          class="flex items-center justify-start h-1/5 px-5 my-5 hover:bg-secondary cursor-pointer"
         >
           Contact Us
         </div>
         <div
-          class="flex items-center justify-start h-1/5 pl-5 pr-5 hover:bg-secondary cursor-pointer"
+          class="flex items-center justify-start h-1/5 px-5 my-5 hover:bg-secondary cursor-pointer"
         >
           Options
         </div>
-        <div
-          class="h-1/5 flex items-center justify-start pl-5 pr-5 hover:bg-secondary cursor-pointer"
+
+        <!-- Remove check for Updates -->
+
+        <!-- <div
+          class="h-1/5 flex items-center justify-start px-5 my-5 hover:bg-secondary cursor-pointer"
         >
           Check for updates
-        </div>
+        </div> -->
       </div>
     </div>
   </div>
