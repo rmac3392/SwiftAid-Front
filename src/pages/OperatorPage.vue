@@ -8,8 +8,8 @@
         class="h-[75%] w-full flex flex-col items-end text-3xl space-y-2 text-white font-medium"
       >
         <div
-          :class="currenTab == 0 ? 'active-tab' : 'general-tab'"
-          @click="currenTab = 0"
+          :class="currentTab === 0 ? 'active-tab' : 'general-tab'"
+          @click="currentTab = 0"
         >
           <div class="flex gap-2 cursor-pointer">
             <div>
@@ -20,8 +20,8 @@
         </div>
 
         <div
-          :class="currenTab == 1 ? 'active-tab' : 'general-tab'"
-          @click="currenTab = 1"
+          :class="currentTab === 1 ? 'active-tab' : 'general-tab'"
+          @click="currentTab = 1"
         >
           <div class="flex gap-2 cursor-pointer">
             <div>
@@ -37,8 +37,25 @@
         </div>
 
         <div
-          :class="currenTab == 2 ? 'active-tab' : 'general-tab'"
-          @click="currenTab = 2"
+          :class="currentTab === 2 ? 'active-tab' : 'general-tab'"
+          @click="currentTab = 2"
+        >
+          <div class="flex gap-2 cursor-pointer">
+            <div>
+              <mdicon
+                class=""
+                name="chart-bar-stacked"
+                :width="65"
+                :height="65"
+              />
+            </div>
+            <div class="flex items-center">Record</div>
+          </div>
+        </div>
+
+        <div
+          :class="currentTab === 3 ? 'active-tab' : 'general-tab'"
+          @click="currentTab = 3"
         >
           <div class="flex gap-2 cursor-pointer">
             <div>
@@ -54,8 +71,8 @@
         </div>
 
         <div
-          :class="currenTab == 3 ? 'active-tab' : 'general-tab'"
-          @click="currenTab = 3"
+          :class="currentTab === 4 ? 'active-tab' : 'general-tab'"
+          @click="currentTab = 4"
         >
           <div class="flex gap-2 cursor-pointer">
             <div>
@@ -102,10 +119,11 @@
       </div>
       <!-- Current tab -->
       <Transition name="fade" mode="out-in">
-        <OperatorDashboardTab v-if="currenTab == 0" />
-        <OperatorReportTab v-else-if="currenTab == 1" />
-        <OperatorRecordTab v-else-if="currenTab == 2" />
-        <OperatorSignOutTab v-else-if="currenTab == 3" />
+        <OperatorDashboardTab v-if="currentTab === 0" />
+        <OperatorReportTab v-else-if="currentTab === 1" />
+        <OperatorRecordTab v-else-if="currentTab === 2" />
+        <OperatorHelpTab v-else-if="currentTab === 3" />
+        <OperatorSignOutTab v-else-if="currentTab === 4" />
       </Transition>
     </div>
   </div>
@@ -118,6 +136,6 @@ import OperatorDashboardTab from "../components/operatorTab/OperatorDashboardTab
 import OperatorRecordTab from "../components/operatorTab/OperatorRecordTab.vue";
 import OperatorReportTab from "../components/operatorTab/OperatorReportTab.vue";
 import OperatorSignOutTab from "../components/operatorTab/OperatorSignOutTab.vue";
-
-const currenTab = ref(0);
+import OperatorHelpTab from "../components/operatorTab/OperatorHelpTab.vue";
+const currentTab = ref(0);
 </script>
