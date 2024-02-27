@@ -9,7 +9,7 @@
     </div>
   </div>
 </template>
-<script lang="ts" setup>
+<script setup>
 import { ref } from "vue";
 import { Pie } from "vue-chartjs";
 import {

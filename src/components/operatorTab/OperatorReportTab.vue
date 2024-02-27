@@ -2,106 +2,141 @@
   <div class="flex h-[87%] w-full">
     <div class="w-[100%] h-full pl-3 pr-5 pb-2 flex">
       <div class="w-[100%] h-[80%] pl-3">
-        <div class="flex h-[15%] w-[100%] bg-white items-end rounded-lg mb-4">
-          <div class="flex h-full w-[25%] text-primary flex-col">
-            <div class="flex items-end justify-end mr-[20%] mt-3">
-              <Notifications notif="8" />
-            </div>
-
-            <div class="flex flex-row gap-3 justify-center items-center">
-              <mdicon
-                class="origin-center"
-                name="ProgressUpload"
-                :width="40"
-                :height="40"
-              />
+        <div class="flex h-[15%] w-[100%] items-end rounded-lg mb-4">
+          <div
+            class="flex h-full w-[25%] text-primary flex-col justify-center items-center"
+          >
+            <div
+              class="bg-gray-100 py-5 rounded-lg border-2 border-white drop-shadow-lg px-12 justify-center items-center flex"
+            >
               <div
-                class="text-xl font-bold [text-shadow:_0_1px_0_rgb(0_0_0_/_40%)]"
+                class="flex items-end justify-end w-[100%] mr-[-13%] mt-[-42%] absolute z-20"
               >
-                Flood
+                <Notifications notif="8" />
+              </div>
+              <div class="flex flex-row gap-2 justify-center items-center">
+                <mdicon
+                  class="origin-center"
+                  name="ProgressUpload"
+                  :width="40"
+                  :height="40"
+                />
+                <div
+                  class="text-xl font-bold [text-shadow:_0_1px_0_rgb(0_0_0_/_40%)]"
+                >
+                  Flood
+                </div>
               </div>
             </div>
           </div>
-          <div class="flex h-full w-[25%] text-primary flex-col">
-            <div class="flex items-end justify-end mt-3 mr-[10%]">
-              <Notifications notif="3" />
-            </div>
-
-            <div class="flex flex-row gap-3 justify-center items-center">
-              <mdicon
-                class="origin-center -rotate-90"
-                name="ProgressClose"
-                :width="40"
-                :height="40"
-              />
+          <div
+            class="flex h-full w-[25%] text-primary flex-col justify-center items-center"
+          >
+            <div
+              class="bg-gray-100 py-5 rounded-lg border-2 border-white drop-shadow-lg px-6 justify-center items-center flex"
+            >
               <div
-                class="text-xl font-bold [text-shadow:_0_1px_0_rgb(0_0_0_/_40%)]"
+                class="flex items-end justify-end w-[100%] mr-[-13%] mt-[-36%] absolute z-20"
               >
-                Fire Incidents
+                <Notifications notif="8" />
+              </div>
+              <div class="flex flex-row gap-2 justify-center items-center">
+                <mdicon
+                  class="origin-center"
+                  name="ProgressUpload"
+                  :width="40"
+                  :height="40"
+                />
+                <div
+                  class="text-xl font-bold [text-shadow:_0_1px_0_rgb(0_0_0_/_40%)]"
+                >
+                  Fire Incident
+                </div>
               </div>
             </div>
           </div>
-          <div class="flex h-full w-[25%] text-primary flex-col">
-            <div class="flex items-end justify-end mr-[20%] mt-3">
-              <Notifications notif="5" />
-            </div>
-
-            <div class="flex flex-row gap-3 justify-center items-center">
-              <mdicon
-                class="origin-center"
-                name="ProgressCheck"
-                :width="40"
-                :height="40"
-              />
+          <div
+            class="flex h-full w-[25%] text-primary flex-col justify-center items-center"
+          >
+            <div
+              class="bg-gray-100 py-5 rounded-lg border-2 border-white drop-shadow-lg px-10 justify-center items-center flex"
+            >
               <div
-                class="text-xl font-bold [text-shadow:_0_1px_0_rgb(0_0_0_/_40%)]"
+                class="flex items-end justify-end w-[100%] mr-[-13%] mt-[-36%] absolute z-20"
               >
-                Typhoon
+                <Notifications notif="8" />
+              </div>
+              <div class="flex flex-row gap-2 justify-center items-center">
+                <mdicon
+                  class="origin-center"
+                  name="ProgressUpload"
+                  :width="40"
+                  :height="40"
+                />
+                <div
+                  class="text-xl font-bold [text-shadow:_0_1px_0_rgb(0_0_0_/_40%)]"
+                >
+                  Typhoon
+                </div>
               </div>
             </div>
           </div>
-          <div class="flex h-full w-[25%] text-primary flex-col mr-5">
-            <div class="flex items-end justify-end mr-[10%] mt-3">
-              <Notifications notif="9" />
-            </div>
-
-            <div class="flex flex-row gap-3 justify-center items-center">
-              <mdicon
-                class="origin-center"
-                name="ProgressQuestion"
-                :width="40"
-                :height="40"
-              />
+          <div
+            class="flex h-full w-[25%] text-primary flex-col justify-center items-center"
+          >
+            <div
+              class="bg-gray-100 py-5 rounded-lg border-2 border-white drop-shadow-lg px-6 justify-center items-center flex"
+            >
               <div
-                class="text-xl font-bold [text-shadow:_0_1px_0_rgb(0_0_0_/_40%)]"
+                class="flex items-end justify-end w-[100%] mr-[-13%] mt-[-36%] absolute z-20"
               >
-                Road Incidents
+                <Notifications notif="8" />
+              </div>
+              <div class="flex flex-row gap-2 justify-center items-center">
+                <mdicon
+                  class="origin-center"
+                  name="ProgressUpload"
+                  :width="40"
+                  :height="40"
+                />
+                <div
+                  class="text-xl font-bold [text-shadow:_0_1px_0_rgb(0_0_0_/_40%)]"
+                >
+                  Road Incident
+                </div>
               </div>
             </div>
           </div>
-          <div class="flex h-full w-[25%] text-primary flex-col mr-5">
-            <div class="flex items-end justify-end mr-[5%] mt-3">
-              <Notifications notif="9" />
-            </div>
-
-            <div class="flex flex-row gap-3 justify-center items-center">
-              <mdicon
-                class="origin-center"
-                name="ProgressQuestion"
-                :width="40"
-                :height="40"
-              />
+          <div
+            class="flex h-full w-[25%] text-primary flex-col justify-center items-center"
+          >
+            <div
+              class="bg-gray-100 py-5 rounded-lg border-2 border-white drop-shadow-lg px-6 justify-center items-center flex"
+            >
               <div
-                class="text-xl font-bold [text-shadow:_0_1px_0_rgb(0_0_0_/_40%)]"
+                class="flex items-end justify-end w-[100%] mr-[-13%] mt-[-33%] absolute z-20"
               >
-                Marine Incidents
+                <Notifications notif="8" />
+              </div>
+              <div class="flex flex-row gap-2 justify-center items-center">
+                <mdicon
+                  class="origin-center"
+                  name="ProgressUpload"
+                  :width="40"
+                  :height="40"
+                />
+                <div
+                  class="text-xl font-bold [text-shadow:_0_1px_0_rgb(0_0_0_/_40%)]"
+                >
+                  Marine Incident
+                </div>
               </div>
             </div>
           </div>
         </div>
         <div class="w-[100%] h-[107%] bg-[#dcd3dd] rounded-lg flex">
           <div
-            class="w-[30%] h-full pl-3 pr-3 pb-3 bg-white rounded-lg border-r-2 border-gray drop-shadow-lg"
+            class="w-[30%] h-full px-3 pb-3 bg-white rounded-lg border-r-2 border-gray drop-shadow-lg"
           >
             <div
               class="text-primary font-bold [text-shadow:_0_1px_0_rgb(0_0_0_/_40%)] text-xl flex text-center justify-center items-center my-7"

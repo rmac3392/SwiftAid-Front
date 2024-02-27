@@ -1,12 +1,12 @@
 <template>
   <div
-    class="flex justify-center items-end bg-red-700 rounded-full w-[10%] text-white font-500"
+    class="flex justify-center items-center bg-red-700 rounded-full w-[13%] h-[28px] text-white font-500"
   >
     {{ notif }}
   </div>
 </template>
 
-<script lang="ts" setup>
+<script setup>
 defineProps({
   notif: String,
 });

@@ -42,14 +42,9 @@
         >
           <div class="flex gap-2 cursor-pointer">
             <div>
-              <mdicon
-                class=""
-                name="chart-bar-stacked"
-                :width="65"
-                :height="65"
-              />
+              <mdicon class="" name="ClipboardList" :width="65" :height="65" />
             </div>
-            <div class="flex items-center">Record</div>
+            <div class="flex items-center">Records</div>
           </div>
         </div>
 

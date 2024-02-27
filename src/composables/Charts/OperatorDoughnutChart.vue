@@ -10,7 +10,7 @@
   </div>
 </template>
 
-<script lang="ts" setup>
+<script setup>
 import { Doughnut } from "vue-chartjs";
 import { ref } from "vue";
 

@@ -45,7 +45,7 @@
   </div>
 </template>
 
-<script lang="ts" setup>
+<script setup>
 import FireDepartmentView from "../../src/components/operatorView/FireDepartmentView.vue";
 import EmergencyMedicalView from "../../src/components/operatorView/EmergencyMedicalView.vue";
 import SearchRescueView from "../../src/components/operatorView/SearchRescueView.vue";

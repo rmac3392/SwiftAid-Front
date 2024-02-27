@@ -1,7 +1,7 @@
 <template>
   <div class="flex items-center justify-center w-full h-[72%] flex-col">
     <div
-      class="bg-gray border-white border-2 w-[70%] h-[500px] shadow-[0_4px_4px_0px_rgba(0,0,0,0.70)] drop-shadow-lg rounded-lg"
+      class="bg-gray border-white border-2 w-[100%] h-[500px] shadow-[0_4px_4px_0px_rgba(0,0,0,0.70)] drop-shadow-lg rounded-lg"
     >
       <div
         class="h-[50px] mt-[15%] mb-[5%] flex flex-col items-center justify-center text-xs text-black font-500"
@@ -55,7 +55,7 @@
     </div>
   </div>
 </template>
-<script lang="ts" setup>
+<script setup>
 defineProps({
   location: String,
   typeOfEmergency: String,
