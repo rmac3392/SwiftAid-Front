@@ -1,5 +1,5 @@
 <template>
-  <div class="flex bg-primary h-screen w-screen">
+  <div class="flex bg-[#2a2d57] h-screen w-screen">
     <div class="h-screen w-[50%]">
       <div class="flex items-center justify-center h-screen">
         <img
