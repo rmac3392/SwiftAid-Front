@@ -80,12 +80,16 @@
               </button>
             </router-link>
 
-            <div class="text-center">
-              Forgot Password?
-              <span class="hover:underline text-blue-500 cursor-pointer">
-                Click Here</span
-              >
-            </div>
+            <router-link class="" to="/forgotPasswordPage">
+              <div class="text-center">
+                Forgot Password? ><span
+                  class="hover:underline text-blue-500 cursor-pointer"
+                >
+                  Click Here</span
+                >
+                >
+              </div>
+            </router-link>
           </div>
         </div>
       </div>
@@ -94,8 +98,8 @@
 </template>
 
 <script setup>
-
 import { useRoute } from "vue-router";
+
 const route = useRoute();
 
 import {

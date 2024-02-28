@@ -1,9 +1,9 @@
 <template>
-  <div class="flex h-[75%] w-full p-20 pl-36 pr-36 rounded-lg">
+  <div class="flex h-[87%] w-full p-24 pl-32 pr-32 rounded-lg">
     <div class="h-full flex bg-white w-full rounded-lg shadow-xl">
       <div class="w-[10%] flex h-full bg-primary rounded-lg">
         <div
-          class="w-[90%] bg-primary h-full rounded-lg text-white flex flex-col justify-center gap-y-10 pb-5"
+          class="w-[90%] bg-primary h-full rounded-lg text-white flex flex-col justify-center gap-y-16 pb-5"
         >
           <div class="flex items-center justify-center col-span-5">
             <mdicon
@@ -66,5 +66,4 @@
     </div>
   </div>
 </template>
-
-<script setup></script>
+<script></script>

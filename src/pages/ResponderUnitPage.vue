@@ -92,7 +92,7 @@
         <div class="w-[15%] h-full"></div>
         <div class="w-[85%] h-full flex gap-6 items-end">
           <!-- Each department -->
-          <div
+          <!-- <div
             class="flex h-full w-[25%] bg-white rounded-lg shadow-xl text-primary p-2"
           >
             <div class="flex items-center justify-center w-[40%] p-3">
@@ -103,38 +103,42 @@
               </div>
             </div>
             <div class="w-[60%] pl-1 pb-3 pt-6">
-              <div class="h-[50%] flex items-center font-semibold text-5xl">
+              <div class="h-[50%] flex items-center font-semibold text-4xl">
                 2
               </div>
-              <div class="h-[50%] flex items-center text-ternary">
+              <div class="text-center flex font-500 text-black">
                 Fire Department
               </div>
             </div>
-          </div>
+          </div> -->
           <!-- Each department -->
 
           <!-- Each department -->
           <div
-            class="flex h-full w-[25%] bg-white rounded-lg shadow-xl text-primary p-2"
+            class="flex h-full w-[25%] bg-white rounded-lg shadow-xl text-primary p-3"
           >
-            <div class="flex items-center justify-center w-[40%] p-3">
+            <div class="flex items-center justify-center w-[30%]">
               <div
-                class="bg-secondary w-full h-full rounded-md flex items-center justify-center"
+                class="bg-secondary w-[90%] h-[90%] rounded-md flex items-center justify-center ml-[10%]"
               >
                 <mdicon
                   class=""
-                  name="police-station"
-                  :width="45"
-                  :height="45"
+                  name="EmailPlusOutline"
+                  :width="40"
+                  :height="40"
                 />
               </div>
             </div>
-            <div class="w-[60%] pl-1 pb-3 pt-6">
-              <div class="h-[50%] flex items-center font-semibold text-5xl">
+            <div class="w-[90%]">
+              <div
+                class="h-[50%] flex items-center justify-center font-semibold text-5xl pt-7 pb-2"
+              >
                 2
               </div>
-              <div class="h-[50%] flex items-center text-ternary">
-                Department
+              <div
+                class="h-[50%] flex justify-center items-center font-bold w-[100%] pt-5"
+              >
+                Recieved Report/s
               </div>
             </div>
           </div>
@@ -142,21 +146,25 @@
 
           <!-- Each department -->
           <div
-            class="flex h-full w-[25%] bg-white rounded-lg shadow-xl text-primary p-2"
+            class="flex h-full w-[25%] bg-white rounded-lg shadow-xl text-primary p-3"
           >
-            <div class="flex items-center justify-center w-[40%] p-3">
+            <div class="flex items-center justify-center w-[30%]">
               <div
-                class="bg-secondary w-full h-full rounded-md flex items-center justify-center"
+                class="bg-secondary w-[90%] h-[90%] rounded-md flex items-center justify-center ml-[10%]"
               >
-                <mdicon class="" name="close-thick" :width="45" :height="45" />
+                <mdicon class="" name="AccountCheck" :width="40" :height="40" />
               </div>
             </div>
-            <div class="w-[60%] pl-1 pb-3 pt-6">
-              <div class="h-[50%] flex items-center font-semibold text-5xl">
+            <div class="w-[90%]">
+              <div
+                class="h-[50%] flex items-center justify-center font-semibold text-5xl pt-7 pb-2"
+              >
                 2
               </div>
-              <div class="h-[50%] flex items-center text-ternary">
-                Cancel Reports
+              <div
+                class="h-[50%] flex justify-center items-center font-bold w-[100%] pt-5"
+              >
+                Acknowledge Report/s
               </div>
             </div>
           </div>
@@ -164,43 +172,25 @@
 
           <!-- Each department -->
           <div
-            class="flex h-full w-[25%] bg-white rounded-lg shadow-xl text-primary p-2"
+            class="flex h-full w-[25%] bg-white rounded-lg shadow-xl text-primary p-3"
           >
-            <div class="flex items-center justify-center w-[40%] p-3">
+            <div class="flex items-center justify-center w-[30%]">
               <div
-                class="bg-secondary w-full h-full rounded-md flex items-center justify-center"
+                class="bg-secondary w-[90%] h-[90%] rounded-md flex items-center justify-center ml-[10%]"
               >
-                <mdicon class="" name="close-thick" :width="45" :height="45" />
+                <mdicon class="" name="AlarmLight" :width="40" :height="40" />
               </div>
             </div>
-            <div class="w-[60%] pl-1 pb-3 pt-6">
-              <div class="h-[50%] flex items-center font-semibold text-5xl">
+            <div class="w-[90%]">
+              <div
+                class="h-[50%] flex items-center justify-center font-semibold text-5xl pt-7 pb-2"
+              >
                 2
               </div>
-              <div class="h-[50%] flex items-center text-ternary">
-                Cancel Reports
-              </div>
-            </div>
-          </div>
-          <!-- Each department -->
-
-          <!-- Each department -->
-          <div
-            class="flex h-full w-[25%] bg-white rounded-lg shadow-xl text-primary p-2"
-          >
-            <div class="flex items-center justify-center w-[40%] p-3">
               <div
-                class="bg-secondary w-full h-full rounded-md flex items-center justify-center"
+                class="h-[50%] flex justify-center items-center font-bold w-[100%] pt-5"
               >
-                <mdicon class="" name="close-thick" :width="45" :height="45" />
-              </div>
-            </div>
-            <div class="w-[60%] pl-1 pb-3 pt-6">
-              <div class="h-[50%] flex items-center font-semibold text-5xl">
-                2
-              </div>
-              <div class="h-[50%] flex items-center text-ternary">
-                Cancel Reports
+                Pending Report/s
               </div>
             </div>
           </div>
@@ -210,10 +200,10 @@
       <!-- Count Total Departments -->
 
       <!-- This is the admin dashbard page -->
-      <AdminDashboardTab v-if="tab === 0" />
-      <AdminUserTab v-else-if="tab === 1" />
-      <AdminHelpTab v-else-if="tab === 2" />
-      <AdminSignOutTab v-else-if="tab === 3" />
+      <ResponderDashboardTab v-if="tab === 0" />
+      <ResponderRecordTab v-else-if="tab === 1" />
+      <ResponderHelpTab v-else-if="tab === 2" />
+      <ResponderSignOutTab v-else-if="tab === 3" />
     </div>
   </div>
 </template>
@@ -223,7 +213,7 @@
 // import EditReportPane from "../components/EditReportPane.vue";
 // import GraphPane from "../components/GraphPane.vue";
 // import EditUserPane from "../components/EditUserPane.vue";
-import AdminDashboardTab from "../components/administratorTab/AdminDashboardTab.vue";
+import ResponderDashboardTab from "../components/responderTab/ResponderDasboardTab.vue";
 import AdminUserTab from "../components/administratorTab/AdminUserTab.vue";
 import AdminSignOutTab from "../components/administratorTab/AdminSignOutTab.vue";
 import AdminHelpTab from "../components/administratorTab/AdminHelpTab.vue";

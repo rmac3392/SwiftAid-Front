@@ -22,6 +22,12 @@ const router = createRouter({
       name: "responderPage",
       component: () => import("../pages/ResponderUnitPage.vue"),
     },
+
+    {
+      path: "/forgotPasswordPage",
+      name: "forgotPasswordPage",
+      component: () => import("../pages/ForgotPassword.vue"),
+    },
   ],
 });
 

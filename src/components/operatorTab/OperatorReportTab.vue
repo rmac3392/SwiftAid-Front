@@ -1,172 +1,169 @@
 <template>
-  <div class="h-[87%] w-full">
-    <div class="w-full h-full pl-3 pr-5 pb-2">
-      <div class="w-full h-[15%] flex">
-        <div class="w-[15%]"></div>
-        <div class="flex h-full w-[85%] pb-3 gap-6 items-end">
+  <div class="flex h-[87%] w-full">
+    <div class="w-[100%] h-full pl-3 pr-5 pb-2 flex">
+      <div class="w-[100%] h-[80%] pl-3">
+        <div class="flex h-[15%] w-[100%] items-end rounded-lg mb-4">
           <div
-            class="flex h-full w-[25%] bg-white rounded-lg shadow-xl text-primary p-2"
+            class="flex h-full w-[25%] text-primary flex-col justify-center items-center"
           >
-            <div class="flex items-center justify-center w-[40%] p-3">
+            <div
+              class="bg-gray-100 py-5 rounded-lg border-2 border-white drop-shadow-lg px-12 justify-center items-center flex"
+            >
               <div
-                class="bg-secondary w-full h-full rounded-md flex items-center justify-center"
+                class="flex items-end justify-end w-[100%] mr-[-13%] mt-[-42%] absolute z-20"
               >
-                <mdicon class="" name="close-thick" :width="45" :height="45" />
+                <Notifications notif="8" />
               </div>
-            </div>
-            <div class="w-[60%] pl-1 pb-3 pt-6">
-              <div class="h-[50%] flex items-center font-semibold text-5xl">
-                2
-              </div>
-              <div class="h-[50%] flex items-center text-ternary">
-                Cancel Reports
-              </div>
-            </div>
-          </div>
-          <div
-            class="flex h-full w-[25%] bg-white rounded-lg shadow-xl text-primary p-2"
-          >
-            <div class="flex items-center justify-center w-[40%] p-3">
-              <div
-                class="bg-secondary w-full h-full rounded-md flex items-center justify-center"
-              >
-                <mdicon class="" name="close-thick" :width="45" :height="45" />
-              </div>
-            </div>
-            <div class="w-[60%] pl-1 pb-3 pt-6">
-              <div class="h-[50%] flex items-center font-semibold text-5xl">
-                2
-              </div>
-              <div class="h-[50%] flex items-center text-ternary">
-                Cancel Reports
-              </div>
-            </div>
-          </div>
-          <div
-            class="flex h-full w-[25%] bg-white rounded-lg shadow-xl text-primary p-2"
-          >
-            <div class="flex items-center justify-center w-[40%] p-3">
-              <div
-                class="bg-secondary w-full h-full rounded-md flex items-center justify-center"
-              >
-                <mdicon class="" name="send-variant" :width="45" :height="45" />
-              </div>
-            </div>
-            <div class="w-[60%] pl-1 pb-3 pt-6">
-              <div class="h-[50%] flex items-center font-semibold text-5xl">
-                8
-              </div>
-              <div class="h-[50%] flex items-center text-ternary">
-                Send Reports
-              </div>
-            </div>
-          </div>
-          <div
-            class="flex h-full w-[25%] bg-white rounded-lg shadow-xl text-primary p-2"
-          >
-            <div class="flex items-center justify-center w-[40%] p-3">
-              <div
-                class="bg-secondary w-full h-full rounded-md flex items-center justify-center"
-              >
+              <div class="flex flex-row gap-2 justify-center items-center">
                 <mdicon
-                  class=""
-                  name="receipt-clock"
-                  :width="45"
-                  :height="45"
+                  class="origin-center"
+                  name="ProgressUpload"
+                  :width="40"
+                  :height="40"
                 />
+                <div
+                  class="text-xl font-bold [text-shadow:_0_1px_0_rgb(0_0_0_/_40%)]"
+                >
+                  Flood
+                </div>
               </div>
-            </div>
-            <div class="w-[60%] pl-1 pb-3 pt-6">
-              <div class="h-[50%] flex items-center font-semibold text-5xl">
-                3
-              </div>
-              <div class="h-[50%] flex items-center text-ternary font-semibold">Pending</div>
             </div>
           </div>
           <div
-            class="flex h-full w-[25%] bg-white rounded-lg shadow-xl text-primary p-2"
+            class="flex h-full w-[25%] text-primary flex-col justify-center items-center"
           >
-            <div class="flex items-center justify-center w-[40%] p-3">
+            <div
+              class="bg-gray-100 py-5 rounded-lg border-2 border-white drop-shadow-lg px-6 justify-center items-center flex"
+            >
               <div
-                class="bg-secondary w-full h-full rounded-md flex items-center justify-center"
+                class="flex items-end justify-end w-[100%] mr-[-13%] mt-[-36%] absolute z-20"
               >
-                <mdicon class="" name="check-bold" :width="45" :height="45" />
+                <Notifications notif="8" />
+              </div>
+              <div class="flex flex-row gap-2 justify-center items-center">
+                <font-awesome-icon :icon="['fas', 'house']" />
+                <div
+                  class="text-xl font-bold [text-shadow:_0_1px_0_rgb(0_0_0_/_40%)]"
+                >
+                  Fire Incident
+                </div>
               </div>
             </div>
-            <div class="w-[60%] pl-1 pb-3 pt-6">
-              <div class="h-[50%] flex items-center font-semibold text-5xl">
-                5
+          </div>
+          <div
+            class="flex h-full w-[25%] text-primary flex-col justify-center items-center"
+          >
+            <div
+              class="bg-gray-100 py-5 rounded-lg border-2 border-white drop-shadow-lg px-10 justify-center items-center flex"
+            >
+              <div
+                class="flex items-end justify-end w-[100%] mr-[-13%] mt-[-36%] absolute z-20"
+              >
+                <Notifications notif="8" />
               </div>
-              <div class="h-[50%] flex items-center text-ternary">
-                Acknowledge
+              <div class="flex flex-row gap-2 justify-center items-center">
+                <mdicon
+                  class="origin-center"
+                  name="ProgressUpload"
+                  :width="40"
+                  :height="40"
+                />
+                <div
+                  class="text-xl font-bold [text-shadow:_0_1px_0_rgb(0_0_0_/_40%)]"
+                >
+                  Typhoon
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="flex h-full w-[25%] text-primary flex-col justify-center items-center"
+          >
+            <div
+              class="bg-gray-100 py-5 rounded-lg border-2 border-white drop-shadow-lg px-6 justify-center items-center flex"
+            >
+              <div
+                class="flex items-end justify-end w-[100%] mr-[-13%] mt-[-36%] absolute z-20"
+              >
+                <Notifications notif="8" />
+              </div>
+              <div class="flex flex-row gap-2 justify-center items-center">
+                <mdicon
+                  class="origin-center"
+                  name="ProgressUpload"
+                  :width="40"
+                  :height="40"
+                />
+                <div
+                  class="text-xl font-bold [text-shadow:_0_1px_0_rgb(0_0_0_/_40%)]"
+                >
+                  Road Incident
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="flex h-full w-[25%] text-primary flex-col justify-center items-center"
+          >
+            <div
+              class="bg-gray-100 py-5 rounded-lg border-2 border-white drop-shadow-lg px-6 justify-center items-center flex"
+            >
+              <div
+                class="flex items-end justify-end w-[100%] mr-[-13%] mt-[-33%] absolute z-20"
+              >
+                <Notifications notif="8" />
+              </div>
+              <div class="flex flex-row gap-2 justify-center items-center">
+                <div
+                  class="text-xl font-bold [text-shadow:_0_1px_0_rgb(0_0_0_/_40%)]"
+                >
+                  Marine Incident
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-
-      <div class="h-[85%] w-full">
-        <div class="h-full flex">
-          <div class="w-[74.2%] p-[0.77rem]">
+        <div class="w-[100%] h-[107%] bg-[#dcd3dd] rounded-lg flex">
+          <div
+            class="w-[30%] h-full px-3 pb-3 bg-white rounded-lg border-r-2 border-gray drop-shadow-lg"
+          >
             <div
-              class="h-full w-full bg-white rounded-lg shadow-xl text-primary p-5"
+              class="text-primary font-bold [text-shadow:_0_1px_0_rgb(0_0_0_/_40%)] text-xl flex text-center justify-center items-center my-7"
             >
-              <div class="flex h-[5%]">
-                <div
-                  :class="active == 0 ? 'active-tabs' : 'general-tabs'"
-                  @click="active = 0"
-                >
-                  Fire Department
-                </div>
-                <div
-                  :class="active == 1 ? 'active-tabs' : 'general-tabs'"
-                  @click="active = 1"
-                >
-                  Emergency Medical Services
-                </div>
-                <div
-                  :class="active == 2 ? 'active-tabs' : 'general-tabs'"
-                  @click="active = 2"
-                >
-                  Search and Rescue Teams
-                </div>
-                <div
-                  :class="active == 3 ? 'active-tabs' : 'general-tabs'"
-                  @click="active = 3"
-                >
-                  Police Department
-                </div>
-                <div
-                  :class="active == 4 ? 'active-tabs' : 'general-tabs'"
-                  @click="active = 4"
-                >
-                  Coast Guards
-                </div>
-              </div>
-              <Transition name="fade" mode="out-in">
-                <FireDepartmentView v-if="active == 0" />
-                <EmergencyMedicalView v-else-if="active == 1" />
-                <SearchRescueView v-else-if="active == 2" />
-                <PoliceDepartmentView v-else-if="active == 3" />
-                <CoastGuardView v-else-if="active == 4" />
-              </Transition>
+              Pending Reports
             </div>
+            <Alert location="Pasil Cebu " />
+            <Alert location="Cebu City " />
+            <Alert location="Tejero Cebu" />
+            <Alert location="Sanciangko Cebu " />
+            <Alert location="Guadalupe Cebu" />
+            <Alert location="Labangon Cebu " />
+            <Alert location="Olango Lapu Lapu" />
           </div>
-          <div class="w-[25.8%] p-[0.77rem] pl-2 pr-0">
-            <div class="h-1/4 pb-3">
-              <div
-                class="h-full w-full bg-white rounded-lg shadow-xl text-primary p-2"
-              ></div>
+
+          <div class="flex flex-col col-span-1 w-[70%]">
+            <div
+              class="h-[55%] mx-5 bg-gray-100 border-2 border-white rounded-lg drop-shadow-lg"
+            >
+              <OperatorBarChart />
             </div>
-            <div class="h-3/4 pt-3">
+            <div
+              class="w-[96%] h-[50%] flex flex-row row-span-3 gap-5 my-5 mx-5"
+            >
               <div
-                class="h-full w-full bg-white rounded-lg shadow-xl text-primary p-5 flex items-center justify-center"
+                class="w-[33.3%] h-[105%] bg-gray-100 border-2 border-white gap-3 rounded-lg"
               >
-                <Bar
-                  id="my-chart-id"
-                  :options="chartOptions"
-                  :data="chartData"
-                />
+                <OperatorPieChart />
+              </div>
+              <div
+                class="w-[33.3%] h-[105%] bg-gray-100 border-2 border-white rounded-lg"
+              >
+                <OperatorDoughnutChart />
+              </div>
+              <div
+                class="w-[33.3%] h-[105%] bg-gray-100 border-2 border-white rounded-lg"
+              >
+                <OperatorPieChart />
               </div>
             </div>
           </div>
@@ -177,38 +174,9 @@
 </template>
 
 <script setup>
-import FireDepartmentView from "../operatorView/FireDepartmentView.vue";
-import EmergencyMedicalView from "../operatorView/EmergencyMedicalView.vue";
-import SearchRescueView from "../operatorView/SearchRescueView.vue";
-import PoliceDepartmentView from "../operatorView/PoliceDepartmentView.vue";
-import CoastGuardView from "../operatorView/CoastGuardView.vue";
-import { Bar } from "vue-chartjs";
-import {
-  Chart as ChartJS,
-  Title,
-  Tooltip,
-  Legend,
-  BarElement,
-  CategoryScale,
-  LinearScale,
-} from "chart.js";
-import { ref } from "vue";
-const active = ref(0);
-
-ChartJS.register(
-  Title,
-  Tooltip,
-  Legend,
-  BarElement,
-  CategoryScale,
-  LinearScale
-);
-const chartData = ref({
-  labels: ["January", "February", "March"],
-  datasets: [{ data: [40, 20, 12], backgroundColor: ["red", "green", "blue"] }],
-});
-
-const chartOptions = ref({
-  responsive: true,
-});
+import Notifications from "../../composables/Notifications.vue";
+import Alert from "../../composables/Alert.vue";
+import OperatorBarChart from "../../composables/Charts/OperatorBarChart.vue";
+import OperatorPieChart from "../../composables/Charts/OperatorPieChart.vue";
+import OperatorDoughnutChart from "../../composables/Charts/OperatorDoughnutChart.vue";
 </script>
