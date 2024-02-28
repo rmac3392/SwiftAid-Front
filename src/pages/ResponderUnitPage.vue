@@ -100,6 +100,7 @@
 // import GraphPane from "../components/GraphPane.vue";
 // import EditUserPane from "../components/EditUserPane.vue";
 import ResponderDashboardTab from "../components/responderTab/ResponderDasboardTab.vue";
+import ResponderRecordTab from "../components/responderTab/ResponderRecordTab.vue";
 import AdminUserTab from "../components/administratorTab/AdminUserTab.vue";
 import AdminSignOutTab from "../components/administratorTab/AdminSignOutTab.vue";
 import AdminHelpTab from "../components/administratorTab/AdminHelpTab.vue";
