@@ -26,7 +26,7 @@
                 :height="65"
               />
             </div>
-            <div class="flex items-center">Users</div>
+            <div class="flex items-center">Records</div>
           </div>
         </div>
 
@@ -58,26 +58,25 @@
             <div
               class="w-[100%] h-full rounded-xl text-primary font-semibold text-4xl flex items-center justify-start"
             >
-              Welcome Back, Ryan
+              Welcome Back, Michael
             </div>
           </div>
           <div class="flex w-[23%]">
-            <div class="w-[25%] flex items-center justify-end">
-              <mdicon
-                class="text-primary"
-                name="account-circle"
-                :width="70"
-                :height="70"
+            <div class="w-[25%] flex items-center">
+              <img
+                class="ml-[20%]"
+                src="../../src/assets/logo.png"
+                alt="logo"
               />
             </div>
             <div class="w-[75%]">
               <div
-                class="pt-5 h-[50%] text-xl font-medium flex items-center justify-center text-primary"
+                class="pt-5 h-[50%] text-xl font-bold flex items-center justify-center text-primary"
               >
-                <div>Macawili, Ryan James</div>
+                <div>Tonilon, Michael O.</div>
               </div>
               <div
-                class="pb-5 h-[50%] text-l flex items-center justify-center text-primary"
+                class="pb-5 h-[50%] text-l flex font-500 items-center justify-center text-primary [text-shadow:_0_1px_0_rgb(0_0_0_/_40%)]"
               >
                 Responder Unit
               </div>
@@ -85,119 +84,6 @@
           </div>
         </div>
       </div>
-      <!-- User Information -->
-
-      <!-- Count Total Departments -->
-      <div class="flex h-[13.5%] w-full pb-5">
-        <div class="w-[15%] h-full"></div>
-        <div class="w-[85%] h-full flex gap-6 items-end">
-          <!-- Each department -->
-          <!-- <div
-            class="flex h-full w-[25%] bg-white rounded-lg shadow-xl text-primary p-2"
-          >
-            <div class="flex items-center justify-center w-[40%] p-3">
-              <div
-                class="bg-secondary w-full h-full rounded-md flex items-center justify-center"
-              >
-                <mdicon class="" name="fire-station" :width="45" :height="45" />
-              </div>
-            </div>
-            <div class="w-[60%] pl-1 pb-3 pt-6">
-              <div class="h-[50%] flex items-center font-semibold text-4xl">
-                2
-              </div>
-              <div class="text-center flex font-500 text-black">
-                Fire Department
-              </div>
-            </div>
-          </div> -->
-          <!-- Each department -->
-
-          <!-- Each department -->
-          <div
-            class="flex h-full w-[25%] bg-white rounded-lg shadow-xl text-primary p-3"
-          >
-            <div class="flex items-center justify-center w-[30%]">
-              <div
-                class="bg-secondary w-[90%] h-[90%] rounded-md flex items-center justify-center ml-[10%]"
-              >
-                <mdicon
-                  class=""
-                  name="EmailPlusOutline"
-                  :width="40"
-                  :height="40"
-                />
-              </div>
-            </div>
-            <div class="w-[90%]">
-              <div
-                class="h-[50%] flex items-center justify-center font-semibold text-5xl pt-7 pb-2"
-              >
-                2
-              </div>
-              <div
-                class="h-[50%] flex justify-center items-center font-bold w-[100%] pt-5"
-              >
-                Recieved Report/s
-              </div>
-            </div>
-          </div>
-          <!-- Each department -->
-
-          <!-- Each department -->
-          <div
-            class="flex h-full w-[25%] bg-white rounded-lg shadow-xl text-primary p-3"
-          >
-            <div class="flex items-center justify-center w-[30%]">
-              <div
-                class="bg-secondary w-[90%] h-[90%] rounded-md flex items-center justify-center ml-[10%]"
-              >
-                <mdicon class="" name="AccountCheck" :width="40" :height="40" />
-              </div>
-            </div>
-            <div class="w-[90%]">
-              <div
-                class="h-[50%] flex items-center justify-center font-semibold text-5xl pt-7 pb-2"
-              >
-                2
-              </div>
-              <div
-                class="h-[50%] flex justify-center items-center font-bold w-[100%] pt-5"
-              >
-                Acknowledge Report/s
-              </div>
-            </div>
-          </div>
-          <!-- Each department -->
-
-          <!-- Each department -->
-          <div
-            class="flex h-full w-[25%] bg-white rounded-lg shadow-xl text-primary p-3"
-          >
-            <div class="flex items-center justify-center w-[30%]">
-              <div
-                class="bg-secondary w-[90%] h-[90%] rounded-md flex items-center justify-center ml-[10%]"
-              >
-                <mdicon class="" name="AlarmLight" :width="40" :height="40" />
-              </div>
-            </div>
-            <div class="w-[90%]">
-              <div
-                class="h-[50%] flex items-center justify-center font-semibold text-5xl pt-7 pb-2"
-              >
-                2
-              </div>
-              <div
-                class="h-[50%] flex justify-center items-center font-bold w-[100%] pt-5"
-              >
-                Pending Report/s
-              </div>
-            </div>
-          </div>
-          <!-- Each department -->
-        </div>
-      </div>
-      <!-- Count Total Departments -->
 
       <!-- This is the admin dashbard page -->
       <ResponderDashboardTab v-if="tab === 0" />

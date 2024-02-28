@@ -10,7 +10,7 @@
               class="bg-gray-100 py-5 rounded-lg border-2 border-white drop-shadow-lg px-12 justify-center items-center flex"
             >
               <div
-                class="flex items-end justify-end w-[100%] mr-[-13%] mt-[-42%] absolute z-20"
+                class="flex items-end justify-end w-[60%] mr-[-58%] mt-[-40%] absolute z-20"
               >
                 <Notifications notif="8" />
               </div>
@@ -36,12 +36,17 @@
               class="bg-gray-100 py-5 rounded-lg border-2 border-white drop-shadow-lg px-6 justify-center items-center flex"
             >
               <div
-                class="flex items-end justify-end w-[100%] mr-[-13%] mt-[-36%] absolute z-20"
+                class="flex items-end justify-end w-[57%] mr-[-58%] mt-[-35%] absolute z-20"
               >
                 <Notifications notif="8" />
               </div>
               <div class="flex flex-row gap-2 justify-center items-center">
-                <font-awesome-icon :icon="['fas', 'house']" />
+                <mdicon
+                  class="origin-center"
+                  name="ProgressUpload"
+                  :width="40"
+                  :height="40"
+                />
                 <div
                   class="text-xl font-bold [text-shadow:_0_1px_0_rgb(0_0_0_/_40%)]"
                 >
@@ -57,7 +62,7 @@
               class="bg-gray-100 py-5 rounded-lg border-2 border-white drop-shadow-lg px-10 justify-center items-center flex"
             >
               <div
-                class="flex items-end justify-end w-[100%] mr-[-13%] mt-[-36%] absolute z-20"
+                class="flex items-end justify-end w-[60%] mr-[-55%] mt-[-37%] absolute z-20"
               >
                 <Notifications notif="8" />
               </div>
@@ -83,7 +88,7 @@
               class="bg-gray-100 py-5 rounded-lg border-2 border-white drop-shadow-lg px-6 justify-center items-center flex"
             >
               <div
-                class="flex items-end justify-end w-[100%] mr-[-13%] mt-[-36%] absolute z-20"
+                class="flex items-end justify-end w-[53%] mr-[-60%] mt-[-35%] absolute z-20"
               >
                 <Notifications notif="8" />
               </div>
@@ -109,11 +114,17 @@
               class="bg-gray-100 py-5 rounded-lg border-2 border-white drop-shadow-lg px-6 justify-center items-center flex"
             >
               <div
-                class="flex items-end justify-end w-[100%] mr-[-13%] mt-[-33%] absolute z-20"
+                class="flex items-end justify-end w-[50%] mr-[-62%] mt-[-33%] absolute z-20"
               >
                 <Notifications notif="8" />
               </div>
               <div class="flex flex-row gap-2 justify-center items-center">
+                <mdicon
+                  class="origin-center"
+                  name="ProgressUpload"
+                  :width="40"
+                  :height="40"
+                />
                 <div
                   class="text-xl font-bold [text-shadow:_0_1px_0_rgb(0_0_0_/_40%)]"
                 >
@@ -132,13 +143,13 @@
             >
               Pending Reports
             </div>
-            <Alert location="Pasil Cebu " />
-            <Alert location="Cebu City " />
-            <Alert location="Tejero Cebu" />
-            <Alert location="Sanciangko Cebu " />
-            <Alert location="Guadalupe Cebu" />
-            <Alert location="Labangon Cebu " />
-            <Alert location="Olango Lapu Lapu" />
+            <Alert location="Pasil Cebu " button-alert="Details" />
+            <Alert location="Cebu City " button-alert="Details" />
+            <Alert location="Tejero Cebu" button-alert="Details" />
+            <Alert location="Sanciangko Cebu " button-alert="Details" />
+            <Alert location="Guadalupe Cebu" button-alert="Details" />
+            <Alert location="Labangon Cebu " button-alert="Details" />
+            <Alert location="Olango Lapu Lapu" button-alert="Details" />
           </div>
 
           <div class="flex flex-col col-span-1 w-[70%]">

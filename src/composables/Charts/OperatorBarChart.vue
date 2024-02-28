@@ -3,7 +3,12 @@
     <div class="h-full flex w-[100%]">
       <div class="w-[100%]">
         <div class="h-full pt-3 flex items-center justify-center">
-          <Bar id="my-chart-id" :options="chartOptions" :data="chartData" />
+          <Bar
+            class=""
+            id="my-chart-id"
+            :options="chartOptions"
+            :data="chartData"
+          />
         </div>
       </div>
     </div>
