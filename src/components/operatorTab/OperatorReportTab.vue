@@ -41,12 +41,7 @@
                 <Notifications notif="8" />
               </div>
               <div class="flex flex-row gap-2 justify-center items-center">
-                <mdicon
-                  class="origin-center"
-                  name="ProgressUpload"
-                  :width="40"
-                  :height="40"
-                />
+                <font-awesome-icon :icon="['fas', 'house']" />
                 <div
                   class="text-xl font-bold [text-shadow:_0_1px_0_rgb(0_0_0_/_40%)]"
                 >
@@ -119,12 +114,6 @@
                 <Notifications notif="8" />
               </div>
               <div class="flex flex-row gap-2 justify-center items-center">
-                <mdicon
-                  class="origin-center"
-                  name="ProgressUpload"
-                  :width="40"
-                  :height="40"
-                />
                 <div
                   class="text-xl font-bold [text-shadow:_0_1px_0_rgb(0_0_0_/_40%)]"
                 >

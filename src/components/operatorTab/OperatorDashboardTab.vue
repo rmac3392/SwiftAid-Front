@@ -62,7 +62,7 @@
               <div class="flex flex-row gap-2 justify-center items-center">
                 <mdicon
                   class="origin-center"
-                  name="ProgressUpload"
+                  name="ProgressClose"
                   :width="40"
                   :height="40"
                 />
@@ -88,7 +88,7 @@
               <div class="flex flex-row gap-2 justify-center items-center">
                 <mdicon
                   class="origin-center"
-                  name="ProgressUpload"
+                  name="ProgressCheck"
                   :width="40"
                   :height="40"
                 />
@@ -114,7 +114,7 @@
               <div class="flex flex-row gap-2 justify-center items-center">
                 <mdicon
                   class="origin-center"
-                  name="ProgressUpload"
+                  name="ProgressQuestion"
                   :width="40"
                   :height="40"
                 />
