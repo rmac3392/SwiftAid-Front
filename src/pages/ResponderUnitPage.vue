@@ -101,9 +101,9 @@
 // import EditUserPane from "../components/EditUserPane.vue";
 import ResponderDashboardTab from "../components/responderTab/ResponderDasboardTab.vue";
 import ResponderRecordTab from "../components/responderTab/ResponderRecordTab.vue";
-import AdminUserTab from "../components/administratorTab/AdminUserTab.vue";
-import AdminSignOutTab from "../components/administratorTab/AdminSignOutTab.vue";
-import AdminHelpTab from "../components/administratorTab/AdminHelpTab.vue";
+
+import ResponderSignOutTab from "../components/responderTab/ResponderSignOutTab.vue";
+import ResponderHelpTab from "../components/responderTab/ResponderHelpTab.vue";
 import { ref } from "vue";
 const tab = ref(0);
 </script>
