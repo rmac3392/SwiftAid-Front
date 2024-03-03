@@ -19,10 +19,10 @@
         <button
           class="flex justify-center items-center h-11 w-full p-1 bg-primary text-white rounded-full font-semibold hover:bg-white hover:text-primary hover:border-primary border-primary border-2 transition duration-300"
         >
-          <div class="mr-[1px]">
+          <div class="mr-[3px]">
             <mdicon class="" name="pencil" :width="15" :height="15" />
           </div>
-          Manage
+          {{ buttonAlert }}
         </button>
       </div>
     </div>
@@ -32,5 +32,6 @@
 <script setup>
 defineProps({
   location: String,
+  buttonAlert: String,
 });
 </script>

@@ -9,13 +9,13 @@
         >
           Emergency Departments
         </div>
-        <Alert location="Pasil Cebu " />
-        <Alert location="Cebu City " />
-        <Alert location="Tejero Cebu" />
-        <Alert location="Sanciangko Cebu " />
-        <Alert location="Guadalupe Cebu" />
-        <Alert location="Labangon Cebu " />
-        <Alert location="Olango Lapu Lapu" />
+        <Alert location="Pasil Cebu " button-alert="Details" />
+        <Alert location="Cebu City " button-alert="Details" />
+        <Alert location="Tejero Cebu" button-alert="Details" />
+        <Alert location="Sanciangko Cebu " button-alert="Details" />
+        <Alert location="Guadalupe Cebu" button-alert="Details" />
+        <Alert location="Labangon Cebu " button-alert="Details" />
+        <Alert location="Olango Lapu Lapu" button-alert="Details" />
       </div>
 
       <div class="w-[70%] h-[80%] pl-3">
@@ -29,7 +29,7 @@
               class="bg-gray-100 py-5 rounded-lg border-2 border-white drop-shadow-lg px-6 justify-center items-center flex"
             >
               <div
-                class="flex items-end justify-end w-[100%] mr-[-13%] mt-[-36%] absolute z-20"
+                class="flex items-end justify-end w-[60%] mr-[-55%] mt-[-36%] absolute z-20"
               >
                 <Notifications notif="8" />
               </div>
@@ -55,7 +55,7 @@
               class="bg-gray-100 py-5 rounded-lg border-2 border-white drop-shadow-lg px-4 ml-[-9%] justify-center items-center flex"
             >
               <div
-                class="flex items-end justify-end w-[85%] mr-[-26%] mt-[-32%] absolute z-20"
+                class="flex items-end justify-end w-[50%] mr-[-63%] mt-[-30%] absolute z-20"
               >
                 <Notifications notif="8" />
               </div>
@@ -81,7 +81,7 @@
               class="bg-gray-100 py-5 rounded-lg border-2 border-white drop-shadow-lg px-5 ml-[-9%] justify-center items-center flex"
             >
               <div
-                class="flex items-end justify-end w-[100%] mr-[-12%] mt-[-36%] absolute z-20"
+                class="flex items-end justify-end w-[60%] mr-[-55%] mt-[-36%] absolute z-20"
               >
                 <Notifications notif="8" />
               </div>
@@ -107,7 +107,7 @@
               class="bg-gray-100 py-5 rounded-lg border-2 border-white drop-shadow-lg px-8 ml-[-9%] justify-center items-center flex"
             >
               <div
-                class="flex items-end justify-end w-[115%] mr-[-1%] mt-[-42%] absolute z-20"
+                class="flex items-end justify-end w-[68%] mr-[-50%] mt-[-42%] absolute z-20"
               >
                 <Notifications notif="8" />
               </div>
