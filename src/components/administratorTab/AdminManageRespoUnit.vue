@@ -1,5 +1,5 @@
 <template>
-  <div class="flex h-[87%] w-full p-60 pr-96 pl-96 rounded-lg">
+  <div class="flex h-[75%] w-full p-40 pr-96 pl-96 rounded-lg">
     <div class="h-full bg-white w-full rounded-lg shadow-xl p-5">
       <div class="w-full h-[45%] flex items-center justify-center mt-5">
         <img src="../../assets/SWIFTAID_logo.png" alt="" class="h-[10rem]" />
