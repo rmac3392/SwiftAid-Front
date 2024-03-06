@@ -1,4 +1,4 @@
-<template>
+  <template>
   <div class="flex flex-col gap-3 items-center justify-center h-[60%] mt-[8%]">
     <div class="flex w-[70%] h-[100%] justify-center items-center">
       <div class="relative shadow-md sm:rounded-lg w-[100%] h-full">
