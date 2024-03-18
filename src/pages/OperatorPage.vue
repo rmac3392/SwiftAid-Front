@@ -85,7 +85,7 @@
             <div
               class="w-[100%] h-full rounded-xl text-primary font-semibold text-4xl flex items-center justify-start"
             >
-              Welcome Back, Ryan
+              Welcome Back, {{ firstName }}
             </div>
           </div>
           <div class="flex w-[23%]">
@@ -101,7 +101,7 @@
               <div
                 class="pt-5 h-[50%] text-xl font-medium flex items-center justify-center text-primary"
               >
-                <div>Macawili, Ryan James</div>
+                <div>{{ lastName }}, {{firstName}}</div>
               </div>
               <div
                 class="pb-5 h-[50%] text-l flex items-center justify-center text-primary"
@@ -125,12 +125,41 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref , onMounted} from "vue";
 
 import OperatorDashboardTab from "../components/operatorTab/OperatorDashboardTab.vue";
 import OperatorRecordTab from "../components/operatorTab/OperatorRecordTab.vue";
 import OperatorReportTab from "../components/operatorTab/OperatorReportTab.vue";
 import OperatorSignOutTab from "../components/operatorTab/OperatorSignOutTab.vue";
 import OperatorHelpTab from "../components/operatorTab/OperatorHelpTab.vue";
+import { useRouter} from "vue-router";
+
+onMounted(() => {
+  operatorAuth();
+});
+
+
+
+const router = useRouter();
 const currentTab = ref(0);
+const firstName = ref();
+const lastName = ref();
+
+const operatorAuth  = async () => {
+  const operator = localStorage.getItem("operatorAuth");
+  if(!operator){
+    router.push("/");
+  }
+  const response = await fetch (`http://localhost:8080/getOperator`);
+  const data = await response.json();
+
+  for(var i = 0; i < data.length; i++){
+    if(localStorage.getItem("operator_userId") == data[i].user_id){
+      firstName.value = data[i].first_name;
+      lastName.value = data[i].last_name;
+      break;    
+    }
+  }
+}
+
 </script>

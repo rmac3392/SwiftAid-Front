@@ -19,6 +19,7 @@
         <button
           class="w-full h-12 bg-primary text-white rounded-lg font-semibold mb-2 hover:bg-white hover:text-primary hover:border-primary border-primary border-2 transition duration-300"
           type="submit"
+          @click="logout()"
         >
           Proceed
         </button>
@@ -27,4 +28,14 @@
   </div>
 </template>
 
-<script setup></script>
+<script setup>
+import { useRouter } from "vue-router";
+
+const router = useRouter();
+
+const logout = () => {
+  
+  localStorage.clear();
+  router.push("/");
+}
+</script>
