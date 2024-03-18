@@ -29,7 +29,7 @@ import { ref } from "vue";
 
 const tableData = [
   {
-    column1: "Row 1, Column 1",
+    column1: "awdawd",
     column2: "Row 1, Column 2",
     column3: "Row 1, Column 3",
   },

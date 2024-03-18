@@ -102,3 +102,4 @@ onMounted(() => {
   initFlowbite();
 });
 </script>
+import EditAccountVue from "../../composables/EditAccount.vue";
