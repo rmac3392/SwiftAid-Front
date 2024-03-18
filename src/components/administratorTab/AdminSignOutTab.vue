@@ -27,4 +27,6 @@
   </div>
 </template>
 
-<script setup></script>
+<script setup>
+import EditAccount from "../../composables/EditAccount.vue";
+</script>
