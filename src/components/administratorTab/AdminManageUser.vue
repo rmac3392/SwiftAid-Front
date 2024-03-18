@@ -91,7 +91,7 @@
   </div>
 </template>
 <script setup>
-import DeleteRecord from "../../Composables/DeleteRecord.vue";
+import DeleteRecord from "../../composables/DeleteRecord.vue";
 import EditAccount from "../../composables/EditAccount.vue";
 import Modal from "../../composables/Modal.vue";
 import { onMounted } from "vue";
@@ -102,4 +102,3 @@ onMounted(() => {
   initFlowbite();
 });
 </script>
-import EditAccountVue from "../../composables/EditAccount.vue";

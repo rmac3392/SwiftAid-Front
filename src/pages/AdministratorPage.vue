@@ -56,7 +56,7 @@
             <div
               class="w-[100%] h-full rounded-xl text-primary font-semibold text-4xl flex items-center justify-start"
             >
-              Welcome Back, Admin
+              Welcome Back, {{ adminFirstName }}
             </div>
           </div>
           <div class="flex w-[23%]">
@@ -95,13 +95,47 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
-
 import AdminAddUser from "../components/administratorTab/AdminAddUser.vue";
-
 import AdminManageUser from "../components/administratorTab/AdminManageUser.vue";
-
 import AdminSignOutTab from "../components/administratorTab/AdminSignOutTab.vue";
+
+import { ref } from "vue";
+import { onMounted } from "vue";
+import { initFlowbite } from "flowbite";
+import { useRouter } from "vue-router";
+
 const currentTab = ref(0);
+const router = useRouter();
+
+
+// initialize components based on data attribute selectors
+onMounted(() => {
+  adminAuth();
+  initFlowbite();
+});
+
+const adminFirstName = ref();
+const adminLastName = ref();
+
+
+const adminAuth  = async () => {
+  const admin = localStorage.getItem("adminAuth");
+  if(!admin){
+    router.push("/");
+  }
+
+
+  const response = await fetch (`http://localhost:8080/getAdmin`);
+  const data = await response.json();
+
+  for(var i = 0; i < data.length; i++){
+    if(localStorage.getItem("admin_userId") == data[i].user_id){
+      adminFirstName.value = data[i].first_name;
+      adminLastName.value = data[i].last_name;
+
+      break;
+    }
+  }
+}
+
 </script>
-import AdminAddUserVue from "../components/administratorTab/AdminAddUser.vue";

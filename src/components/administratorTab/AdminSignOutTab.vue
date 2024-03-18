@@ -19,6 +19,7 @@
         <button
           class="w-full h-12 bg-primary text-white rounded-lg font-semibold mb-2 hover:bg-white hover:text-primary hover:border-primary border-primary border-2 transition duration-300"
           type="submit"
+          @click="logout()"
         >
           Proceed
         </button>
@@ -29,4 +30,13 @@
 
 <script setup>
 import EditAccount from "../../composables/EditAccount.vue";
+import { useRouter } from "vue-router";
+
+const router = useRouter();
+
+const logout = () => {
+  
+  localStorage.clear();
+  router.push("/");
+}
 </script>

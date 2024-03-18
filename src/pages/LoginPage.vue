@@ -100,46 +100,97 @@
 </template>
 
 <script setup>
-import { useRoute, useRouter } from "vue-router";
-import { ref } from "vue";
+import { useRoute , useRouter } from "vue-router";
+import { ref , onMounted} from 'vue';
+
+onMounted(() => {
+  authChecker();
+});
+
 
 const errorMessage = ref();
-const username = ref();
-const password = ref();
+const username=ref();
+const password=ref();
 
 const router = useRouter();
 
+
+
+const authChecker = () => {
+  const admin = localStorage.getItem("adminAuth");
+  const operator = localStorage.getItem("operatorAuth");
+  const responder = localStorage.getItem("responderAuth");
+  
+  if(admin){
+    router.push("/AdministratorPage");
+  }
+  if(operator){
+    router.push("/OperatorPage");
+
+  }
+  if(responder){
+    router.push("/ResponderPage");
+  }
+}
+
+
+
 const login = async () => {
-  try {
-    const response = await fetch("http://localhost:8080/getUsers");
+
+  try{
+    const response = await fetch(`http://localhost:8080/getUsers`);
     const data = await response.json();
     const length = data.length;
 
-    for (var i = 0; i < length; i++) {
-      if (data[i].username == username.value) {
+    for(var i= 0; i <length; i++){
+      if(data[i].username==username.value){
         errorMessage.value = "";
 
-        if (data[i].password == password.value) {
-          if (data[i].role == "admin") {
+        if(data[i].password==password.value){
+
+          if(data[i].role=="admin"){
+
+            localStorage.setItem("admin_userId",`${data[i].user_id}`);
+            localStorage.setItem("adminAuth",true);
             router.push("/AdministratorPage");
-          } else if (data[i].role == "operator") {
-            router.push("/OperatorPage");
-          } else if (data[i].role == "responder") {
-            router.push("/ResponderPage");
+
           }
-        } else {
-          errorMessage.value = "Wrong Password";
+          else if(data[i].role=="operator"){
+
+            localStorage.setItem("operator_userId",`${data[i].user_id}`);
+            localStorage.setItem("operatorAuth",true);
+            router.push("/OperatorPage");
+
+          }
+          else if(data[i].role=="responder"){
+
+            localStorage.setItem("responder_userId",`${data[i].user_id}`);
+            localStorage.setItem("responderAuth",true);
+            router.push("/ResponderPage");
+
+
+          }
+
+        }
+        else{
+          errorMessage.value = "Wrong Password"
         }
 
         break;
-      } else {
+      }
+      else{
         errorMessage.value = "Username invalid";
       }
     }
-  } catch (error) {
-    console.error("Error:", error);
+    
   }
-};
+  catch(error){
+    console.error("Error:",error);
+  }
+
+
+}
+
 
 import {
   UserIcon,

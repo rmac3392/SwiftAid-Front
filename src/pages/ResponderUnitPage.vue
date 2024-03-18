@@ -58,7 +58,7 @@
             <div
               class="w-[100%] h-full rounded-xl text-primary font-semibold text-4xl flex items-center justify-start"
             >
-              Welcome Back, Michael
+              Welcome Back, {{ institution }}
             </div>
           </div>
           <div class="flex w-[23%]">
@@ -73,7 +73,7 @@
               <div
                 class="pt-5 h-[50%] text-xl font-bold flex items-center justify-center text-primary"
               >
-                <div>Tonilon, Michael O.</div>
+                <div>{{institution}}</div>
               </div>
               <div
                 class="pb-5 h-[50%] text-l flex font-500 items-center justify-center text-primary [text-shadow:_0_1px_0_rgb(0_0_0_/_40%)]"
@@ -97,9 +97,36 @@
 <script setup>
 import ResponderDashboardTab from "../components/responderTab/ResponderDasboardTab.vue";
 import ResponderRecordTab from "../components/responderTab/ResponderRecordTab.vue";
-
 import ResponderSignOutTab from "../components/responderTab/ResponderSignOutTab.vue";
 import ResponderHelpTab from "../components/responderTab/ResponderHelpTab.vue";
-import { ref } from "vue";
+import { ref , onMounted} from "vue";
+import { useRouter} from "vue-router";
+
+
 const tab = ref(0);
+const institution = ref();
+const router = useRouter();
+
+
+onMounted(() => {
+  responderAuth();
+});
+
+
+const responderAuth  = async () => {
+  const responder = localStorage.getItem("responderAuth");
+  if(!responder){
+    router.push("/");
+  }
+
+  const response = await fetch (`http://localhost:8080/getResponder`);
+  const data = await response.json();
+
+  for(var i = 0; i < data.length; i++){
+    if(localStorage.getItem("responder_userId") == data[i].user_id){
+      institution.value = data[i].institution;
+      break;    
+    }
+  }
+}
 </script>
