@@ -34,7 +34,6 @@
         </div>
       </div>
       <Transition name="fade" mode="out-in">
-        >
         <FireDepartmentView v-if="active == 0" />
         <EmergencyMedicalView v-else-if="active == 1" />
         <SearchRescueView v-else-if="active == 2" />

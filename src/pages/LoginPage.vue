@@ -24,6 +24,7 @@
                 <UserIcon class="h-9 w-9 text-gray-500" />
               </div>
               <input
+                v-model="username"
                 type="text"
                 id="floating_outlined"
                 class="pl-16 border-b-2 rounded-md block px-2.5 pb-2.5 pt-4 w-full text-lg text-black bg-transparent border-1 border-primary appearance-none dark:text-black dark:primary dark:focus:border-primary focus:outline-none focus:ring-0 focus:border-primary peer"
@@ -42,6 +43,7 @@
                 <LockClosedIcon class="h-9 w-9 text-gray-500" />
               </div>
               <input
+                v-model="password"
                 type="password"
                 id="floating_outlined2"
                 class="pl-16 text-lg border-b-2 rounded-md block px-2.5 pb-2.5 pt-4 w-full text-gray-900 bg-transparent border-1 border-primary appearance-none dark:text-black dark:primary dark:focus:border-primary focus:outline-none focus:ring-0 focus:border-primary peer"
@@ -70,15 +72,15 @@
                 <option value="">Emergency Responder Unit</option>
               </select>
             </div>
+            <p>{{ errorMessage }}</p>
 
-            <router-link class="" to="/operatorPage">
-              <button
-                class="w-full h-12 bg-primary text-white rounded-lg font-semibold mb-2 hover:bg-white hover:text-primary hover:border-primary border-primary border-2 transition duration-300"
-                type="submit"
-              >
-                Submit
-              </button>
-            </router-link>
+            <button
+              class="w-full h-12 bg-primary text-white rounded-lg font-semibold mb-2 hover:bg-white hover:text-primary hover:border-primary border-primary border-2 transition duration-300"
+              type="submit"
+              @click="login"
+            >
+              Submit
+            </button>
 
             <router-link class="" to="/forgotPasswordPage">
               <div class="text-center">
@@ -98,9 +100,46 @@
 </template>
 
 <script setup>
-import { useRoute } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
+import { ref } from "vue";
 
-const route = useRoute();
+const errorMessage = ref();
+const username = ref();
+const password = ref();
+
+const router = useRouter();
+
+const login = async () => {
+  try {
+    const response = await fetch("http://localhost:8080/getUsers");
+    const data = await response.json();
+    const length = data.length;
+
+    for (var i = 0; i < length; i++) {
+      if (data[i].username == username.value) {
+        errorMessage.value = "";
+
+        if (data[i].password == password.value) {
+          if (data[i].role == "admin") {
+            router.push("/AdministratorPage");
+          } else if (data[i].role == "operator") {
+            router.push("/OperatorPage");
+          } else if (data[i].role == "responder") {
+            router.push("/ResponderPage");
+          }
+        } else {
+          errorMessage.value = "Wrong Password";
+        }
+
+        break;
+      } else {
+        errorMessage.value = "Username invalid";
+      }
+    }
+  } catch (error) {
+    console.error("Error:", error);
+  }
+};
 
 import {
   UserIcon,
