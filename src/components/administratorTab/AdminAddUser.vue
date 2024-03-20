@@ -40,15 +40,16 @@
                   </label>
                   
                   <select v-if="selected_userToAdd===`Responder`"
+                  v-model="department"
                     id="department"
                     class="bg-gray-50 border ml-4 border-gray-300 text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5"
                     required
                   >
                     <option disabled selected>Click to Select</option>
-                    <option value="operator">Fire Department</option>
-                    <option value="responder">Search and Rescue Group</option>
-                    <option value="responder">NGO</option>
-                    <option value="responder">Private Sector</option>
+                    <option value="fire">Fire Department</option>
+                    <option value="search_rescue">Search and Rescue Group</option>
+                    <option value="ngo">NGO</option>
+                    <option value="privatre">Private Sector</option>
                   </select>
                 </div>
               </div>
@@ -271,6 +272,7 @@
               >
               Submit
             </button>
+            {{ errorMessage }}
           </div>
           <!-- END OF OPERATOR -->
 
@@ -285,28 +287,16 @@
             <div class="grid gap-6 mb-6 md:grid-cols-2">
               <div>
                 <input
+                v-model="institution"
                   type="text"
-                  id="first_name"
+                  id="institution"
                   class="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5"
                   placeholder="John"
                   required
                 />
               </div>
 
-              <div class="mt-[-13%]">
-                <label
-                  for="company"
-                  class="mb-2 text-sm font-medium justify-start items-start flex"
-                  >Last Name</label
-                >
-                <input
-                  type="text"
-                  id="last_name"
-                  class="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5"
-                  placeholder="Doe"
-                  required
-                />
-              </div>
+
 
               <div class="mt-[-13%]">
                 <label
@@ -315,8 +305,9 @@
                   >City</label
                 >
                 <input
+                v-model="city"
                   type="text"
-                  id="last_name"
+                  id="city"
                   class="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5"
                   placeholder="Doe"
                   required
@@ -330,8 +321,9 @@
                   >Address</label
                 >
                 <input
+                v-model="address"
                   type="text"
-                  id="last_name"
+                  id="address"
                   class="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5"
                   placeholder="Doe"
                   required
@@ -346,8 +338,9 @@
                 </div>
 
                 <input
+                v-model="mobile_number"
                   type="tel"
-                  id="phone"
+                  id="mobile_number"
                   class="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5"
                   placeholder="123-45-678"
                   pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}"
@@ -363,8 +356,9 @@
                 </div>
 
                 <input
+                v-modle="zipcode"
                   type="tel"
-                  id="phone"
+                  id="zipcode"
                   class="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5"
                   placeholder="123-45-678"
                   pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}"
@@ -380,6 +374,7 @@
               </div>
 
               <input
+              v-model="email"
                 type="email"
                 id="email"
                 class="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5"
@@ -397,7 +392,7 @@
                 <input
                   v-model="username"
                   type="text"
-                  id="first_name"
+                  id="username"
                   class="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5"
                   placeholder="John"
                   required
@@ -413,6 +408,7 @@
                 >
                 <div class="mb-6">
                   <input
+                  v-model="password"
                     type="password"
                     id="password"
                     class="bg-gray-50 pr-20 border justify-start items-start border-gray-300 text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5"
@@ -428,6 +424,8 @@
                 >
                 <div class="mb-6">
                   <input
+                  v-model="confirm_password"
+
                     type="password"
                     id="confirm_password"
                     class="bg-gray-50 border pr-20 border-gray-300 text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5"
@@ -461,11 +459,14 @@
             </div>
 
             <button
+            @click="submitResponder"
               type="submit"
               class="text-white flex justify-start items-start my-5 px-8 bg-primary hover:bg-primary focus:ring-4 focus:outline-none focus:ring-primary font-medium rounded-lg text-sm w-full sm:w-auto s py-2.5 text-center"
             >
               Submit
             </button>
+            {{ errorMessage }}
+
           </div>
                     <!-- END OF RESPONDER -->
 
@@ -527,12 +528,17 @@ const email = ref();
 const username = ref();
 const password = ref();
 const confirm_password=ref();
+const institution = ref();
+const city=ref();
+const zipcode = ref();
+const department = ref();
+
+const errorMessage = ref();
 
 
 const handleFileImage = (event) => {
   const file = (event.target.files || [])[0];
   if (file) {
-    // Check for image type if needed
     const allowedTypes = ["image/jpeg", "image/png", "image/gif"];
     if (!allowedTypes.includes(file.type)) {
       console.log("Invalid file type. Please upload an image.");
@@ -548,29 +554,80 @@ const handleFileImage = (event) => {
 const submitOperator = async () => {
   try {
     const formData = new FormData();
-    formData.append("first_name",first_name.value);
-    formData.append("last_name",last_name.value);
-    formData.append("gender",gender.value);
-    formData.append("address",address.value);
-    formData.append("mobile_number",mobile_number.value);
-    formData.append("birthdate",birthdate.value);
-    formData.append("email",email.value);
-    formData.append("username",username.value);
-    formData.append("password",password.value);
-
-    formData.append("image",image.value);
-
-    const response = await axios.post("http://localhost:8080/addOperator",formData,{
+    
+    if(password.value!=confirm_password.value){
+      errorMessage.value = "Passwords do not match";
+    } 
+    else{
+      formData.append("first_name",first_name.value);
+      formData.append("last_name",last_name.value);
+      formData.append("gender",gender.value);
+      formData.append("address",address.value);
+      formData.append("mobile_number",mobile_number.value);
+      formData.append("birthdate",birthdate.value);
+      formData.append("email",email.value);
+      formData.append("username",username.value);
+      formData.append("password",password.value);
+      formData.append("image",image.value);
+      
+      const response = await axios.post("http://localhost:8080/addOperator",formData,{
       headers: {
         "Content-Type" : "multipart/form-data",
-      },
-    });
+        },
+      });
+    }
+
+
+
   }
   catch(error){
+    if(!image.value){
+      errorMessage.value = "Insert Image!"
+    }
     console.log("Error:",error);
   }
 
 
+}
+
+const submitResponder = async() => {
+
+  try {
+    const formData = new FormData();
+
+    if(password.value!=confirm_password.value){
+      errorMessage.value = "Passwords do not match";
+    }
+    else{
+      formData.append("department",department.value);
+      formData.append("institution",institution.value);
+      formData.append("city",city.value);
+      formData.append("address",address.value);
+      formData.append("mobile_number",mobile_number.value);
+      formData.append("zipcode",zipcode.value);
+      formData.append("email",email.value);
+      formData.append("username",username.value);
+      formData.append("password",password.value);
+      formData.append("image",image.value);
+
+      const response = await axios.post("http://localhost:8080/addResponder",formData,{
+        headers: {
+          "Content-Type" : "multipart/form-data",
+        },
+      });
+      
+    }
+
+
+
+
+  }
+  catch(error){
+    if(!image.value){
+      errorMessage.value = "Insert Image!"
+    }
+    console.log("Error:",error);
+  }
 }
 
 

@@ -108,7 +108,6 @@ const currentTab = ref(0);
 const router = useRouter();
 
 
-// initialize components based on data attribute selectors
 onMounted(() => {
   adminAuth();
   initFlowbite();
