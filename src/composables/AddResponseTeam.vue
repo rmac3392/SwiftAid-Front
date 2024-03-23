@@ -37,6 +37,8 @@
           class="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600"
         >
           <input
+          @change="change"
+          v-model="snr"
             id="checkbox-item-4"
             type="checkbox"
             value=""
@@ -54,6 +56,7 @@
           class="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600"
         >
           <input
+          v-model="fire_department"
             id="checkbox-item-5"
             type="checkbox"
             value=""
@@ -71,6 +74,7 @@
           class="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600"
         >
           <input
+          v-model="ngo"
             id="checkbox-item-6"
             type="checkbox"
             value=""
@@ -88,6 +92,7 @@
           class="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600"
         >
           <input
+          v-model="private_sector"
             id="checkbox-item-6"
             type="checkbox"
             value=""
@@ -105,6 +110,7 @@
           class="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600"
         >
           <input
+          v-model="baranggay_tanod"
             id="checkbox-item-6"
             type="checkbox"
             value=""
@@ -121,11 +127,17 @@
   </div>
 </template>
 <script setup>
-import { onMounted } from "vue";
+import { onMounted, ref } from "vue";
 import { initFlowbite } from "flowbite";
-
 // initialize components based on data attribute selectors
 onMounted(() => {
   initFlowbite();
 });
+const snr = defineModel('snr');
+const fire_department = defineModel('fire_department');
+const ngo = defineModel('ngo');
+const private_sector = defineModel('private_sector');
+const baranggay_tanod = defineModel('baranggay_tanod');
+
+
 </script>
