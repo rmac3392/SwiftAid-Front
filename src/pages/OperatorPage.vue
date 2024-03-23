@@ -157,6 +157,9 @@ const operatorAuth  = async () => {
     if(localStorage.getItem("operator_userId") == data[i].user_id){
       firstName.value = data[i].first_name;
       lastName.value = data[i].last_name;
+
+      localStorage.setItem(`currentOperator`,`${firstName.value} ${lastName.value}`);
+
       break;    
     }
   }
