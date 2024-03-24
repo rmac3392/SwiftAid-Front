@@ -4,6 +4,7 @@
       <div class="w-[100%]">
         <div class="h-full pt-3 flex items-center justify-center">
           <Bar
+            :key="chartKey"
             class=""
             id="my-chart-id"
             :options="chartOptions"
@@ -16,7 +17,7 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, defineProps, onMounted, watch } from "vue";
 import { Bar } from "vue-chartjs";
 import {
   Chart as ChartJS,
@@ -36,6 +37,23 @@ ChartJS.register(
   CategoryScale,
   LinearScale
 );
+
+const chartOptions = ref({
+  responsive: true,
+  maintainAspectRatio: false,
+});
+
+const props = defineProps({
+  jan: Number,
+  feb: Number,
+  mar: Number,
+  apr: Number,
+  may: Number,
+  jun: Number,
+  jul: Number,
+  aug: Number,
+});
+
 const chartData = ref({
   labels: [
     "January",
@@ -49,23 +67,36 @@ const chartData = ref({
   ],
   datasets: [
     {
-      data: [40, 20, 12, 50, 12, 25, 20, 128],
-      // backgroundColor: [
-      //   "red",
-      //   "green",
-      //   "blue",
-      //   "red",
-      //   "green",
-      //   "blue",
-      //   "red",
-      //   "green",
-      // ],
+      data: [],
       backgroundColor: ["#2b2d56"],
     },
   ],
 });
 
-const chartOptions = ref({
-  responsive: true,
+const chartKey = ref(0);
+
+watch(
+  () => [props.jan, props.feb, props.mar, props.apr, props.may, props.jun, props.jul, props.aug],
+  () => {
+    updateChartData();
+  }
+);
+
+onMounted(() => {
+  updateChartData();
 });
+
+const updateChartData = () => {
+  chartData.value.datasets[0].data = [
+    props.jan,
+    props.feb,
+    props.mar,
+    props.apr,
+    props.may,
+    props.jun,
+    props.jul,
+    props.aug,
+  ];
+  chartKey.value++;
+};
 </script>
