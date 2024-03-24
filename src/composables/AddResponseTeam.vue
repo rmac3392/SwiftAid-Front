@@ -139,5 +139,4 @@ const ngo = defineModel('ngo');
 const private_sector = defineModel('private_sector');
 const baranggay_tanod = defineModel('baranggay_tanod');
 
-
 </script>

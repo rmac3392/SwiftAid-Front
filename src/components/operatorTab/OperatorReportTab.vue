@@ -12,7 +12,7 @@
               <div
                 class="flex items-end justify-end w-[60%] mr-[-58%] mt-[-40%] absolute z-20"
               >
-                <Notifications notif="8" />
+                <Notifications :notif="floodCnt" />
               </div>
               <div class="flex flex-row gap-2 justify-center items-center">
                 <mdicon
@@ -38,7 +38,7 @@
               <div
                 class="flex items-end justify-end w-[57%] mr-[-58%] mt-[-35%] absolute z-20"
               >
-                <Notifications notif="8" />
+                <Notifications :notif="fireCnt" />
               </div>
               <div class="flex flex-row gap-2 justify-center items-center">
                 <mdicon
@@ -64,7 +64,7 @@
               <div
                 class="flex items-end justify-end w-[60%] mr-[-55%] mt-[-37%] absolute z-20"
               >
-                <Notifications notif="8" />
+                <Notifications :notif="typhoonCnt" />
               </div>
               <div class="flex flex-row gap-2 justify-center items-center">
                 <mdicon
@@ -90,7 +90,7 @@
               <div
                 class="flex items-end justify-end w-[53%] mr-[-60%] mt-[-35%] absolute z-20"
               >
-                <Notifications notif="8" />
+                <Notifications :notif="roadCnt" />
               </div>
               <div class="flex flex-row gap-2 justify-center items-center">
                 <mdicon
@@ -116,7 +116,7 @@
               <div
                 class="flex items-end justify-end w-[50%] mr-[-62%] mt-[-33%] absolute z-20"
               >
-                <Notifications notif="8" />
+                <Notifications :notif="marineCnt" />
               </div>
               <div class="flex flex-row gap-2 justify-center items-center">
                 <mdicon
@@ -143,20 +143,30 @@
             >
               Pending Reports
             </div>
-            <Alert location="Pasil Cebu " button-alert="Details" />
-            <Alert location="Cebu City " button-alert="Details" />
-            <Alert location="Tejero Cebu" button-alert="Details" />
-            <Alert location="Sanciangko Cebu " button-alert="Details" />
-            <Alert location="Guadalupe Cebu" button-alert="Details" />
-            <Alert location="Labangon Cebu " button-alert="Details" />
-            <Alert location="Olango Lapu Lapu" button-alert="Details" />
+            <Alert 
+            v-for="(post,index) in newPost"
+            :key="index"
+            :id="post.id"
+            :location="post.city"
+            button-alert="Details" 
+            />
           </div>
 
           <div class="flex flex-col col-span-1 w-[70%]">
             <div
               class="h-[55%] mx-5 bg-gray-100 border-2 border-white rounded-lg drop-shadow-lg"
             >
-              <OperatorBarChart />
+              <OperatorBarChart
+              :key="chartKey"
+              :jan=jan
+              :feb=feb
+              :mar=mar
+              :apr=apr
+              :may=may
+              :jun=jun
+              :jul=jul
+              :aug=aug
+              />
             </div>
             <div
               class="w-[96%] h-[50%] flex flex-row row-span-3 gap-5 my-5 mx-5"
@@ -190,4 +200,134 @@ import Alert from "../../composables/Alert.vue";
 import OperatorBarChart from "../../composables/Charts/OperatorBarChart.vue";
 import OperatorPieChart from "../../composables/Charts/OperatorPieChart.vue";
 import OperatorDoughnutChart from "../../composables/Charts/OperatorDoughnutChart.vue";
+import { ref, onMounted} from "vue";
+import axios from "axios";
+
+
+
+const chartKey = ref(0); // Key variable
+
+
+//referencers
+const newPost = ref([]);
+
+const floodCnt = ref(0);
+const fireCnt = ref(0);
+const typhoonCnt = ref(0);
+const roadCnt = ref(0);
+const marineCnt = ref(0);
+
+//month referencers
+const jan = ref(0);
+const feb = ref(0);
+const mar = ref(0);
+const apr = ref(0);
+const may = ref(0);
+const jun = ref(0);
+const jul = ref(0);
+const aug = ref(0);
+
+
+onMounted(()=>{
+  update();
+getPosts();
+});
+
+// functions
+const getPosts = async () => {
+  const response = await axios.get(`http://localhost:8080/getPost`);
+  const data =  response.data;
+  const lth = data.length;
+
+  newPost.value = [];
+
+
+
+
+  for(var i = 0; i < lth ; i ++){
+    var emergency = data[i].emergency_type;
+    var status = data[i].status;
+    var id = data[i].post_id;
+    var city = data[i].city;
+
+    // date getter
+    const timestamp = data[i].timestamp;
+    const date = new Date(timestamp);
+    const monthIndex = date.getMonth(); 
+    const monthName = getMonthName(monthIndex); 
+    if(status=='pending'){
+      newPost.value.push({
+        id: id,
+        city: city,
+      });
+    }
+
+    if(monthName=='jan'){
+      jan.value++;
+    }
+    if(monthName=='feb'){
+      feb.value++;
+    }
+    if(monthName=='mar'){
+      mar.value++;
+    }
+    if(monthName=='apr'){
+      apr.value++;
+    }
+    if(monthName=='may'){
+      may.value++;
+    }
+    if(monthName=='jun'){
+      jun.value++;
+    }
+    if(monthName=='jul'){
+      jul.value++;
+    }
+    if(monthName=='aug'){
+      aug.value++;
+    }
+
+    getCount(emergency,'flood');
+    getCount(emergency,'fire');
+    getCount(emergency,'typhoon');
+    getCount(emergency,'road');
+    getCount(emergency,'marine');
+  }
+
+}
+
+const getCount = (data, emergency) => {
+  if (data === emergency) {
+    if (data === 'flood') {
+      floodCnt.value++;
+    } else if (data === 'fire') {
+      fireCnt.value++;
+    } else if (data === 'typhoon') {
+      typhoonCnt.value++;
+    } else if (data === 'road') {
+      roadCnt.value++;
+    } else if (data === 'marine') {
+      marineCnt.value++;
+    }
+  }
+}
+
+
+const getMonthName = (index) => {
+
+  const months = [
+    'jan', 'feb', 'mar', 'apr', 'may', 'jun',
+    'jul', 'aug', 'sep', 'oct', 'nov', 'dec'
+  ];
+  return months[index];
+
+
+}
+
+
+
+const update = () => {
+  chartKey.value++; 
+};
+
 </script>
