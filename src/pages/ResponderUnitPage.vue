@@ -1,5 +1,5 @@
 <template>
-  <div class="flex bg-secondary h-screen w-screen">
+  <div class="flex bg-secondary h-screen w-screen" v-if="auth">
     <div class="w-[20%] bg-primary h-screen">
       <div class="h-[25%] w-full flex items-center justify-center">
         <img class="w-80" src="../assets/SWIFTAID_+.png" alt="" />
@@ -92,6 +92,10 @@
       <ResponderSignOutTab v-else-if="tab === 3" />
     </div>
   </div>
+  <div v-else class="flex justify-center items-center h-48">
+    <div class="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-purple-500"></div>
+    <div class="ml-4 text-purple-500">Loading...</div>
+  </div>
 </template>
 
 <script setup>
@@ -102,6 +106,8 @@ import ResponderHelpTab from "../components/responderTab/ResponderHelpTab.vue";
 import { ref , onMounted} from "vue";
 import { useRouter} from "vue-router";
 
+const auth = ref();
+auth.value = localStorage.getItem("responderAuth");
 
 const tab = ref(0);
 const institution = ref();

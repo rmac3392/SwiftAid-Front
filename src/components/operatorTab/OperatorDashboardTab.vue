@@ -327,20 +327,43 @@ const additionalResponseTeam = async()=>{
     if(postID.value){
       formData.append('post_id',1);
     }
+    else{
+      formData.append('post_id',0);
+
+    }
     if(snr.value){
       formData.append('search_and_rescue',1);
+    }
+    else{
+      formData.append('search_and_rescue',0);
+
     }
     if(fire_department.value){
       formData.append('fire_department',1);
     }
+    else{
+      formData.append('fire_department',0);
+
+    }
     if(ngo.value){
       formData.append('ngo',1);
+    }
+    else{
+      formData.append('ngo',0);
+
     }
     if(private_sector.value){
       formData.append('private_sector',1);
     }
+    else{
+      formData.append('private_sector',0);
+
+    }
     if(baranggay_tanod.value){
       formData.append('baranggay_tanod',1);
+    }
+    else{
+      formData.append('baranggay_tanod',0);
     }
     const response = await axios.post("http://localhost:8080/addPostTeam",formData,{
       headers: {
@@ -359,18 +382,26 @@ const additionalResponseTeam = async()=>{
 const sendPost = async () => {
   
   try {
-    const operatorID = localStorage.getItem('operator_userId');
-    const response = await axios.put(`http://localhost:8080/updatePost/${postID.value}`, {
-      responder_id: null, 
-      operator_id: operatorID,
-      additional_description: additionalDescription.value,
-      post_id: postID.value
-    });
+    const operatorUserID = localStorage.getItem('operator_userId');
+    const response = await fetch('http://localhost:8080/getOperator')
+    const data = await response.json();
+    for(var i = 0 ; i < data.length ; i++){
+      if(operatorUserID==data[i].user_id){
+        const operatorID = data[i].operator_id;
+        await axios.put(`http://localhost:8080/updatePost/${postID.value}`, {
+          responder_id: null, 
+          operator_id: operatorID,
+          additional_description: additionalDescription.value,
+          post_id: postID.value
+        });
+        
+        sentPost(postID.value); 
+        additionalResponseTeam();
+        
+        break;
+      }
+    }
 
-    console.log("Post updated successfully:", response.data);
-    
-    sentPost(postID.value); 
-    additionalResponseTeam();
   } catch (error) {
     console.error("Error acknowledging post:", error);
   }
@@ -379,7 +410,7 @@ const sendPost = async () => {
 const sentPost = async (id) => {
   try {
     const response = await axios.put(`http://localhost:8080/sendPost/${id}`);
-    window.location.reload();
+    // window.location.reload();
 
   } catch (error) {
     console.error("Error acknowledging post:", error.message || "Unknown error");
