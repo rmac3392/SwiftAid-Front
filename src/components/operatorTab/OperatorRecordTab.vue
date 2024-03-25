@@ -19,7 +19,7 @@
           </thead>
 
           <TableRecords
-          v-for="(post,index) in allPost"
+          v-for="(post,index) in displayedPost"
           :key="index"
           viewDetails="Details"
           :description="post.description"
@@ -36,7 +36,17 @@
         </table>
       </div>
     </div>
-    <div class="flex justify-center items-center mt-[2%]"><Pagination /></div>
+    <div class="flex justify-center items-center mt-[2%]">
+      <Pagination
+      :postCount="postCount"
+      :currentPage="currentPage" 
+      :totalPage="totalPage"
+      :pages="pages"
+      :next="next"
+      :previous="previous"
+      :changePage="changePage"
+      />
+    </div>
   </div>
 </template>
 
@@ -45,25 +55,32 @@ import Pagination from "../../composables/Pagination.vue";
 import TableRecords from "../../composables/TableRecords.vue";
 import { onMounted,ref } from "vue";
 
-onMounted(()=>{
+onMounted(async ()=>{
+  getPostCount();
   getPost();
+  landingPage();
+
 });
 
 //REFERENCERS
 
 // for table records
 
-//for post itself
+//------------------------ Start Table Records ------------------------
 const allPost = ref([]);
-
-
 const operator = ref('-----');
+const tableCounter=ref(0);
+const tablePostCount = ref(0);
+const displayedPost = ref([]);
+tablePostCount.value = 1;
+
+displayedPost.value = allPost.value;
+
 
 const getPost = async() => {
   const response = await fetch(`http://localhost:8080/getPost`);
   const data = await response.json();
   const lth = data.length;
-
   for(var i = 0 ; i <lth ; i++){
 
     var id = data[i].post_id;
@@ -71,7 +88,7 @@ const getPost = async() => {
     var emergency_type = data[i].emergency_type.toUpperCase();
     var description = data[i].description;
     var action = data[i].status.toUpperCase();
-    //time stamp
+    //-------------------- TIME STAMP START --------------------
     const timestamp = data[i].timestamp;
     const date = new Date(timestamp);
     const fullDate = `${(date.getMonth() + 1).toString().padStart(2, '0')}/${date.getDate().toString().padStart(2, '0')}/${date.getFullYear()}`;
@@ -80,16 +97,21 @@ const getPost = async() => {
     const amPM = hour >= 12 ? 'PM' : 'AM';
     hour = hour % 12 || 12;
     const time = `${hour}:${minute} ${amPM}`
-    //--------------------------------------
-    const pReportResponse = await fetch(`http://localhost:8080/getSinglePostReport/${id}`);
-    const pReportData = await pReportResponse.json();
-    const operator_id = pReportData[0].operator_id;
+    //-------------------- TIME STAMP END --------------------
+    // const pReportResponse = await fetch(`http://localhost:8080/getSinglePostReport/${id}`);
+    // const pReportData = await pReportResponse.json();
+    // const operator_id = pReportData[0].operator_id;
 
-    const operatorResponse = await fetch(`http://localhost:8080/getSingleOperator/${operator_id}`);
-    const operatorData = await operatorResponse.json();
-    const operatorName = `${operatorData[0].first_name} ${operatorData[0].last_name}`;
-      if(data[i].status=='pending'){
-        allPost.value.push({
+    // const operatorResponse = await fetch(`http://localhost:8080/getSingleOperator/${operator_id}`);
+    // const operatorData = await operatorResponse.json();
+    // const operatorName = `${operatorData[0].first_name} ${operatorData[0].last_name}`;
+    const operatorName='dummy';
+    //-------------------- START PAGE COUNTER --------------------
+
+    //-------------------- END PAGE COUNTER --------------------
+
+    if(data[i].status=='pending'){
+      allPost.value.push({
         id:id,
         location:location,
         emergency_type:emergency_type,
@@ -99,8 +121,9 @@ const getPost = async() => {
         time: time,
         operator:"TBD"
       })
+      tablePostCount.value++;
     }
-    else{
+    else {
       operator.value = operatorName
       allPost.value.push({
         id:id,
@@ -110,13 +133,120 @@ const getPost = async() => {
         action:action,
         date:fullDate,
         time: time,
-        operator:operator.value
+        operator:'--'
       })
+      tablePostCount.value++;
+    }
+    if(i<7){
+      if(data[i].status=='pending'){
+        displayedPost.value.push({
+        id:id,
+        location:location,
+        emergency_type:emergency_type,
+        description:description,
+        action:action,
+        date:fullDate,
+        time: time,
+        operator:"TBD"
+      })
+      tablePostCount.value++;
+    }
+    else {
+      operator.value = operatorName
+      displayedPost.value.push({
+        id:id,
+        location:location,
+        emergency_type:emergency_type,
+        description:description,
+        action:action,
+        date:fullDate,
+        time: time,
+        operator:'--'
+      })
+      tablePostCount.value++;
+    }
 
     }
+      
+
+
+
 
   
   }
 }
+//------------------------ End Table Records ------------------------
+
+//------------------------ Start Pagination ------------------------
+
+const postCount = ref(0);
+const currentPage = ref(1);
+const totalPage= ref(0);
+
+const pages = ref([]);
+
+
+
+
+const getPostCount = async () => {
+  const response = await fetch(`http://localhost:8080/getPost`);
+  const data = await response.json();
+  for(var i = 0; i < data.length;i++){
+    postCount.value++;
+  }
+
+  totalPage.value = Math.ceil(postCount.value / 7);
+  for(var i = 1; i<=totalPage.value;i++){
+    pages.value.push({
+      i:i
+    })
+  }
+}
+
+const changePage = (i) => {
+  currentPage.value = i;
+  tableCounter.value = 0;
+  displayedPost.value = [];
+
+  var displayedPostIndex = 0;
+
+  for (var i = 0; i < postCount.value; i++) {
+    if (i % 7 === 0) {
+      tableCounter.value++;
+    }
+    if (tableCounter.value === currentPage.value) {
+      displayedPost.value[displayedPostIndex++] = allPost.value[i];
+    }
+  }
+};
+
+
+
+
+
+
+const next = () =>{
+  if(currentPage.value != totalPage.value){
+    currentPage.value++
+  }
+  var i = currentPage.value;
+  changePage(i);
+}
+const previous = () =>{
+  if(currentPage.value != 1){
+    currentPage.value--;
+  }
+  var i = currentPage.value;
+  changePage(i);
+}
+
+const landingPage = () => {
+  currentPage.value=1;
+  var i = currentPage.value;
+  changePage(i);
+}
+
+//------------------------ End Pagination ------------------------
+
 
 </script>

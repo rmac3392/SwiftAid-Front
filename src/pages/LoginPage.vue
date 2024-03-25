@@ -1,5 +1,5 @@
 <template>
-  <div class="flex bg-[#2a2d57] h-screen w-screen">
+  <div class="flex bg-[#2a2d57] h-screen w-screen" v-if="!auth">
     <div class="h-screen w-[50%]">
       <div class="flex items-center justify-center h-screen">
         <img
@@ -12,7 +12,7 @@
     <div class="h-screen w-[50%]">
       <div class="flex justify-center items-center h-screen">
         <div class="w-[617px] h-[561px] bg-white rounded-2xl p-7 shadow-lg">
-          <div class="mb-10 font-semibold text-primary cursor-pointer text-lg">
+          <div   class="mb-10 font-semibold text-primary cursor-pointer text-lg">
             Login
           </div>
 
@@ -97,6 +97,11 @@
       </div>
     </div>
   </div>
+
+  <div v-else class="flex justify-center items-center h-48">
+    <div class="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-purple-500"></div>
+    <div class="ml-4 text-purple-500">LOADING BRUHHHH</div>
+  </div>
 </template>
 
 <script setup>
@@ -111,8 +116,10 @@ onMounted(() => {
 const errorMessage = ref();
 const username=ref();
 const password=ref();
-
 const router = useRouter();
+
+const auth = ref();
+auth.value = localStorage.getItem("auth");
 
 
 
@@ -152,13 +159,15 @@ const login = async () => {
 
             localStorage.setItem("admin_userId",`${data[i].user_id}`);
             localStorage.setItem("adminAuth",true);
-            router.push("/AdministratorPage");
+            localStorage.setItem("auth",true);
+;           router.push("/AdministratorPage");
 
           }
           else if(data[i].role=="operator"){
 
             localStorage.setItem("operator_userId",`${data[i].user_id}`);
             localStorage.setItem("operatorAuth",true);
+            localStorage.setItem("auth",true);
             router.push("/OperatorPage");
 
           }
@@ -166,6 +175,7 @@ const login = async () => {
 
             localStorage.setItem("responder_userId",`${data[i].user_id}`);
             localStorage.setItem("responderAuth",true);
+            localStorage.setItem("auth",true);
             router.push("/ResponderPage");
 
 
