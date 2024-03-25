@@ -2,52 +2,56 @@
   <div
     class="flex w-[75%] bg-gray-100 rounded-lg items-center justify-center mx-auto my-auto border-2 border-primary text-primary font-500 drop-shadow-lg"
   >
-    <div class="text-center w-full my-auto">
+    <div class="text-center w-full my-auto h-[800px]">
       <div class="text-2xl my-5">
         Please fill out the form below to create user*
       </div>
 
       <div
-        class="flex flex-row row-span-2 bg-secondary w-[90%] h-[] mx-auto rounded-lg mb-8"
+        class="flex flex-row row-span-2 bg-secondary w-[90%] h-[89%] mx-auto rounded-lg mb-8"
       >
-        <div class="w-[50%] h-[80%] my-[5%] mx-[5%]">
+        <div class="w-[50%] h-[80%] my-[2%] mx-[5%]">
           <div class="flex justify-start items-start my-5">
             <div class="flex flex-row">
-              <div class="max-w-sm mx-auto flex flex-col">
+              <div class="mx-auto flex flex-col">
                 <label
                   for="users"
-                  class="mb-2 text-sm font-medium flex items-start"
+                  class="mb-2 text-sm font-medium flex items-start text-start"
                   >Select User to Add</label
                 >
                 <select
                   v-model="selected_userToAdd"
                   id="users"
-                  class="bg-gray-50 border px-9 justify-start items-start border-gray-300 text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5"
+                  class="bg-gray-50 text-start border px-4 justify-start items-start border-gray-300 text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5"
                   required
                   @change="selectedUser"
                 >
                   <option disabled selected>Click to Select</option>
                   <option value="Operator">System Operator</option>
-                  <option value="Responder">Emergency Responder</option>
+                  <option value="Responder">Emergency Responder Unit</option>
                 </select>
               </div>
               <div class="flex flex-row">
                 <div class="max-w-sm mx-auto flex flex-col">
-                  <label v-if="selected_userToAdd===`Responder`"
+                  <label
+                    v-if="selected_userToAdd === `Responder`"
                     for="department"
                     class="mb-2 text-sm font-medium flex items-start ml-6"
                     >if user is ERU, select department
                   </label>
-                  
-                  <select v-if="selected_userToAdd===`Responder`"
-                  v-model="department"
+
+                  <select
+                    v-if="selected_userToAdd === `Responder`"
+                    v-model="department"
                     id="department"
                     class="bg-gray-50 border ml-4 border-gray-300 text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5"
                     required
                   >
                     <option disabled selected>Click to Select</option>
                     <option value="fire">Fire Department</option>
-                    <option value="search_rescue">Search and Rescue Group</option>
+                    <option value="search_rescue">
+                      Search and Rescue Group
+                    </option>
                     <option value="ngo">NGO</option>
                     <option value="privatre">Private Sector</option>
                   </select>
@@ -60,14 +64,14 @@
 
           <!-- START OF OPERATOR -->
 
-          <div v-if="selected_userToAdd==`Operator`">
+          <div v-if="selected_userToAdd == `Operator`">
             <div class="flex justify-start items-start">
               <label for="company" class="block mb-2 text-sm font-medium"
                 >First Name</label
               >
             </div>
 
-            <div class="grid gap-6 mb-6 md:grid-cols-2">
+            <div class="grid gap-6 md:grid-cols-2">
               <div>
                 <input
                   v-model="first_name"
@@ -79,7 +83,7 @@
                 />
               </div>
 
-              <div class="mt-[-13%]">
+              <div class="mt-[-12%]">
                 <label
                   for="company"
                   class="mb-2 text-sm font-medium justify-start items-start flex"
@@ -95,33 +99,23 @@
                 />
               </div>
               <!-- GENDER -->
-              <select
-              v-model="gender"
-              id="gender"
-              class="bg-gray-50 border ml-4 border-gray-300 text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5"
-              required
-            >
-              <option disabled selected>Click to Select</option>
-              <option value="male">Male</option>
-              <option value="female">Female</option>
-
-            </select>
-
-            <div class="mt-[-13%]">
-              <label
-                for="company"
-                class="mb-2 text-sm font-medium justify-start items-start flex"
-                >Address</label
-              >
-              <input
-                v-model="address"
-                type="text"
-                id="last_name"
-                class="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5"
-                placeholder="Doe"
-                required
-              />
-            </div>
+              <div class="flex-col flex">
+                <label
+                  for="gender"
+                  class="mb-2 text-sm font-medium justify-start items-start flex"
+                  >Gender</label
+                >
+                <select
+                  v-model="gender"
+                  id="gender"
+                  class="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5"
+                  required
+                >
+                  <option disabled selected>Click to Select</option>
+                  <option value="male">Male</option>
+                  <option value="female">Female</option>
+                </select>
+              </div>
               <div>
                 <div class="flex justify-start items-start">
                   <label for="phone" class="block mb-2 text-sm font-medium"
@@ -130,13 +124,27 @@
                 </div>
 
                 <input
-                v-model="mobile_number"
-
+                  v-model="mobile_number"
                   type="tel"
                   id="phone"
                   class="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5"
                   placeholder="09*********"
+                  required
+                />
+              </div>
+              <div class="mb-6">
+                <div class="flex justify-start items-start">
+                  <label for="email" class="block mb-2 text-sm font-medium"
+                    >Email Address</label
+                  >
+                </div>
 
+                <input
+                  v-model="email"
+                  type="email"
+                  id="email"
+                  class="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5"
+                  placeholder="youremail@gmail.com"
                   required
                 />
               </div>
@@ -165,7 +173,7 @@
                     </svg>
                   </div>
                   <input
-                  v-model="birthdate"
+                    v-model="birthdate"
                     type="date"
                     class="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="Select date"
@@ -173,30 +181,27 @@
                 </div>
               </div>
             </div>
-            <div class="mb-6">
-              <div class="flex justify-start items-start">
-                <label for="email" class="block mb-2 text-sm font-medium"
-                  >Email Address</label
+            <div class="flex flex-row gap-7">
+              <div class="flex flex-col w-[50%]">
+                <label
+                  for="company"
+                  class="mb-2 text-sm font-medium justify-start items-start flex"
+                  >Address</label
                 >
+                <input
+                  v-model="address"
+                  type="text"
+                  id="last_name"
+                  class="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5"
+                  placeholder="Sanciangko Street Cebu City"
+                  required
+                />
               </div>
 
-              <input
-              v-model="email"
-                type="email"
-                id="email"
-                class="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5"
-                placeholder="john.doe@company.com"
-                required
-              />
-            </div>
-
-            <div class="flex justify-start items-start">
-              <label for="company" class="block mb-2 text-sm font-medium"
-                >Username</label
-              >
-            </div>
-
-              <div>
+              <div class="flex flex-col items-start justify-start w-[50%]">
+                <label for="company" class="block mb-2 text-sm font-medium"
+                  >Username</label
+                >
                 <input
                   v-model="username"
                   type="text"
@@ -206,17 +211,18 @@
                   required
                 />
               </div>
+            </div>
 
-            <div
-              class="flex items-start justify-start gap-5 flex-row row-span-2"
-            >
-              <div class="flex flex-col col-span-2 justify-start items-start">
+            <div class="flex justify-start items-start gap-7 mt-5">
+              <div
+                class="flex flex-col col-span-2 justify-start items-start w-[50%]"
+              >
                 <label for="Password" class="block mb-2 text-sm font-medium"
                   >Password</label
                 >
                 <div class="mb-6">
                   <input
-                  v-model="password"
+                    v-model="password"
                     type="password"
                     id="password"
                     class="bg-gray-50 pr-20 border justify-start items-start border-gray-300 text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5"
@@ -225,14 +231,15 @@
                   />
                 </div>
               </div>
-
-              <div class="flex flex-col col-span-2 justify-start items-start">
+              <div
+                class="flex flex-col col-span-2 justify-start items-start w-[50%]"
+              >
                 <label for="Password" class="block mb-2 text-sm font-medium"
                   >Confirm password</label
                 >
                 <div class="mb-6">
                   <input
-                  v-model="confirm_password"
+                    v-model="confirm_password"
                     type="password"
                     id="confirm_password"
                     class="bg-gray-50 border pr-20 border-gray-300 text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5"
@@ -242,6 +249,10 @@
                 </div>
               </div>
             </div>
+
+            <div
+              class="flex items-start justify-start gap-5 flex-row row-span-2"
+            ></div>
 
             <div class="flex items-start mb-6">
               <div class="flex items-center h-5">
@@ -269,7 +280,7 @@
               type="submit"
               class="text-white flex justify-start items-start my-5 px-8 bg-primary hover:bg-primary focus:ring-4 focus:outline-none focus:ring-primary font-medium rounded-lg text-sm w-full sm:w-auto s py-2.5 text-center"
               @click="submitOperator()"
-              >
+            >
               Submit
             </button>
             {{ errorMessage }}
@@ -277,55 +288,37 @@
           <!-- END OF OPERATOR -->
 
           <!-- START OF RESPONDER -->
-          <div v-if="selected_userToAdd==`Responder`">
+          <div v-if="selected_userToAdd == `Responder`">
             <div class="flex justify-start items-start">
-              <label for="company" class="block mb-2 text-sm font-medium"
-                > Institution</label
+              <label for="company" class="block mb-1 text-sm font-medium">
+                Institution</label
               >
             </div>
 
             <div class="grid gap-6 mb-6 md:grid-cols-2">
               <div>
                 <input
-                v-model="institution"
+                  v-model="institution"
                   type="text"
                   id="institution"
                   class="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5"
-                  placeholder="John"
+                  placeholder="Private Sector"
                   required
                 />
               </div>
 
-
-
-              <div class="mt-[-13%]">
+              <div class="mt-[-10%]">
                 <label
                   for="company"
-                  class="mb-2 text-sm font-medium justify-start items-start flex"
+                  class="mb-1 text-sm font-medium justify-start items-start flex"
                   >City</label
                 >
                 <input
-                v-model="city"
+                  v-model="city"
                   type="text"
                   id="city"
                   class="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5"
-                  placeholder="Doe"
-                  required
-                />
-              </div>
-
-              <div class="mt-[-13%]">
-                <label
-                  for="company"
-                  class="mb-2 text-sm font-medium justify-start items-start flex"
-                  >Address</label
-                >
-                <input
-                v-model="address"
-                  type="text"
-                  id="address"
-                  class="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5"
-                  placeholder="Doe"
+                  placeholder="Cebu City"
                   required
                 />
               </div>
@@ -338,17 +331,17 @@
                 </div>
 
                 <input
-                v-model="mobile_number"
+                  v-model="mobile_number"
                   type="tel"
                   id="mobile_number"
                   class="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5"
-                  placeholder="123-45-678"
+                  placeholder="09*********"
                   pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}"
                   required
                 />
               </div>
 
-              <div>
+              <div class="">
                 <div class="flex justify-start items-start">
                   <label for="phone" class="block mb-2 text-sm font-medium"
                     >Zip Code</label
@@ -356,39 +349,41 @@
                 </div>
 
                 <input
-                v-modle="zipcode"
+                  v-modle="zipcode"
                   type="tel"
                   id="zipcode"
                   class="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5"
-                  placeholder="123-45-678"
+                  placeholder="6000"
                   pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}"
                   required
                 />
               </div>
             </div>
-            <div class="mb-6">
-              <div class="flex justify-start items-start">
-                <label for="email" class="block mb-2 text-sm font-medium"
-                  >Email address</label
+            <div class="mb-6 flex flex-row gap-7">
+              <div class="w-[100%]">
+                <label
+                  for="company"
+                  class="mb-2 text-sm font-medium justify-start items-start flex"
+                  >Address</label
                 >
+                <input
+                  v-model="address"
+                  type="text"
+                  id="address"
+                  class="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5"
+                  placeholder="Sanciangko Street Cebu City"
+                  required
+                />
               </div>
-
-              <input
-              v-model="email"
-                type="email"
-                id="email"
-                class="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5"
-                placeholder="john.doe@company.com"
-                required
-              />
-            </div>
-            <div class="flex justify-start items-start">
-              <label for="company" class="block mb-2 text-sm font-medium"
-                >Username</label
-              >
             </div>
 
-              <div>
+            <div class="flex flex-row gap-7">
+              <div class="flex flex-col w-[50%]">
+                <div class="flex justify-start items-start">
+                  <label for="company" class="block mb-2 text-sm font-medium"
+                    >Username</label
+                  >
+                </div>
                 <input
                   v-model="username"
                   type="text"
@@ -399,8 +394,23 @@
                 />
               </div>
 
+              <div class="flex flex-col w-[50%]">
+                <label for="email" class="mb-2 text-sm text-start font-medium"
+                  >Email address</label
+                >
+                <input
+                  v-model="email"
+                  type="email"
+                  id="email"
+                  class="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5"
+                  placeholder="youremail@gmail.com"
+                  required
+                />
+              </div>
+            </div>
+
             <div
-              class="flex items-start justify-start gap-5 flex-row row-span-2"
+              class="flex items-start justify-start gap-5 flex-row row-span-2 mt-[4%]"
             >
               <div class="flex flex-col col-span-2 justify-start items-start">
                 <label for="Password" class="block mb-2 text-sm font-medium"
@@ -408,7 +418,7 @@
                 >
                 <div class="mb-6">
                   <input
-                  v-model="password"
+                    v-model="password"
                     type="password"
                     id="password"
                     class="bg-gray-50 pr-20 border justify-start items-start border-gray-300 text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5"
@@ -424,8 +434,7 @@
                 >
                 <div class="mb-6">
                   <input
-                  v-model="confirm_password"
-
+                    v-model="confirm_password"
                     type="password"
                     id="confirm_password"
                     class="bg-gray-50 border pr-20 border-gray-300 text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5"
@@ -459,20 +468,21 @@
             </div>
 
             <button
-            @click="submitResponder"
+              @click="submitResponder"
               type="submit"
               class="text-white flex justify-start items-start my-5 px-8 bg-primary hover:bg-primary focus:ring-4 focus:outline-none focus:ring-primary font-medium rounded-lg text-sm w-full sm:w-auto s py-2.5 text-center"
             >
               Submit
             </button>
             {{ errorMessage }}
-
           </div>
-                    <!-- END OF RESPONDER -->
-
+          <!-- END OF RESPONDER -->
         </div>
 
-        <div v-if="selected_userToAdd" class="flex w-[25%] mx-auto my-[10%] flex-col justify-center">
+        <div
+          v-if="selected_userToAdd"
+          class="flex w-[23%] mx-auto my-[10%] flex-col justify-center"
+        >
           <div class="text-md mb-5 text-bold">Click below to upload photo.</div>
           <label
             for="image"
@@ -502,7 +512,12 @@
                 SVG, PNG, JPG or GIF (MAX. 800x400px)
               </p>
             </div>
-            <input id="image" type="file" class="hidden" @change="handleFileImage($event)"/>
+            <input
+              id="image"
+              type="file"
+              class="hidden"
+              @change="handleFileImage($event)"
+            />
           </label>
         </div>
       </div>
@@ -511,13 +526,12 @@
 </template>
 
 <script setup>
-
 import { ref } from "vue";
-import  axios  from "axios";  
+import axios from "axios";
 
-const selected_userToAdd= ref();
+const selected_userToAdd = ref();
 
-const image=ref(null);
+const image = ref(null);
 const first_name = ref();
 const last_name = ref();
 const gender = ref();
@@ -527,14 +541,13 @@ const birthdate = ref();
 const email = ref();
 const username = ref();
 const password = ref();
-const confirm_password=ref();
+const confirm_password = ref();
 const institution = ref();
-const city=ref();
+const city = ref();
 const zipcode = ref();
 const department = ref();
 
 const errorMessage = ref();
-
 
 const handleFileImage = (event) => {
   const file = (event.target.files || [])[0];
@@ -550,85 +563,75 @@ const handleFileImage = (event) => {
   }
 };
 
-
 const submitOperator = async () => {
   try {
     const formData = new FormData();
-    
-    if(password.value!=confirm_password.value){
+
+    if (password.value != confirm_password.value) {
       errorMessage.value = "Passwords do not match";
-    } 
-    else{
-      formData.append("first_name",first_name.value);
-      formData.append("last_name",last_name.value);
-      formData.append("gender",gender.value);
-      formData.append("address",address.value);
-      formData.append("mobile_number",mobile_number.value);
-      formData.append("birthdate",birthdate.value);
-      formData.append("email",email.value);
-      formData.append("username",username.value);
-      formData.append("password",password.value);
-      formData.append("image",image.value);
-      
-      const response = await axios.post("http://localhost:8080/addOperator",formData,{
-      headers: {
-        "Content-Type" : "multipart/form-data",
-        },
-      });
+    } else {
+      formData.append("first_name", first_name.value);
+      formData.append("last_name", last_name.value);
+      formData.append("gender", gender.value);
+      formData.append("address", address.value);
+      formData.append("mobile_number", mobile_number.value);
+      formData.append("birthdate", birthdate.value);
+      formData.append("email", email.value);
+      formData.append("username", username.value);
+      formData.append("password", password.value);
+      formData.append("image", image.value);
+
+      const response = await axios.post(
+        "http://localhost:8080/addOperator",
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
     }
-
-
-
-  }
-  catch(error){
-    if(!image.value){
-      errorMessage.value = "Insert Image!"
+  } catch (error) {
+    if (!image.value) {
+      errorMessage.value = "Insert Image!";
     }
-    console.log("Error:",error);
+    console.log("Error:", error);
   }
+};
 
-
-}
-
-const submitResponder = async() => {
-
+const submitResponder = async () => {
   try {
     const formData = new FormData();
 
-    if(password.value!=confirm_password.value){
+    if (password.value != confirm_password.value) {
       errorMessage.value = "Passwords do not match";
+    } else {
+      formData.append("department", department.value);
+      formData.append("institution", institution.value);
+      formData.append("city", city.value);
+      formData.append("address", address.value);
+      formData.append("mobile_number", mobile_number.value);
+      formData.append("zipcode", zipcode.value);
+      formData.append("email", email.value);
+      formData.append("username", username.value);
+      formData.append("password", password.value);
+      formData.append("image", image.value);
+
+      const response = await axios.post(
+        "http://localhost:8080/addResponder",
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
     }
-    else{
-      formData.append("department",department.value);
-      formData.append("institution",institution.value);
-      formData.append("city",city.value);
-      formData.append("address",address.value);
-      formData.append("mobile_number",mobile_number.value);
-      formData.append("zipcode",zipcode.value);
-      formData.append("email",email.value);
-      formData.append("username",username.value);
-      formData.append("password",password.value);
-      formData.append("image",image.value);
-
-      const response = await axios.post("http://localhost:8080/addResponder",formData,{
-        headers: {
-          "Content-Type" : "multipart/form-data",
-        },
-      });
-      
+  } catch (error) {
+    if (!image.value) {
+      errorMessage.value = "Insert Image!";
     }
-
-
-
-
+    console.log("Error:", error);
   }
-  catch(error){
-    if(!image.value){
-      errorMessage.value = "Insert Image!"
-    }
-    console.log("Error:",error);
-  }
-}
-
-
+};
 </script>
