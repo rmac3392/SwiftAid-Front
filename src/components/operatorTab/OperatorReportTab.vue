@@ -143,13 +143,24 @@
             >
               Pending Reports
             </div>
-            <Alert 
+            <!-- <Alert 
             v-for="(post,index) in newPost"
             :key="index"
             :id="post.id"
             :location="post.city"
-            button-alert="Details" 
-            />
+            
+            /> -->
+            <div @click="showModal = true" class="gap-10 font-semibold  text-lg flex items-center drop-shadow-lg justify-center mx-auto w-[90%] h-[65px] border-2 my-5 bg-gray rounded-xl border-white shadow-xl hover:shadow-[0_4px_4px_0px_rgba(0,0,0,0.70)] hover:scale-[1.02] p-2">
+              Lapu Lapu City
+              <div class="w-[40%] text-center justify-center rounded-full items-center flex px-2 h-[2.7rem] bg-primary text-white rounded-lg font-semibold hover:bg-white hover:text-primary hover:border-primary border-primary border-2 transition duration-300 hover:cursor-pointer">  
+  Details</div>
+            
+            </div>
+           
+
+<!-- ModalComponent usage -->
+
+            <div></div>
           </div>
 
           <div class="flex flex-col col-span-1 w-[70%]">
@@ -188,8 +199,10 @@
               </div>
             </div>
           </div>
+          
         </div>
       </div>
+      <ModalComponent :isVisible="showModal" @update:isVisible="showModal = $event" />
     </div>
   </div>
 </template>
@@ -197,12 +210,15 @@
 <script setup>
 import Notifications from "../../composables/Notifications.vue";
 import Alert from "../../composables/Alert.vue";
+import ModalComponent from "../../composables/ModalComponent.vue"; // Import the modal component
 import OperatorBarChart from "../../composables/Charts/OperatorBarChart.vue";
 import OperatorPieChart from "../../composables/Charts/OperatorPieChart.vue";
 import OperatorDoughnutChart from "../../composables/Charts/OperatorDoughnutChart.vue";
 import { ref, onMounted} from "vue";
 import axios from "axios";
 
+// Modal visibility state
+const showModal = ref(false);
 
 
 const chartKey = ref(0); // Key variable

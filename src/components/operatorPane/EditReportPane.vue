@@ -8,7 +8,7 @@
           Post Details :
         </div>
         <div
-          class="bg-white w-full h-[12%] border-2 rounded-lg mb-4 border-gray-400"
+          class="bg-white w-full h-[12%] border-2 rounded-lg mb-4 border-gray-400 px-2 py-2 font-semibold"
         >{{ postDetails}}</div>
 
         <div for="" class="w-full text-lg font-bold text-primary">
@@ -16,8 +16,8 @@
         </div>
         
         <div
-          class="bg-white w-full h-[12%] border-2 rounded-lg mb-4 border-gray-400"
-        > {{zipcode}}<br>{{city}}<br>{{ address }}
+          class="bg-white w-full h-[12%] border-2 rounded-lg mb-4 border-gray-400 font-semibold px-2 py-2"
+        > {{zipcode}} {{city}} {{ address }}
       </div>
         <div for="" class="w-full text-lg font-bold text-primary">
           Type of Emergency :
@@ -39,8 +39,8 @@
           class="flex bg-white w-full h-[12%] border-2 rounded-lg mb-4 border-gray-400 hover:shadow-[0_4px_4px_0px_rgba(0,0,0,0.70)] outline-none focus:ring-2 focus:ring-primary"
         >          <Emergency :department="emergency_team" v-if="postDetails"/>
 
-          <div class="h-full w-[100%] p-1 flex justify-end items-end gap-1">
-            <div class="h-full w-[20%] flex p-2">
+          <div class="h-full w-[100%] p-2 flex justify-end items-end gap-1">
+            <div class="h-full w-[25%] flex p-2">
               <!-- <mdicon class="" name="plus" :width="20" :height="20" /> -->
               <div>           
                 <AddResponseTeam

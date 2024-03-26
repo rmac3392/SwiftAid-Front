@@ -16,6 +16,7 @@
         <div class="text-black flex">{{ location }}</div>
       </div>
       <div class="w-[29%]">
+        
         <button
           class="flex justify-center items-center h-11 w-full p-1 bg-primary text-white rounded-full font-semibold hover:bg-white hover:text-primary hover:border-primary border-primary border-2 transition duration-300"
         >
