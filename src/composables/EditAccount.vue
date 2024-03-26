@@ -1,13 +1,4 @@
 <template>
-  <button
-    data-modal-target="popup-modal1"
-    data-modal-toggle="popup-modal1"
-    class="block text-primary text-xs font-500"
-    type="button"
-  >
-    Edit Account
-  </button>
-
   <div
     id="popup-modal1"
     tabindex="-1"
@@ -187,7 +178,16 @@
 </template>
 <script setup>
 import Buttons from "./Buttons.vue";
-import { onMounted } from "vue";
+import { ref, onMounted, computed } from "vue";
+
+const userData = ref([]);
+
+// Computed property to get the currently selected user data
+const selectedUserData = computed(() => {
+  return selectedUserIndex.value !== null
+    ? userData.value[selectedUserIndex.value]
+    : null;
+});
 
 import { initFlowbite } from "flowbite";
 
