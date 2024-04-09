@@ -28,6 +28,11 @@ const router = createRouter({
       name: "forgotPasswordPage",
       component: () => import("../pages/ForgotPassword.vue"),
     },
+    {
+      path: "/testPage",
+      name: "testPage",
+      component: () => import("../pages/TestPage.vue"),
+    },
   ],
 });
 
