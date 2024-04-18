@@ -95,7 +95,7 @@
               <div
                 class="pt-5 h-[50%] text-xl font-medium flex items-center justify-center text-primary"
               >
-                <div>{{ lastName }}, {{ firstName }}</div>
+                <div>Macawili, Ryan James</div>
               </div>
               <div
                 class="pb-5 h-[50%] text-l flex items-center justify-center text-primary"
@@ -111,7 +111,8 @@
         <Transition name="fade" mode="out-in">
           <!-- <OperatorDashboardTab v-if="currentTab === 0" /> -->
           <operatorDashboardView v-if="currentTab === 0" />
-          <OperatorReportTab v-else-if="currentTab === 1" />
+          <!-- <OperatorReportTab v-else-if="currentTab === 1" /> -->
+          <operatorReportView v-else-if="currentTab === 1" />
           <OperatorRecordTab v-else-if="currentTab === 2" />
           <OperatorHelpTab v-else-if="currentTab === 3" />
           <OperatorSignOutTab v-else-if="currentTab === 4" />
@@ -137,6 +138,7 @@ import OperatorSignOutTab from "../components/operatorTab/OperatorSignOutTab.vue
 import OperatorHelpTab from "../components/operatorTab/OperatorHelpTab.vue";
 
 import operatorDashboardView from "../view/operatorDashboardView.vue";
+import operatorReportView from "../view/operatorReportView.vue";
 import { useRouter } from "vue-router";
 
 onMounted(() => {

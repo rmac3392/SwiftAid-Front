@@ -121,8 +121,8 @@
         </div>
       </div>
       <div class="h-[85%]">
-        <div class="h-full bg-white rounded-lg flex shadow-lg">
-          <div class="w-1/2 h-full">
+        <div class="h-full flex">
+          <div class="w-1/2 h-full bg-white rounded-lg shadow-lg mr-3">
             <EditReportPane
               v-model:additionalDescription="additionalDescription"
               v-model:snr="snr"
@@ -138,7 +138,7 @@
               :emergency_team="postEmergencyTeam"
             />
           </div>
-          <div class="w-1/2 h-full p-5">
+          <div class="w-1/2 h-full p-5 bg-white rounded-lg shadow-lg ml-2">
             <div for="" class="w-full text-lg font-semibold text-primary mb-2">
               Map :
             </div>
