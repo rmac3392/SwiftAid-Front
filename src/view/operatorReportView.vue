@@ -146,7 +146,7 @@
         </div>
       </div>
       <div class="w-[72%] h-full ml-2 flex flex-col">
-        <div class="bg-white rounded-lg mb-3 shadow-lg h-1/2 p-5">
+        <div class="bg-white rounded-lg mb-3 shadow-lg h-1/2 px-5">
           <OperatorBarChart />
         </div>
         <div class="bg-white rounded-lg mt-2 shadow-lg h-1/2 p-5">
@@ -178,9 +178,7 @@
                   <td class="border border-gray-300">On</td>
                   <td class="border border-gray-300">12:30:01</td>
                   <td class="border border-gray-300">
-                    <button class="bg-red-400 rounded-full p-1">
-                      Download
-                    </button>
+                    <dialogAction />
                   </td>
                 </tr>
                 <!-- row 2 -->
@@ -194,9 +192,7 @@
                   <td class="border border-gray-300">On</td>
                   <td class="border border-gray-300">12:30:01</td>
                   <td class="border border-gray-300">
-                    <button class="bg-red-400 rounded-full p-1">
-                      Download
-                    </button>
+                    <dialogAction />
                   </td>
                 </tr>
                 <!-- row 3 -->
@@ -210,9 +206,7 @@
                   <td class="border border-gray-300">On</td>
                   <td class="border border-gray-300">12:30:01</td>
                   <td class="border border-gray-300">
-                    <button class="bg-red-400 rounded-full p-1">
-                      Download
-                    </button>
+                    <dialogAction />
                   </td>
                 </tr>
 
@@ -226,9 +220,7 @@
                   <td class="border border-gray-300">On</td>
                   <td class="border border-gray-300">12:30:01</td>
                   <td class="border border-gray-300">
-                    <button class="bg-red-400 rounded-full p-1">
-                      Download
-                    </button>
+                    <dialogAction />
                   </td>
                 </tr>
 
@@ -242,9 +234,7 @@
                   <td class="border border-gray-300">On</td>
                   <td class="border border-gray-300">12:30:01</td>
                   <td class="border border-gray-300">
-                    <button class="bg-red-400 rounded-full p-1">
-                      Download
-                    </button>
+                    <dialogAction />
                   </td>
                 </tr>
 
@@ -258,9 +248,7 @@
                   <td class="border border-gray-300">On</td>
                   <td class="border border-gray-300">12:30:01</td>
                   <td class="border border-gray-300">
-                    <button class="bg-red-400 rounded-full p-1">
-                      Download
-                    </button>
+                    <dialogAction />
                   </td>
                 </tr>
               </tbody>
@@ -274,4 +262,5 @@
 <script setup>
 import OperatorPieChart from "../composables/Charts/OperatorPieChart.vue";
 import OperatorBarChart from "../composables/Charts/OperatorBarChart.vue";
+import dialogAction from "../composables/dialogAction.vue";
 </script>

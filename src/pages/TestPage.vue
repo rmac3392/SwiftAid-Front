@@ -25,12 +25,7 @@
         >
           <div class="flex gap-2 cursor-pointer">
             <div>
-              <mdicon
-                class=""
-                name="chart-bar-stacked"
-                :width="65"
-                :height="65"
-              />
+              <mdicon class="" name="chart-box" :width="65" :height="65" />
             </div>
             <div class="flex items-center">Reports</div>
           </div>
@@ -42,9 +37,9 @@
         >
           <div class="flex gap-2 cursor-pointer">
             <div>
-              <mdicon class="" name="ClipboardList" :width="65" :height="65" />
+              <mdicon class="" name="help-box" :width="65" :height="60" />
             </div>
-            <div class="flex items-center">Records</div>
+            <div class="flex items-center">Help</div>
           </div>
         </div>
 
@@ -54,24 +49,7 @@
         >
           <div class="flex gap-2 cursor-pointer">
             <div>
-              <mdicon
-                class=""
-                name="MapMarkerQuestion"
-                :width="65"
-                :height="60"
-              />
-            </div>
-            <div class="flex items-center">Help</div>
-          </div>
-        </div>
-
-        <div
-          :class="currentTab === 4 ? 'active-tab' : 'general-tab'"
-          @click="currentTab = 4"
-        >
-          <div class="flex gap-2 cursor-pointer">
-            <div>
-              <mdicon class="" name="logout" :width="65" :height="65" />
+              <mdicon class="" name="logout-variant" :width="65" :height="65" />
             </div>
             <div class="flex items-center">Sign Out</div>
           </div>
@@ -113,9 +91,9 @@
           <operatorDashboardView v-if="currentTab === 0" />
           <!-- <OperatorReportTab v-else-if="currentTab === 1" /> -->
           <operatorReportView v-else-if="currentTab === 1" />
-          <OperatorRecordTab v-else-if="currentTab === 2" />
-          <OperatorHelpTab v-else-if="currentTab === 3" />
-          <OperatorSignOutTab v-else-if="currentTab === 4" />
+
+          <OperatorHelpTab v-else-if="currentTab === 2" />
+          <OperatorSignOutTab v-else-if="currentTab === 3" />
         </Transition>
       </div>
     </div>
