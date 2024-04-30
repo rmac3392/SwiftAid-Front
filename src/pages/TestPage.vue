@@ -45,7 +45,7 @@
 
         <div
           :class="currentTab === 3 ? 'active-tab' : 'general-tab'"
-          @click="currentTab = 3"
+          @click="showModal(); isClicked=true"
         >
           <div class="flex gap-2 cursor-pointer">
             <div>
@@ -57,6 +57,28 @@
       </div>
     </div>
     <div class="w-[80%]">
+      <dialog v-if="isClicked==true" id="my_modal_3" class="modal" ref="myModal">
+        <div class="modal-box">
+          <form method="dialog">
+            <button
+              class="btn btn-md btn-circle btn-ghost absolute right-2 top-2"
+            >
+              ✕
+            </button>
+          </form>
+          <h1 class="font-bold text-xl">Sign Out</h1>
+          <p class="py-4 text-center text-lg font-medium">
+            Are you sure you want to sign out?
+          </p>
+          <div class="flex items-center justify-center">
+            <button
+              class="btn bg-primary text-white hover:bg-white hover:text-primary hover:border-primary"
+            >
+              Sign Out
+            </button>
+          </div>
+        </div>
+      </dialog>
       <div class="h-[13%] w-full p-5">
         <div class="flex w-full h-full bg-white rounded-lg shadow-lg">
           <div class="w-[77%] p-3"></div>
@@ -85,6 +107,7 @@
         </div>
       </div>
       <!-- Current tab -->
+
       <div class="pb-5 px-5 h-[87%]">
         <Transition name="fade" mode="out-in">
           <!-- <OperatorDashboardTab v-if="currentTab === 0" /> -->
@@ -93,7 +116,7 @@
           <operatorReportView v-else-if="currentTab === 1" />
 
           <OperatorHelpTab v-else-if="currentTab === 2" />
-          <OperatorSignOutTab v-else-if="currentTab === 3" />
+          <!-- <OperatorSignOutTab v-else-if="currentTab === 3" /> -->
         </Transition>
       </div>
     </div>
@@ -119,6 +142,8 @@ import operatorDashboardView from "../view/operatorDashboardView.vue";
 import operatorReportView from "../view/operatorReportView.vue";
 import { useRouter } from "vue-router";
 
+const isClicked = ref(false);
+
 onMounted(() => {
   operatorAuth();
 });
@@ -130,6 +155,8 @@ const router = useRouter();
 const currentTab = ref(0);
 const firstName = ref();
 const lastName = ref();
+
+const myModal = ref(null);
 
 const operatorAuth = async () => {
   const operator = localStorage.getItem("operatorAuth");
@@ -153,4 +180,14 @@ const operatorAuth = async () => {
     }
   }
 };
+
+const showModal = () => {
+  if (myModal.value) {
+    myModal.value.showModal();
+  }
+};
+
+onMounted(() => {
+  showModal(); // Optionally show the modal on component mount
+});
 </script>

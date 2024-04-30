@@ -22,7 +22,7 @@
               12
             </div>
             <div class="h-[35%] flex justify-center items-start text-sm">
-              Sent Reports
+              Fire
             </div>
           </div>
         </div>
@@ -48,7 +48,33 @@
               12
             </div>
             <div class="h-[35%] flex justify-center items-start text-sm">
-              Sent Reports
+              Flood
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="bg-white w-1/4 h-full rounded-lg p-5 flex shadow-lg">
+        <div class="h-full w-[40%]">
+          <div
+            class="bg-primary h-full rounded-lg flex items-center justify-center text-white"
+          >
+            <mdicon
+              class="origin-center"
+              name="ProgressUpload"
+              :width="50"
+              :height="50"
+            />
+          </div>
+        </div>
+        <div class="h-full pl-3 w-[60%]">
+          <div class="h-full">
+            <div
+              class="h-[65%] flex justify-center font-semibold items-end text-4xl"
+            >
+              12
+            </div>
+            <div class="h-[35%] flex justify-center items-start text-sm">
+              Injuries
             </div>
           </div>
         </div>
@@ -74,7 +100,7 @@
               12
             </div>
             <div class="h-[35%] flex justify-center items-start text-sm">
-              Cancel Reports
+              Assault
             </div>
           </div>
         </div>
@@ -100,7 +126,7 @@
               12
             </div>
             <div class="h-[35%] flex justify-center items-start text-sm">
-              Acknowledged
+              Biohazard
             </div>
           </div>
         </div>
@@ -126,7 +152,7 @@
               12
             </div>
             <div class="h-[35%] flex justify-center items-start text-sm">
-              Pending Reports
+              Others
             </div>
           </div>
         </div>
@@ -264,3 +290,4 @@ import OperatorPieChart from "../composables/Charts/OperatorPieChart.vue";
 import OperatorBarChart from "../composables/Charts/OperatorBarChart.vue";
 import dialogAction from "../composables/dialogAction.vue";
 </script>
+
