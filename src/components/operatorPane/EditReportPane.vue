@@ -17,8 +17,7 @@
 
         <textarea
           class="bg-white w-full h-[12%] border-2 rounded-lg mb-4 border-gray-400 font-semibold px-2 py-2"
-        >
-          {{ zipcode }} {{ city }} {{ address }}
+        >{{ location }}
         </textarea>
         <div for="" class="w-full text-lg font-semibold text-primary">
           Type of Emergency :
@@ -32,9 +31,9 @@
           <Emergency department="Flood" /> -->
 
           <div class="h-1/2 flex gap-2">
-            <Emergency emergency="Biohazard" />
-            <Emergency emergency="Fire" />
-            <Emergency emergency="Flood" />
+            <Emergency v-for="(type,index) in emergencies" 
+            :emergency="type.emergency" />
+
           </div>
           <div class="h-1/2 flex justify-end">
             <div class="dropdown dropdown-right">
@@ -50,22 +49,22 @@
                 class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52 border border-black"
               >
                 <li class="border-b border-black">
-                  <a> <input type="checkbox" name="" id="" /> Fire</a>
+                  <a><input type="checkbox" v-model="fire" @change="checked(fire,'Fire')" />Fire</a>
                 </li>
                 <li class="border-b border-black">
-                  <a> <input type="checkbox" name="" id="" /> Flood</a>
+                  <a><input type="checkbox" v-model="flood" @change="checked(flood,'Flood')" /> Flood</a>
                 </li>
                 <li class="border-b border-black">
-                  <a> <input type="checkbox" name="" id="" />Assault</a>
+                  <a><input type="checkbox" v-model="assault" @change="checked(assault,'Assault')" />Assault</a>
                 </li>
                 <li class="border-b border-black">
-                  <a> <input type="checkbox" name="" id="" />Injuries</a>
+                  <a><input type="checkbox" v-model="injuries" @change="checked(injuries,'Injuries')" />Injuries</a>
                 </li>
                 <li class="border-b border-black">
-                  <a> <input type="checkbox" name="" id="" />Biohazard</a>
+                  <a><input type="checkbox" v-model="biohazard" @change="checked(biohazard,'Biohazard')" />Biohazard</a>
                 </li>
                 <li class="border-b border-black">
-                  <a> <input type="checkbox" name="" id="" />Others</a>
+                  <a><input type="checkbox" v-model="others" @change="checked(others,'Others')" />Others</a>
                 </li>
               </ul>
             </div>
@@ -104,26 +103,26 @@
                   class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52 border border-black h-60 "
                 >
                   <li class="border-b border-black">
-                    <a> <input type="checkbox" name="" id="" /> Fire</a>
+                    <input type="checkbox" v-model="fire"/>
                   </li>
                   <li class="border-b border-black">
-                    <a> <input type="checkbox" name="" id="" /> Flood</a>
+                    <a> <input type="checkbox" v-model="flood"/> Flood</a>
                   </li>
                   <li class="border-b border-black">
-                    <a> <input type="checkbox" name="" id="" />Assault</a>
+                    <a> <input type="checkbox" v-model="assault"/>Assault</a>
                   </li>
                   <li class="border-b border-black">
-                    <a> <input type="checkbox" name="" id="" />Injuries</a>
+                    <a> <input type="checkbox" v-model="injuries"/>Injuries</a>
                   </li>
                   <li class="border-b border-black">
-                    <a> <input type="checkbox" name="" id="" />Biohazard</a>
+                    <a> <input type="checkbox" v-model="biohazard"/>Biohazard</a>
                   </li>
                   <li class="border-b border-black">
-                    <a> <input type="checkbox" name="" id="" />Others</a>
+                    <a><input type="checkbox" v-model="others"/>Others</a>
                   </li>
                  
                 </ul>
-              </div>
+              </div>  
             </div>
           </div>
         </div>
@@ -143,21 +142,26 @@
 <script setup>
 import Emergency from "../../composables/Emergency.vue";
 import AddResponseTeam from "../../composables/AddResponseTeam.vue";
-import { ref, onMounted } from "vue";
-const dog = ref();
-defineProps({
+import { ref, onMounted ,defineModel} from "vue";
+
+const props = defineProps({
   postDetails: String,
-  zipcode: String,
-  address: String,
-  city: String,
-  emergency_type: String,
+  location:String,
+  emergencies: Array,
   emergency_team: String,
+  checked: Function,
 });
 const additionalDescription = defineModel("additionalDescription");
 
-const snr = defineModel("snr");
-const fire_department = defineModel("fire_department");
-const ngo = defineModel("ngo");
-const private_sector = defineModel("private_sector");
-const baranggay_tanod = defineModel("baranggay_tanod");
+const fire = defineModel("fire");
+const flood = defineModel("flood");
+const assault = defineModel("assault");
+const injuries = defineModel("injuries");
+const biohazard = defineModel("biohazard");
+const others = defineModel("others");
+
+
+
+
+
 </script>

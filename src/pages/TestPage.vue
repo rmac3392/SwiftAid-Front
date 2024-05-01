@@ -95,7 +95,7 @@
               <div
                 class="pt-5 h-[50%] text-xl font-medium flex items-center justify-center text-primary"
               >
-                <div>Macawili, Ryan James</div>
+                <div>{{ lastName }}, {{ firstName }}</div>
               </div>
               <div
                 class="pb-5 h-[50%] text-l flex items-center justify-center text-primary"
