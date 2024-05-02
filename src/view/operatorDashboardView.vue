@@ -192,7 +192,7 @@ const getPost = async () =>{
   const response = await fetch(`http://localhost:8080/getPost`);
   const data = await response.json();
   for(var i = 0; i < data.length ; i++){
-    if (data[i].status == 'pending') {
+    if (data[i].status == 'Pending') {
       const timestamp = new Date(data[i].timestamp);
 
       const month = timestamp.getMonth() + 1; 
@@ -220,13 +220,13 @@ const getPost = async () =>{
       });
       pending.value++;
     }
-    else if(data[i].status=='sent'){
+    else if(data[i].status=='Sent'){
       sent.value++;
     }
-    else if(data[i].status=='acknowledged'){
+    else if(data[i].status=='Acknowledged'){
       acknowledged.value++;
     }
-    else if(data[i].status=='cancelled'){
+    else if(data[i].status=='Cancelled'){
       cancelled.value++;
     }
     
