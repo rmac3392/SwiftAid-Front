@@ -19,7 +19,7 @@
             <div
               class="h-[65%] flex justify-center font-semibold items-end text-4xl"
             >
-              12
+              {{fireCount}}
             </div>
             <div class="h-[35%] flex justify-center items-start text-sm">
               Fire
@@ -45,7 +45,7 @@
             <div
               class="h-[65%] flex justify-center font-semibold items-end text-4xl"
             >
-              12
+              {{ floodCount }}
             </div>
             <div class="h-[35%] flex justify-center items-start text-sm">
               Flood
@@ -71,7 +71,7 @@
             <div
               class="h-[65%] flex justify-center font-semibold items-end text-4xl"
             >
-              12
+              {{ injuriesCount }}
             </div>
             <div class="h-[35%] flex justify-center items-start text-sm">
               Injuries
@@ -97,7 +97,7 @@
             <div
               class="h-[65%] flex justify-center font-semibold items-end text-4xl"
             >
-              12
+              {{ assaultCount }}
             </div>
             <div class="h-[35%] flex justify-center items-start text-sm">
               Assault
@@ -123,7 +123,7 @@
             <div
               class="h-[65%] flex justify-center font-semibold items-end text-4xl"
             >
-              12
+              {{ biohazardCount }}
             </div>
             <div class="h-[35%] flex justify-center items-start text-sm">
               Biohazard
@@ -149,7 +149,7 @@
             <div
               class="h-[65%] flex justify-center font-semibold items-end text-4xl"
             >
-              12
+              {{ othersCount }}
             </div>
             <div class="h-[35%] flex justify-center items-start text-sm">
               Others
@@ -173,8 +173,17 @@
       </div>
       <div class="w-[72%] h-full ml-2 flex flex-col">
         <div class="bg-white rounded-lg mb-3 shadow-lg h-1/2 px-5">
-          <OperatorBarChart />
-        </div>
+          <OperatorBarChart
+          :key="chartKey"
+          :jan=jan
+          :feb=feb
+          :mar=mar
+          :apr=apr
+          :may=may
+          :jun=jun
+          :jul=jul
+          :aug=aug
+          />        </div>
         <div class="bg-white rounded-lg mt-2 shadow-lg h-1/2 p-5">
           <div class="overflow-auto h-full">
             <table
@@ -194,89 +203,24 @@
               </thead>
               <tbody class="">
                 <!-- row 1 -->
-                <tr class="hover">
-                  <th class="border border-gray-300">1</th>
-                  <td class="border border-gray-300">Cy Ganderton</td>
+                <tr class="hover" v-for="(post,index) in posts">
+                  <th class="border border-gray-300">{{index+1}}</th>
+                  <td class="border border-gray-300">{{post.location}}</td>
                   <td class="border border-gray-300">
-                    Quality Control Specialist
+                    {{ post.emergency }}
                   </td>
-                  <td class="border border-gray-300">Blue</td>
-                  <td class="border border-gray-300">On</td>
-                  <td class="border border-gray-300">12:30:01</td>
+                  <td class="border border-gray-300">{{post.description}}</td>
+                  <td class="border border-gray-300">{{post.status}}</td>
+                  <td class="border border-gray-300">{{post.timestamp}}</td>
                   <td class="border border-gray-300">
-                    <dialogAction />
-                  </td>
-                </tr>
-                <!-- row 2 -->
-                <tr class="hover">
-                  <th class="border border-gray-300">1</th>
-                  <td class="border border-gray-300">Cy Ganderton</td>
-                  <td class="border border-gray-300">
-                    Quality Control Specialist
-                  </td>
-                  <td class="border border-gray-300">Blue</td>
-                  <td class="border border-gray-300">On</td>
-                  <td class="border border-gray-300">12:30:01</td>
-                  <td class="border border-gray-300">
-                    <dialogAction />
+                    <dialogAction 
+                      :emergency="post.emergency"
+                      :date="post.timestamp"
+                      :time="post.time"
+                    />
                   </td>
                 </tr>
-                <!-- row 3 -->
-                <tr class="hover">
-                  <th class="border border-gray-300">1</th>
-                  <td class="border border-gray-300">Cy Ganderton</td>
-                  <td class="border border-gray-300">
-                    Quality Control Specialist
-                  </td>
-                  <td class="border border-gray-300">Blue</td>
-                  <td class="border border-gray-300">On</td>
-                  <td class="border border-gray-300">12:30:01</td>
-                  <td class="border border-gray-300">
-                    <dialogAction />
-                  </td>
-                </tr>
-
-                <tr class="hover">
-                  <th class="border border-gray-300">1</th>
-                  <td class="border border-gray-300">Cy Ganderton</td>
-                  <td class="border border-gray-300">
-                    Quality Control Specialist
-                  </td>
-                  <td class="border border-gray-300">Blue</td>
-                  <td class="border border-gray-300">On</td>
-                  <td class="border border-gray-300">12:30:01</td>
-                  <td class="border border-gray-300">
-                    <dialogAction />
-                  </td>
-                </tr>
-
-                <tr class="hover">
-                  <th class="border border-gray-300">1</th>
-                  <td class="border border-gray-300">Cy Ganderton</td>
-                  <td class="border border-gray-300">
-                    Quality Control Specialist
-                  </td>
-                  <td class="border border-gray-300">Blue</td>
-                  <td class="border border-gray-300">On</td>
-                  <td class="border border-gray-300">12:30:01</td>
-                  <td class="border border-gray-300">
-                    <dialogAction />
-                  </td>
-                </tr>
-
-                <tr class="hover">
-                  <th class="border border-gray-300">1</th>
-                  <td class="border border-gray-300">Cy Ganderton</td>
-                  <td class="border border-gray-300">
-                    Quality Control Specialist
-                  </td>
-                  <td class="border border-gray-300">Blue</td>
-                  <td class="border border-gray-300">On</td>
-                  <td class="border border-gray-300">12:30:01</td>
-                  <td class="border border-gray-300">
-                    <dialogAction />
-                  </td>
-                </tr>
+    
               </tbody>
             </table>
           </div>
@@ -289,5 +233,78 @@
 import OperatorPieChart from "../composables/Charts/OperatorPieChart.vue";
 import OperatorBarChart from "../composables/Charts/OperatorBarChart.vue";
 import dialogAction from "../composables/dialogAction.vue";
+import {ref,onMounted} from "vue";
+
+onMounted(()=>{
+  getPost();
+});
+
+const posts = ref([]);
+
+const fireCount = ref(0);
+const floodCount = ref(0);
+const assaultCount = ref(0);
+const injuriesCount = ref(0);
+const biohazardCount = ref(0);
+const othersCount = ref(0);
+
+//month referencers
+const jan = ref(0);
+const feb = ref(0);
+const mar = ref(0);
+const apr = ref(0);
+const may = ref(0);
+const jun = ref(0);
+const jul = ref(0);
+const aug = ref(0);
+
+const getPost = async () => {
+  const response = await fetch('http://localhost:8080/getPost');
+  const data = await response.json();
+
+  for(var i = 0 ; i < data.length ; i ++){
+    const timestamp = new Date(data[i].timestamp);
+
+    const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    const monthIndex = timestamp.getMonth();
+    const monthName = months[monthIndex];
+    const day = timestamp.getDate();
+    const year = timestamp.getFullYear();
+
+    let hours = timestamp.getHours();
+    const minutes = timestamp.getMinutes();
+    const ampm = hours >= 12 ? 'PM' : 'AM';
+    hours = hours % 12;
+    hours = hours ? hours : 12; 
+    const time = hours + ':' + (minutes < 10 ? '0' : '') + minutes + ' ' + ampm;
+
+    posts.value.push({
+      id: data[i].post_id,
+      location: data[i].address,
+      emergency: data[i].emergency_type,
+      description: data[i].description,
+      status: data[i].status,
+      timestamp: `${monthName} ${day}, ${year}`,
+      time: time
+    });
+
+    if(data[i].emergency_type=='Fire'){fireCount.value++;}
+    if(data[i].emergency_type=='Flood'){floodCount.value++;}
+    if(data[i].emergency_type=='Assault'){assaultCount.value++;}
+    if(data[i].emergency_type=='Injuries'){injuriesCount.value++;}
+    if(data[i].emergency_type=='Biohazard'){biohazardCount.value++;}
+    if(data[i].emergency_type=='Others'){othersCount.value++;}
+    if(monthName=='January'){jan.value++;}
+    if(monthName=='February'){feb.value++;}
+    if(monthName=='March'){mar.value++;}
+    if(monthName=='April'){apr.value++;}
+    if(monthName=='May'){may.value++;}
+    if(monthName=='June'){jun.value++;}
+    if(monthName=='July'){jul.value++;}
+    if(monthName=='August'){aug.value++;}
+
+  }
+
+}
 </script>
 

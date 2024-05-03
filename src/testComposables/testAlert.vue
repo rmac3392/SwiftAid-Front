@@ -11,18 +11,20 @@
         </div>
       </div>
       <div class="w-[67%] ml-1 font-normal cursor-pointer">
-        <div class="text-lg">Lapu Lapu City, Masiwa</div>
-        <div class="text-sm">Fire Incident</div>
+        <div class="text-lg">{{ location }}</div>
+        <div class="text-sm">{{ type }}</div>
       </div>
       <div class="w-[15%] h-full flex items-center font-medium text-[10px]">
-        3:00 pm
+        {{ time }}
       </div>
     </div>
   </div>
 </template>
 <script setup>
-defineProps({
+const props = defineProps({
   location: String,
   buttonAlert: String,
+  time:String,
+  type:String,
 });
 </script>

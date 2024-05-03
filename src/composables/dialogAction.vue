@@ -34,7 +34,7 @@
               <div class="flex">
                 <div class="w-[30%]">EMERGENCY TYPE</div>
                 <div class="w-[20%] text-center">:</div>
-                <div class="w-[50%]">Fire</div>
+                <div class="w-[50%]">{{emergency}}</div>
               </div>
               <div class="flex">
                 <div class="w-[30%]">RESPONDER</div>
@@ -49,12 +49,12 @@
               <div class="flex">
                 <div class="w-[30%]">DATE</div>
                 <div class="w-[20%] text-center">:</div>
-                <div class="w-[50%]">April 21, 2022</div>
+                <div class="w-[50%]">{{date}}</div>
               </div>
               <div class="flex">
                 <div class="w-[30%]">TIME</div>
                 <div class="w-[20%] text-center">:</div>
-                <div class="w-[50%]">10:59 pm</div>
+                <div class="w-[50%]">{{time}}</div>
               </div>
             </div>
             <hr class="border border-gray-800">
@@ -91,6 +91,12 @@
 </template>
 <script setup>
 import { ref } from "vue";
-
 const dialog = ref();
+const props = defineProps({
+  emergency : String,
+  responder: String,
+  operator: String,
+  date: String,
+  time: String,
+});
 </script>

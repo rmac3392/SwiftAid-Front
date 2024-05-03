@@ -4,14 +4,15 @@
       class="bg-white h-full rounded-lg w-[28%] mr-3 p-5 overflow-auto space-y-5 shadow-lg"
     >
       <div class="font-semibold text-xl text-primary">Emergency Alert :</div>
-      <testAlert />
-      <testAlert />
-      <testAlert />
-      <testAlert />
-      <testAlert />
-      <testAlert />
-      <testAlert />
-      <testAlert />
+
+      <!-- alert -->
+      <testAlert v-for="(post,index) in posts"
+      @click="getDetails(post.id)"
+      :location="`${post.address}, ${post.city}`"
+      :type="post.type"
+      :time="post.time"
+      />
+
     </div>
     <div class="h-full w-[72%] ml-2">
       <div class="flex h-[15%] pb-5 gap-5">
@@ -33,7 +34,7 @@
               <div
                 class="h-[65%] flex justify-center font-semibold items-end text-4xl"
               >
-                12
+                {{ sent }}
               </div>
               <div class="h-[35%] flex justify-center items-start text-sm">
                 Sent Reports
@@ -59,10 +60,10 @@
               <div
                 class="h-[65%] flex justify-center font-semibold items-end text-4xl"
               >
-                12
+                {{ cancelled }}
               </div>
               <div class="h-[35%] flex justify-center items-start text-sm">
-                Cancel Reports
+                Cancelled Reports
               </div>
             </div>
           </div>
@@ -85,7 +86,7 @@
               <div
                 class="h-[65%] flex justify-center font-semibold items-end text-4xl"
               >
-                12
+                {{ acknowledged }}
               </div>
               <div class="h-[35%] flex justify-center items-start text-sm">
                 Acknowledged
@@ -111,7 +112,7 @@
               <div
                 class="h-[65%] flex justify-center font-semibold items-end text-4xl"
               >
-                12
+                {{ pending }}
               </div>
               <div class="h-[35%] flex justify-center items-start text-sm">
                 Pending Reports
@@ -124,17 +125,17 @@
         <div class="h-full flex">
           <div class="w-1/2 h-full bg-white rounded-lg shadow-lg mr-3">
             <EditReportPane
-              v-model:additionalDescription="additionalDescription"
-              v-model:snr="snr"
-              v-model:fire_department="fire_department"
-              v-model:ngo="ngo"
-              v-model:private_sector="private_sector"
-              v-model:baranggay_tanod="baranggay_tanod"
+            @click="check"
+              v-model:fire="fire"
+              v-model:flood="flood"
+              v-model:assault="assault"
+              v-model:injuries="injuries"
+              v-model:biohazard="biohazard"
+              v-model:others="others"
+              :checked="checked"
               :postDetails="postDetails"
-              :zipcode="postZipcode"
-              :address="postAddress"
-              :city="postCity"
-              :emergency_type="postTypeOfEmergency"
+              :location="location"
+              :emergencies="typeOfEmergency"
               :emergency_team="postEmergencyTeam"
             />
           </div>
@@ -174,4 +175,114 @@
 <script setup>
 import testAlert from "../testComposables/testAlert.vue";
 import EditReportPane from "../components/operatorPane/EditReportPane.vue";
+import {ref,onMounted,watch} from "vue";
+import axios from "axios";
+
+onMounted(()=>{
+  getPost();
+});
+
+const posts = ref([]);
+
+const pending = ref(0);
+const cancelled = ref(0);
+const acknowledged = ref(0);
+const sent = ref(0);
+const getPost = async () =>{
+  const response = await fetch(`http://localhost:8080/getPost`);
+  const data = await response.json();
+  for(var i = 0; i < data.length ; i++){
+    if (data[i].status == 'Pending') {
+      const timestamp = new Date(data[i].timestamp);
+
+      const month = timestamp.getMonth() + 1; 
+      const day = timestamp.getDate();
+      const year = timestamp.getFullYear();
+
+      let hours = timestamp.getHours();
+      const minutes = timestamp.getMinutes();
+      const ampm = hours >= 12 ? 'PM' : 'AM';
+      hours = hours % 12;
+      hours = hours ? hours : 12; 
+      const time = hours + ':' + (minutes < 10 ? '0' : '') + minutes + ' ' + ampm;
+
+      posts.value.push({
+        id: data[i].post_id,
+        description: data[i].description,
+        type: data[i].emergency_type,
+        address: data[i].address,
+        month: month,
+        day: day,
+        year: year,
+        time: time,
+        city: data[i].city,
+        zipcode: data[i].zipcode
+      });
+      pending.value++;
+    }
+    else if(data[i].status=='Sent'){
+      sent.value++;
+    }
+    else if(data[i].status=='Acknowledged'){
+      acknowledged.value++;
+    }
+    else if(data[i].status=='Cancelled'){
+      cancelled.value++;
+    }
+    
+
+  }
+}
+
+const postDetails = ref();
+const location = ref();
+const typeOfEmergency = ref([]);
+const emergencyTeam = ref();
+
+
+const fire = ref(false);
+const flood = ref(false);
+const assault = ref(false);
+const injuries = ref(false);
+const biohazard = ref(false);
+const others = ref(false);
+
+
+const getDetails = async (id) =>{
+  typeOfEmergency.value = ([]);
+  fire.value = false
+  flood.value = false;
+  assault.value = false;
+  injuries.value = false;
+  biohazard.value = false;
+  others.value = false;
+  const response = await fetch(`http://localhost:8080/getSinglePost/${id}`);
+  const data = await response.json();
+  postDetails.value = data[0].description;
+  location.value = `${data[0].address}, ${data[0].city}, ${data[0].zipcode}`;
+  if(data[0].emergency_type=='Fire'){fire.value=true;}
+  else if(data[0].emergency_type=='Flood'){flood.value=true;}
+  else if(data[0].emergency_type=='Assault'){assault.value=true;}
+  else if(data[0].emergency_type=='Injuries'){injuries.value=true;}
+  else if(data[0].emergency_type=='Biohazard'){biohazard.value=true;}
+  else if(data[0].emergency_type=='Others'){others.value=true;}
+
+  typeOfEmergency.value.push({
+    emergency: data[0].emergency_type
+  });
+}
+
+
+function checked (isChecked,value){
+  if (isChecked) {
+    typeOfEmergency.value.push({ emergency: value });
+  } else {
+    const index = typeOfEmergency.value.findIndex((item) => item.emergency === value);
+    if (index !== -1) {
+      typeOfEmergency.value.splice(index, 1);
+    }
+  }
+}
+
+
 </script>
