@@ -14,7 +14,7 @@
               <img src="../assets/ndrmc.png" alt="" />
             </div>
             <div
-              class="h-full w-[56%] text-[0.55rem] flex flex-col items-center font-medium justify-center "
+              class="h-full w-[56%] text-[0.55rem] flex flex-col items-center font-medium justify-center"
             >
               <div class="leading-[0.58rem]">Republic of the Philippines</div>
               <div class="leading-[0.58rem]">N.D.R.R.M.C</div>
@@ -34,40 +34,53 @@
               <div class="flex">
                 <div class="w-[30%]">EMERGENCY TYPE</div>
                 <div class="w-[20%] text-center">:</div>
-                <div class="w-[50%]">{{emergency}}</div>
+                <div class="w-[50%]">{{ emergency }}</div>
               </div>
               <div class="flex">
                 <div class="w-[30%]">RESPONDER</div>
                 <div class="w-[20%] text-center">:</div>
-                <div class="w-[50%]">BFP region VII</div>
+                <div class="w-[50%]">
+                  {{ responder }} Bureau of Fire Protection
+                </div>
               </div>
               <div class="flex">
                 <div class="w-[30%]">OPERATOR</div>
                 <div class="w-[20%] text-center">:</div>
-                <div class="w-[50%]">Ryan James Macawili</div>
+                <div class="w-[50%]">{{ operator }} Ryan Macawili</div>
               </div>
               <div class="flex">
                 <div class="w-[30%]">DATE</div>
                 <div class="w-[20%] text-center">:</div>
-                <div class="w-[50%]">{{date}}</div>
+                <div class="w-[50%]">{{ date }}</div>
               </div>
               <div class="flex">
                 <div class="w-[30%]">TIME</div>
                 <div class="w-[20%] text-center">:</div>
-                <div class="w-[50%]">{{time}}</div>
+                <div class="w-[50%]">{{ time }}</div>
               </div>
             </div>
-            <hr class="border border-gray-800">
+            <hr class="border border-gray-800" />
           </div>
-          <div class="h-[40%]  pt-2 pl-8 font-medium text-[0.55rem]">
-            <div class="leading-3">1. Lorem ipsum dolor. Laudantium sunt consequatur dolores! Sit dolore at nemo minus culpa corrupti iste dolorum error.</div>
-            <br>
-            <div class="leading-3">2. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat, delectus iusto alias eius quod reprehenderit, doloribus dolore dignissimos neque cumque expedita possimus! Doloremque, eveniet sit. Expedita nam doloremque alias nobis.</div>
-            <br>
-            <div class="leading-3">3. Lorem ipsum dolor sit amet consectetur adipisicing elit.</div>
+          <div class="h-[40%] pt-2 pl-8 font-medium text-[0.55rem]">
+            <div class="leading-3">
+              1. {{ firstDetails }} Lorem ipsum dolor sit amet consectetur,
+              adipisicing elit. Dolore, dignissimos.
+            </div>
+            <br />
+            <div class="leading-3">
+              2. {{ secondDetails }} Lorem ipsum dolor sit amet consectetur
+              adipisicing elit. Amet, voluptate.
+            </div>
+            <br />
+            <div class="leading-3">
+              3. {{ thirdDetails }} Lorem, ipsum dolor sit amet consectetur
+              adipisicing elit. Repudiandae, esse.
+            </div>
           </div>
           <div class="h-[10%] font-medium text-[0.55rem]">
-            <div class="leading-[0.55rem] text-end font-bold">RYAN JAMES MACAWILI</div>
+            <div class="leading-[0.55rem] text-end font-bold">
+              {{ operator }} Ryan Macawili
+            </div>
             <div class="leading-[0.55rem] text-end">Dispatch Operator</div>
           </div>
         </div>
@@ -93,10 +106,13 @@
 import { ref } from "vue";
 const dialog = ref();
 const props = defineProps({
-  emergency : String,
+  emergency: String,
   responder: String,
   operator: String,
   date: String,
   time: String,
+  firstDetails: String,
+  secondDetails: String,
+  thirdDetails: String,
 });
 </script>

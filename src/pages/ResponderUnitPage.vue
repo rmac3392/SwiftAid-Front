@@ -52,7 +52,7 @@
 
     <div class="w-[80%] p-5">
       <!-- User Information -->
-      <div class="h-[11.5%] w-full pb-5">
+      <div class="h-[12.5%] w-full">
         <div class="flex w-full h-full bg-white rounded-lg shadow-xl">
           <div class="w-[77%] p-3">
             <div
@@ -73,12 +73,12 @@
               <div
                 class="pt-5 h-[50%] text-xl font-bold flex items-center justify-center text-primary"
               >
-                <div>{{institution}}</div>
+                <div>{{ institution }}</div>
               </div>
               <div
                 class="pb-5 h-[50%] text-l flex font-500 items-center justify-center text-primary [text-shadow:_0_1px_0_rgb(0_0_0_/_40%)]"
               >
-                Responder Unit
+                Cebu City Responder
               </div>
             </div>
           </div>
@@ -93,7 +93,9 @@
     </div>
   </div>
   <div v-else class="flex justify-center items-center h-48">
-    <div class="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-purple-500"></div>
+    <div
+      class="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-purple-500"
+    ></div>
     <div class="ml-4 text-purple-500">Loading...</div>
   </div>
 </template>
@@ -103,8 +105,8 @@ import ResponderDashboardTab from "../components/responderTab/ResponderDasboardT
 import ResponderRecordTab from "../components/responderTab/ResponderRecordTab.vue";
 import ResponderSignOutTab from "../components/responderTab/ResponderSignOutTab.vue";
 import ResponderHelpTab from "../components/responderTab/ResponderHelpTab.vue";
-import { ref , onMounted} from "vue";
-import { useRouter} from "vue-router";
+import { ref, onMounted } from "vue";
+import { useRouter } from "vue-router";
 
 const auth = ref();
 auth.value = localStorage.getItem("responderAuth");
@@ -113,39 +115,24 @@ const tab = ref(0);
 const institution = ref();
 const router = useRouter();
 
-
 onMounted(() => {
   responderAuth();
 });
 
-
-const responderAuth  = async () => {
+const responderAuth = async () => {
   const responder = localStorage.getItem("responderAuth");
-  if(!responder){
+  if (!responder) {
     router.push("/");
   }
 
-  const response = await fetch (`http://localhost:8080/getResponder`);
+  const response = await fetch(`http://localhost:8080/getResponder`);
   const data = await response.json();
 
-  for(var i = 0; i < data.length; i++){
-    if(localStorage.getItem("responder_userId") == data[i].user_id){
+  for (var i = 0; i < data.length; i++) {
+    if (localStorage.getItem("responder_userId") == data[i].user_id) {
       institution.value = data[i].institution;
-      break;    
+      break;
     }
   }
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
+};
 </script>

@@ -1,6 +1,6 @@
 <template>
   <div class="flex items-center justify-center w-full h-[72%] flex-col">
-    <div
+    <!-- <div
       class="bg-gray border-white border-2 w-[100%] h-[500px] shadow-[0_4px_4px_0px_rgba(0,0,0,0.70)] drop-shadow-lg rounded-lg"
     >
       <div
@@ -52,7 +52,7 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
   </div>
 </template>
 <script setup>
