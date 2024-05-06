@@ -7,12 +7,12 @@ const router = createRouter({
             component: () =>
                 import ("../pages/LoginPage.vue"),
         },
-        {
-            path: "/operatorPage",
-            name: "OperatorPage",
-            component: () =>
-                import ("../pages/OperatorPage.vue"),
-        },
+        // {
+        //     path: "/operatorPage",
+        //     name: "OperatorPage",
+        //     component: () =>
+        //         import ("../pages/OperatorPage.vue"),
+        // },
         {
             path: "/administratorPage",
             name: "AdministratorPage",
@@ -33,16 +33,16 @@ const router = createRouter({
                 import ("../pages/ForgotPassword.vue"),
         },
         {
-            path: "/testPage",
+            path: "/operatorPage",
             name: "testPage",
             component: () =>
                 import ("../pages/TestPage.vue"),
         },
         {
-            path: "/testPage",
-            name: "testPage",
+            path: "/post",
+            name: "post",
             component: () =>
-                import ("../pages/TestPage.vue"),
+                import ("../pages/Post.vue"),
         },
     ],
 });

@@ -60,9 +60,9 @@
             <hr class="border border-gray-800">
           </div>
           <div class="h-[40%]  pt-2 pl-8 font-medium text-[0.55rem]">
-            <div class="leading-3">1. Lorem ipsum dolor. Laudantium sunt consequatur dolores! Sit dolore at nemo minus culpa corrupti iste dolorum error.</div>
+            <div class="leading-3"><Strong>User Description:</Strong> <p>{{description}}</p></div>
             <br>
-            <div class="leading-3">2. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat, delectus iusto alias eius quod reprehenderit, doloribus dolore dignissimos neque cumque expedita possimus! Doloremque, eveniet sit. Expedita nam doloremque alias nobis.</div>
+            <div class="leading-3"><Strong>Additional Description:</Strong><p>{{additionalDescription}}</p></div>
             <br>
             <div class="leading-3">3. Lorem ipsum dolor sit amet consectetur adipisicing elit.</div>
           </div>
@@ -95,6 +95,8 @@ const dialog = ref();
 const props = defineProps({
   emergency : String,
   responder: String,
+  description:String,
+  additionalDescription:String,
   operator: String,
   date: String,
   time: String,

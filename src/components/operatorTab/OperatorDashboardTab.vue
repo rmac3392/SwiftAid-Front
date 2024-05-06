@@ -180,6 +180,8 @@
       </div>
     </div>
   </div>
+
+  
 </template>
 
 <script setup>
@@ -373,7 +375,6 @@ const sendPost = async () => {
         });
 
         sentPost(postID.value);
-        additionalResponseTeam();
 
         break;
       }
@@ -382,7 +383,17 @@ const sendPost = async () => {
     console.error("Error acknowledging post:", error);
   }
 };
-
+const editPostLocation = async (id) => {
+  try {
+    const response = await axios.put(`http://localhost:8080/sendPost/${id}`);
+    // window.location.reload();
+  } catch (error) {
+    console.error(
+      "Error acknowledging post:",
+      error.message || "Unknown error"
+    );
+  }
+}
 const sentPost = async (id) => {
   try {
     const response = await axios.put(`http://localhost:8080/sendPost/${id}`);

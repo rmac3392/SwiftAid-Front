@@ -73,6 +73,7 @@
           <div class="flex items-center justify-center">
             <button
               class="btn bg-primary text-white hover:bg-white hover:text-primary hover:border-primary"
+              @click="logout"
             >
               Sign Out
             </button>
@@ -136,6 +137,7 @@ import OperatorDashboardTab from "../components/operatorTab/OperatorDashboardTab
 import OperatorRecordTab from "../components/operatorTab/OperatorRecordTab.vue";
 import OperatorReportTab from "../components/operatorTab/OperatorReportTab.vue";
 import OperatorSignOutTab from "../components/operatorTab/OperatorSignOutTab.vue";
+
 import OperatorHelpTab from "../components/operatorTab/OperatorHelpTab.vue";
 
 import operatorDashboardView from "../view/operatorDashboardView.vue";
@@ -186,6 +188,11 @@ const showModal = () => {
     myModal.value.showModal();
   }
 };
+
+const logout = () => {
+  localStorage.clear();
+  router.push("/");
+}
 
 onMounted(() => {
   showModal(); // Optionally show the modal on component mount

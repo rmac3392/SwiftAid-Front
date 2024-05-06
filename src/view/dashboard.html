@@ -1,3 +1,6 @@
+dashboard
+
+
 <template>
   <div class="flex h-full">
     <div
@@ -157,7 +160,6 @@
                 <Map
                   :inputText="mapText"             
                   :type="mapType"
-                  :isVisible="true"
                 />
               </div>
               <div class="flex flex-col mt-5 items-center justify-center">
@@ -181,9 +183,29 @@
     </div>
   </div>
 
-
+    <!-- MODAL START -->
+    <div v-if="alertModal" class="fixed inset-0 flex items-center justify-center z-50">
+      <div class="fixed inset-0 bg-gray-900 bg-opacity-50 transition-opacity ease-in-out duration-300"></div>
   
-
+      <div class="bg-white rounded-lg p-8 w-96 max-w-full mx-auto z-50 shadow-xl transform transition-all duration-500 ease-in-out">
+        <div class="flex justify-end">
+          <button @click="closeModal" class="text-gray-500 hover:text-gray-700 focus:outline-none">
+            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+          </button>
+        </div>
+  
+        <h2 class="text-2xl font-bold text-red-600 mb-4">Emergency Alert!</h2>
+        <p class="text-lg mb-6">There is an emergency situation. Please take necessary precautions.</p>
+        
+        <button @click="closeModal" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded shadow-md transition duration-300 ease-in-out transform hover:scale-105">
+          GOT IT
+        </button>
+      </div>
+    </div>
+  <!-- MODAL END -->
+  
 </template>
 <script setup>
 import testAlert from "../testComposables/testAlert.vue";
@@ -218,6 +240,7 @@ const zipcode = ref();
 const mapText = ref();
 const mapType = ref();
 
+const alertModal = ref(false);
 
 
 const getPost = async () =>{
@@ -269,6 +292,16 @@ const getPost = async () =>{
       cancelled.value++;
     }
 
+    // const currentLength = posts.value.length;
+
+    // // Trigger action if there's a change in length
+    // if (currentLength > previousLength) {
+    //     const audio = new Audio(`src/assets/alert.mp3`);
+    //     audio.play();
+    //     previousLength = currentLength;
+    //     openModal();
+    // }
+
   }
 
   }
@@ -279,6 +312,12 @@ const getPost = async () =>{
 
 }
 
+const openModal = () => {
+  alertModal.value=true;
+}
+const closeModal = () => {
+  alertModal.value=false;
+}
 
 const postDetails = ref();
 const location = ref();
@@ -292,6 +331,7 @@ const assault = ref(false);
 const injuries = ref(false);
 const biohazard = ref(false);
 const others = ref(false);
+const address = ref();
 
 const getDetails = async (id) =>{
   typeOfEmergency.value = ([]);
@@ -535,10 +575,10 @@ const initializeDataFetching = async () => {
                   }
                 }
                 if (lth > posts.value.length) {
-
                   getPost();
                   const audio = new Audio(`src/assets/alert.mp3`); 
                   audio.play();
+                  openModal();
                 }
             } catch (error) {
                 console.error('Error fetching posts:', error);
