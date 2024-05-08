@@ -11,19 +11,19 @@
         </div>
 
         <div class="space-y-5 w-[95%] mx-auto">
-          <testAlert v-for="(post,index) in posts"
-          @click="getDetails(post.id)"
-          :location="`${post.address}, ${post.city}`"
-          :type="post.type"
-          :time="post.time"
+          <testAlert
+            v-for="(post, index) in posts"
+            @click="getDetails(post.id)"
+            :location="`${post.address}, ${post.city}`"
+            :type="post.type"
+            :time="post.time"
           />
-
         </div>
       </div>
 
       <div class="w-[33%] h-[93.5%]">
         <div class="w-[100%] h-[107%] rounded-lg flex bg-gray-100 flex-col">
-          <div 
+          <div
             class="text-primary font-bold text-2xl flex text-center justify-center mx-auto mt-8 mb-6"
           >
             EMERGENCY DETAILS
@@ -69,7 +69,7 @@
                       <div class="flex">
                         <div class="w-[30%]">EMERGENCY TYPE</div>
                         <div class="w-[20%] text-center">:</div>
-                        <div class="w-[50%]"> {{emergency}}</div>
+                        <div class="w-[50%]">{{ emergency }}</div>
                       </div>
                       <div class="flex">
                         <div class="w-[30%]">RESPONDER</div>
@@ -100,17 +100,24 @@
                     class="h-[40%] pt-5 pl-3 font-medium text-xs text-justify"
                   >
                     <div v-if="postDetails" class="leading-3 text-[0.68rem]">
-                      <strong>Post:</strong> <br>{{ postDetails }} 
+                      <strong>Post:</strong> <br />{{ postDetails }}
                     </div>
                     <br />
-                    <div v-if="additionalDescription" class="leading-3 text-[0.68rem]">
-                      <strong>Additional Description:</strong> <br>{{ additionalDescription }} 
-
+                    <div
+                      v-if="additionalDescription"
+                      class="leading-3 text-[0.68rem]"
+                    >
+                      <strong>Additional Description:</strong> <br />{{
+                        additionalDescription
+                      }}
                     </div>
                     <br />
-                    <div v-if="eru.length!=0" class="leading-3 text-[0.68rem]">
+                    <div
+                      v-if="eru.length != 0"
+                      class="leading-3 text-[0.68rem]"
+                    >
                       <strong>Deployable Units:</strong>
-                      <p v-for="(unit,index) in eru">
+                      <p v-for="(unit, index) in eru">
                         {{ unit }}
                       </p>
                     </div>
@@ -157,16 +164,14 @@
               <div class="flex items-center justify-center h-full">
                 <!-- MAP -->
                 <Map
-                  :inputText="postDetails"             
+                  :inputText="postDetails"
                   :type="mapType"
-                  :isVisible="true"
+                  :isVisible="false"
                 />
                 <!-- END MAP -->
               </div>
               <div class="flex flex-col mt-7 items-center justify-center">
-                <div class="flex items-center justify-center mt-3">
-  
-                </div>
+                <div class="flex items-center justify-center mt-3"></div>
               </div>
             </div>
           </div>
@@ -177,22 +182,18 @@
 </template>
 
 <script setup>
-
 import TestAlert from "../../testComposables/testAlert.vue";
 import Map from "../../composables/Map.vue";
 
-import {ref,onMounted} from "vue";
+import { ref, onMounted } from "vue";
 
-onMounted(()=>{
+onMounted(() => {
   getPost();
 });
 
 const posts = ref([]);
 const postID = ref();
 const additionalDescription = ref("");
-
-
-
 
 const city = ref();
 const zipcode = ref();
@@ -203,55 +204,80 @@ const eru = ref([]);
 const date = ref();
 const time_ref = ref();
 
-const getPost = async () =>{
-  try{
+const singlePost = async (id) => {
+  const response = await fetch(`http://localhost:8080/getSinglePostTeam/${id}`);
+  const data = await response.json();
+  return data[0].name;
+};
+const singlePostTeam = async (id) => {
+  const response = await fetch(``);
+};
+const getResponder = async () => {
+  const response = await fetch("http://localhost:8080/getResponder");
+  const data = await response.json();
+
+  for (var i = 0; i < data.length; i++) {
+    if (data[i].user_id == localStorage.getItem("responder_userId")) {
+      return data[i].institution;
+    }
+  }
+};
+
+const getPost = async () => {
+  try {
     posts.value = [];
 
     const response = await fetch(`http://localhost:8080/getPost`);
     const data = await response.json();
 
-  for(var i = 0; i < data.length ; i++){
-    if (data[i].status == 'Sent') {
-      const timestamp = new Date(data[i].timestamp);
-      const months = ['January','February','March','April','May','June',];
+    for (var i = 0; i < data.length; i++) {
+      if (data[i].status == "Sent") {
+        const singlePostName = await singlePost(data[i].post_id);
+        const responderName = await getResponder();
 
-      const month = timestamp.getMonth() + 1; 
-      const day = timestamp.getDate();
-      const year = timestamp.getFullYear();
+        if (singlePostName == responderName) {
+          const timestamp = new Date(data[i].timestamp);
+          const months = [
+            "January",
+            "February",
+            "March",
+            "April",
+            "May",
+            "June",
+          ];
 
-      let hours = timestamp.getHours();
-      const minutes = timestamp.getMinutes();
-      const ampm = hours >= 12 ? 'PM' : 'AM';
-      hours = hours % 12;
-      hours = hours ? hours : 12; 
-      const time = hours + ':' + (minutes < 10 ? '0' : '') + minutes + ' ' + ampm;
-      date.value = `${months[month-1]} ${day}, ${year}`
-      time_ref.value = time;
-      posts.value.push({
-        id: data[i].post_id,
-        description: data[i].description,
-        type: data[i].emergency_type,
-        address: data[i].address,
-        month: month,
-        day: day,
-        year: year,
-        time: time,
-        city: data[i].city,
-        zipcode: data[i].zipcode
-      });
+          const month = timestamp.getMonth() + 1;
+          const day = timestamp.getDate();
+          const year = timestamp.getFullYear();
+
+          let hours = timestamp.getHours();
+          const minutes = timestamp.getMinutes();
+          const ampm = hours >= 12 ? "PM" : "AM";
+          hours = hours % 12;
+          hours = hours ? hours : 12;
+          const time =
+            hours + ":" + (minutes < 10 ? "0" : "") + minutes + " " + ampm;
+          date.value = `${months[month - 1]} ${day}, ${year}`;
+          time_ref.value = time;
+          posts.value.push({
+            id: data[i].post_id,
+            description: data[i].description,
+            type: data[i].emergency_type,
+            address: data[i].address,
+            month: month,
+            day: day,
+            year: year,
+            time: time,
+            city: data[i].city,
+            zipcode: data[i].zipcode,
+          });
+        }
+      }
     }
- 
-
-  }
-
-  }
-  catch(error){
+  } catch (error) {
     console.log(error);
   }
-
-
-}
-
+};
 
 const postDetails = ref();
 const location = ref();
@@ -260,8 +286,8 @@ const operator = ref();
 
 const emergency = ref();
 const mapType = ref();
-const getDetails = async (id) =>{
 
+const getDetails = async (id) => {
   postID.value = id;
 
   const response = await fetch(`http://localhost:8080/getSinglePost/${id}`);
@@ -270,13 +296,23 @@ const getDetails = async (id) =>{
   postDetails.value = data[0].description;
   location.value = `${data[0].address}`;
 
-  if(emergency.value == 'Fire'){
-    mapType.value='fire_station';
+  if (emergency.value == "Fire") {
+    mapType.value = "fire_station";
+  } else if (emergency.value == "Flood") {
+    mapType.value = "fire_station";
+  } else if (emergency.value == "Assault") {
+    mapType.value = "police";
+  } else if (emergency.value == "Injuries") {
+    mapType.value = "hospital";
+  } else if (emergency.value == "Biohazard") {
+    mapType.value = "hospital";
+  } else if (emergency.value == "Others") {
+    mapType.value = "police";
   }
 
   city.value = data[0].city;
   zipcode.value = data[0].zipcode;
-  mapText.value=data[0].description;
+  mapText.value = data[0].description;
 
   const post_report = await getSinglePostReport(id);
   additionalDescription.value = post_report.additional_description;
@@ -284,31 +320,30 @@ const getDetails = async (id) =>{
   eru.value = await getSinglePostTeam(id);
   operator.value = await getSingleOperator(post_report.operator_id);
   searchLocation();
-}
+};
 
 const getSinglePostReport = async (id) => {
-  const response = await fetch(`http://localhost:8080/getSinglePostReport/${id}`);
+  const response = await fetch(
+    `http://localhost:8080/getSinglePostReport/${id}`
+  );
   const data = await response.json();
   return data[0];
-}
+};
 
 const getSinglePostTeam = async (id) => {
   const response = await fetch(`http://localhost:8080/getSinglePostTeam/${id}`);
   const data = await response.json();
-  let array  = ([]);
-  for(var i = 0 ; i < data.length ;i ++){
-    array.push(data[i].name)
+  let array = [];
+  for (var i = 0; i < data.length; i++) {
+    array.push(data[i].name);
   }
   return array;
-}
+};
 
-const getSingleOperator = async (id) =>{
+const getSingleOperator = async (id) => {
   const response = await fetch(`http://localhost:8080/getSingleOperator/${id}`);
   const data = await response.json();
 
   return `${data[0].first_name} ${data[0].last_name}`;
-}
-
-
-
+};
 </script>
