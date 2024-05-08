@@ -7,9 +7,9 @@
 
       <!-- alert -->
       <testAlert
-        v-for="(post, index) in posts"
+        v-for="(post, index) in posts.slice().reverse()"
         @click="getDetails(post.id)"
-        :location="`${post.address}, ${post.city}`"
+        :location="`${post.city}`+' City'"
         :type="post.type"
         :time="post.time"
       />
@@ -18,7 +18,7 @@
       <div class="flex h-[15%] pb-5 gap-5">
         <div class="bg-white w-1/4 h-full rounded-lg p-5 flex shadow-lg">
           <div class="h-full w-[40%]">
-            <div
+            <div  
               class="bg-primary h-full rounded-lg flex items-center justify-center text-white"
             >
               <mdicon
@@ -63,7 +63,7 @@
                 {{ cancelled }}
               </div>
               <div class="h-[35%] flex justify-center items-start text-sm">
-                Cancelled Reports
+                Cancelled
               </div>
             </div>
           </div>
@@ -144,31 +144,34 @@
               :team_checked="team_checked"
             />
           </div>
-          <div class="w-1/2 h-full p-5 bg-white rounded-lg shadow-lg ml-2">
-            <div for="" class="w-full text-lg font-semibold text-primary mb-2">
-              <br />
-            </div>
-            <div class="h-[75%]">
+          <div class="w-1/2  h-full p-5 bg-white rounded-lg shadow-lg ml-2">
+            <div class="h-[95%]  w-full  ">
+              <h2 class="text-lg text-start font-semibold text-primary mb-2">Map :</h2>
               <div
-                class="flex items-center justify-center h-[calc(100% - 40px)] overflow-hidden"
+                class="flex flex-col items-center justify-center  h-full w-full overflow-hidden"
               >
+              
                 <!-- Setting overflow-hidden to prevent overflow -->
-                <Map :inputText="mapText" :type="mapType" :isVisible="true" />
+                
+                <Map :inputText="mapText" :type="mapType" :isVisible="true" class="h-full "/>
               </div>
-              <div class="flex flex-col mt-5 items-center justify-center">
-                <button
-                  @click="sendPost()"
-                  class="w-[85%] h-12 bg-primary text-white rounded-lg font-semibold mb-2 hover:bg-white hover:text-primary hover:border-primary border-primary border-2 transition duration-300"
-                >
-                  Send
-                </button>
-                <button
-                  @click="denyPost(postID.value)"
-                  class="w-[85%] h-12 bg-primary text-white rounded-lg font-semibold mb-2 hover:bg-white hover:text-primary hover:border-primary border-primary border-2 transition duration-300"
-                >
-                  Discard
-                </button>
-              </div>
+            </div>
+            <div
+              class="flex items-center h-[5%] gap-4 justify-center"
+            >
+            <button
+                @click="denyPost(postID.value)"
+                class="w-[85%] h-12 bg-primary text-white rounded-lg font-semibold mb-2 hover:bg-white hover:text-primary hover:border-primary border-primary border-2 transition duration-300"
+              >
+                Discard
+              </button>
+              <button
+                @click="sendPost()"
+                class="w-[85%] h-12 bg-primary text-white rounded-lg font-semibold mb-2 hover:bg-white hover:text-primary hover:border-primary border-primary border-2 transition duration-300"
+              >
+                Send
+              </button>
+              
             </div>
           </div>
         </div>

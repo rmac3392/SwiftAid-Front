@@ -6,12 +6,13 @@
           <div
             class="bg-primary h-full rounded-lg flex items-center justify-center text-white"
           >
-            <mdicon
+            <!-- <mdicon
               class="origin-center"
               name="ProgressUpload"
               :width="50"
               :height="50"
-            />
+            /> -->
+            <img src="../assets/fire.svg" alt="SVG Icon" class="fill-current w-[50px] h-[50px] text-white" />
           </div>
         </div>
         <div class="h-full pl-3 w-[60%]">
@@ -19,7 +20,7 @@
             <div
               class="h-[65%] flex justify-center font-semibold items-end text-4xl"
             >
-              {{fireCount}}
+              {{ fireCount }}
             </div>
             <div class="h-[35%] flex justify-center items-start text-sm">
               Fire
@@ -32,12 +33,7 @@
           <div
             class="bg-primary h-full rounded-lg flex items-center justify-center text-white"
           >
-            <mdicon
-              class="origin-center"
-              name="ProgressUpload"
-              :width="50"
-              :height="50"
-            />
+            <img src="../assets/flood.svg" class="h-[50px] w-[50px]" alt="">
           </div>
         </div>
         <div class="h-full pl-3 w-[60%]">
@@ -58,12 +54,7 @@
           <div
             class="bg-primary h-full rounded-lg flex items-center justify-center text-white"
           >
-            <mdicon
-              class="origin-center"
-              name="ProgressUpload"
-              :width="50"
-              :height="50"
-            />
+            <img src="../assets/injuries.svg" class="h-[50px] w-[50px]" alt="">
           </div>
         </div>
         <div class="h-full pl-3 w-[60%]">
@@ -84,12 +75,7 @@
           <div
             class="bg-primary h-full rounded-lg flex items-center justify-center text-white"
           >
-            <mdicon
-              class="origin-center"
-              name="ProgressClose"
-              :width="50"
-              :height="50"
-            />
+            <img src="../assets/assault.svg" class="h-[60px] w-[60px] mt-2" alt="">
           </div>
         </div>
         <div class="h-full pl-3 w-[60%]">
@@ -110,12 +96,7 @@
           <div
             class="bg-primary h-full rounded-lg flex items-center justify-center text-white"
           >
-            <mdicon
-              class="origin-center"
-              name="ProgressCheck"
-              :width="50"
-              :height="50"
-            />
+            <img src="../assets/biohazard.svg" class="h-[50px] w-[50px] mt-2" alt="">
           </div>
         </div>
         <div class="h-full pl-3 w-[60%]">
@@ -136,12 +117,7 @@
           <div
             class="bg-primary h-full rounded-lg flex items-center justify-center text-white"
           >
-            <mdicon
-              class="origin-center"
-              name="ProgressQuestion"
-              :width="50"
-              :height="50"
-            />
+            <img src="../assets/other.svg" class="h-[50px] w-[50px] mt-2" alt="">
           </div>
         </div>
         <div class="h-full pl-3 w-[60%]">
@@ -171,23 +147,24 @@
           <OperatorPieChart />
         </div>
       </div>
-      <div class="w-[72%] h-full ml-2 flex flex-col">
-        <div class="bg-white rounded-lg mb-3 shadow-lg h-1/2 px-5">
+      <div class="w-[72%] ml-2 flex flex-col">
+        <div class="bg-white w-full rounded-lg mb-3 shadow-lg h-[50%] ">
           <OperatorBarChart
-          :key="chartKey"
-          :jan=jan
-          :feb=feb
-          :mar=mar
-          :apr=apr
-          :may=may
-          :jun=jun
-          :jul=jul
-          :aug=aug
-          />        </div>
-        <div class="bg-white rounded-lg mt-2 shadow-lg h-1/2 p-5">
-          <div class="overflow-auto h-full">
+            :key="chartKey"
+            :jan="jan"
+            :feb="feb"
+            :mar="mar"
+            :apr="apr"
+            :may="may"
+            :jun="jun"
+            :jul="jul"
+            :aug="aug"
+          />
+        </div>
+        <div class="bg-white  rounded-lg mt-2 shadow-lg h-[50%]">
+          <div class="overflow-auto h-full rounded-lg">
             <table
-              class="table border border-gray-300 table-pin-rows table-pin-cols"
+              class="table border border-gray-300 table-pin-rows table-pin-cols "
             >
               <!-- head -->
               <thead class="text-primary">
@@ -203,17 +180,17 @@
               </thead>
               <tbody class="">
                 <!-- row 1 -->
-                <tr class="hover" v-for="(post,index) in posts">
-                  <th class="border border-gray-300">{{index+1}}</th>
-                  <td class="border border-gray-300">{{post.location}}</td>
+                <tr class="hover" v-for="(post, index) in posts">
+                  <th class="border border-gray-300">{{ index + 1 }}</th>
+                  <td class="border border-gray-300">{{ post.location }}</td>
                   <td class="border border-gray-300">
                     {{ post.emergency }}
                   </td>
-                  <td class="border border-gray-300">{{post.description}}</td>
-                  <td class="border border-gray-300">{{post.status}}</td>
-                  <td class="border border-gray-300">{{post.timestamp}}</td>
+                  <td class="border border-gray-300">{{ post.description }}</td>
+                  <td class="border border-gray-300">{{ post.status }}</td>
+                  <td class="border border-gray-300">{{ post.timestamp }}</td>
                   <td class="border border-gray-300">
-                    <dialogAction 
+                    <dialogAction
                       :emergency="post.emergency"
                       :date="post.timestamp"
                       :time="post.time"
@@ -221,7 +198,6 @@
                     />
                   </td>
                 </tr>
-    
               </tbody>
             </table>
           </div>
@@ -229,15 +205,14 @@
       </div>
     </div>
   </div>
-  
 </template>
 <script setup>
 import OperatorPieChart from "../composables/Charts/OperatorPieChart.vue";
 import OperatorBarChart from "../composables/Charts/OperatorBarChart.vue";
 import dialogAction from "../composables/dialogAction.vue";
-import {ref,onMounted} from "vue";
+import { ref, onMounted } from "vue";
 
-onMounted(()=>{
+onMounted(() => {
   getPost();
 });
 
@@ -261,13 +236,26 @@ const jul = ref(0);
 const aug = ref(0);
 
 const getPost = async () => {
-  const response = await fetch('http://localhost:8080/getPost');
+  const response = await fetch("http://localhost:8080/getPost");
   const data = await response.json();
 
-  for(var i = 0 ; i < data.length ; i ++){
+  for (var i = 0; i < data.length; i++) {
     const timestamp = new Date(data[i].timestamp);
 
-    const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    const months = [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December",
+    ];
     const monthIndex = timestamp.getMonth();
     const monthName = months[monthIndex];
     const day = timestamp.getDate();
@@ -275,10 +263,10 @@ const getPost = async () => {
 
     let hours = timestamp.getHours();
     const minutes = timestamp.getMinutes();
-    const ampm = hours >= 12 ? 'PM' : 'AM';
+    const ampm = hours >= 12 ? "PM" : "AM";
     hours = hours % 12;
-    hours = hours ? hours : 12; 
-    const time = hours + ':' + (minutes < 10 ? '0' : '') + minutes + ' ' + ampm;
+    hours = hours ? hours : 12;
+    const time = hours + ":" + (minutes < 10 ? "0" : "") + minutes + " " + ampm;
 
     posts.value.push({
       id: data[i].post_id,
@@ -287,26 +275,51 @@ const getPost = async () => {
       description: data[i].description,
       status: data[i].status,
       timestamp: `${monthName} ${day}, ${year}`,
-      time: time
+      time: time,
     });
 
-    if(data[i].emergency_type=='Fire'){fireCount.value++;}
-    if(data[i].emergency_type=='Flood'){floodCount.value++;}
-    if(data[i].emergency_type=='Assault'){assaultCount.value++;}
-    if(data[i].emergency_type=='Injuries'){injuriesCount.value++;}
-    if(data[i].emergency_type=='Biohazard'){biohazardCount.value++;}
-    if(data[i].emergency_type=='Others'){othersCount.value++;}
-    if(monthName=='January'){jan.value++;}
-    if(monthName=='February'){feb.value++;}
-    if(monthName=='March'){mar.value++;}
-    if(monthName=='April'){apr.value++;}
-    if(monthName=='May'){may.value++;}
-    if(monthName=='June'){jun.value++;}
-    if(monthName=='July'){jul.value++;}
-    if(monthName=='August'){aug.value++;}
-
+    if (data[i].emergency_type == "Fire") {
+      fireCount.value++;
+    }
+    if (data[i].emergency_type == "Flood") {
+      floodCount.value++;
+    }
+    if (data[i].emergency_type == "Assault") {
+      assaultCount.value++;
+    }
+    if (data[i].emergency_type == "Injuries") {
+      injuriesCount.value++;
+    }
+    if (data[i].emergency_type == "Biohazard") {
+      biohazardCount.value++;
+    }
+    if (data[i].emergency_type == "Others") {
+      othersCount.value++;
+    }
+    if (monthName == "January") {
+      jan.value++;
+    }
+    if (monthName == "February") {
+      feb.value++;
+    }
+    if (monthName == "March") {
+      mar.value++;
+    }
+    if (monthName == "April") {
+      apr.value++;
+    }
+    if (monthName == "May") {
+      may.value++;
+    }
+    if (monthName == "June") {
+      jun.value++;
+    }
+    if (monthName == "July") {
+      jul.value++;
+    }
+    if (monthName == "August") {
+      aug.value++;
+    }
   }
-
-}
+};
 </script>
-

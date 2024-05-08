@@ -6,7 +6,7 @@
           Post Details :
         </div>
         <div
-          class="bg-white w-full h-[12%] border-2 rounded-lg mb-4 border-gray-400 px-2 py-2 font-semibold"
+          class="bg-white w-full h-[12%] border-2 rounded-lg mb-4 border-gray-400 px-2 py-2 font-semibold overflow-auto"
         >
           {{ postDetails }}
         </div>
@@ -27,7 +27,7 @@
         <div
           class="bg-white w-full h-[12%] border-2 rounded-lg mb-4 border-gray-400 p-[7px]"
         >
-          <!-- <Emergency :department="emergency_type" v-if="postDetails" /> -->
+          <!-- <Emergency :department="emergency_ty12pe" v-if="postDetails" /> -->
           <!-- <Emergency department="Road Incident" />
           <Emergency department="Flood" /> -->
 
@@ -76,13 +76,15 @@
           Emergency Response Team :
         </div>
         <div
-          class="flex bg-white w-full h-[12%] border-2 rounded-lg mb-4 border-gray-400 hover:shadow-[0_4px_4px_0px_rgba(0,0,0,0.70)] outline-none focus:ring-2 focus:ring-primary"
+          class="flex bg-white w-full h-[12%] border-2 p-2 rounded-lg mb-4 border-gray-400 hover:shadow-[0_4px_4px_0px_rgba(0,0,0,0.70)] outline-none focus:ring-2 focus:ring-primary"
         >
           <!-- <Emergency :department="emergency_team" v-if="postDetails" /> -->
-          <Emergency v-for="(eru,index) in deployed_team" 
+          <div class="h-full w-[70%] ">
+            <Emergency v-for="(eru,index) in deployed_team" 
           :emergency="eru.eru" />
-          <div class="h-full w-[100%] p-2 flex justify-end items-end gap-1">
-            <div class="h-full w-[25%] flex justify-end items-end">
+          </div>
+          <div class="h-full w-[30%] gap-2 ">
+            <div class="h-full w-full  flex justify-end items-end">
               <!-- <mdicon class="" name="plus" :width="20" :height="20" /> -->
 
               <!-- <AddResponseTeam
@@ -92,7 +94,7 @@
                   v-model:private_sector="private_sector"
                   v-model:baranggay_tanod="baranggay_tanod"
                 /> -->
-                <div class="dropdown dropdown-right">
+                <div class=" dropdown dropdown-right ">
                   <div
                     tabIndex="{0}"
                     role="button"
@@ -154,9 +156,6 @@ const assault = defineModel("assault");
 const injuries = defineModel("injuries");
 const biohazard = defineModel("biohazard");
 const others = defineModel("others");
-
-
-
 
 
 </script>

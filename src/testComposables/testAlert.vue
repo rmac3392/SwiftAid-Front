@@ -7,7 +7,13 @@
         <div
           class="flex items-center justify-center bg-primary rounded-full h-12 w-12"
         >
-          <mdicon class="text-white" name="fire" :width="30" :height="30" />
+          <!-- <mdicon class="text-white" name="fire" :width="30" :height="30" /> -->
+          <img v-if="type==='Fire'" src="../assets/fire.svg" class="h-[30px]w-[30px] p-2"  alt="">
+          <img v-if="type==='Flood'" src="../assets/flood.svg" class="h-[30px]w-[30px] p-2"  alt="">
+          <img v-if="type==='Biohazard'" src="../assets/biohazard.svg" class="h-[30px]w-[30px] p-2"  alt="">
+          <img v-if="type==='Injuries'" src="../assets/injuries.svg" class="h-[30px]w-[30px] p-2"  alt="">
+          <img v-if="type==='Assault'" src="../assets/fire.svg" class="h-[30px]w-[30px] p-2"  alt="">
+          <img v-if="type==='Other'" src="../assets/fire.svg" class="h-[30px]w-[30px] p-2"  alt="">
         </div>
       </div>
       <div class="w-[67%] ml-1 font-normal cursor-pointer">

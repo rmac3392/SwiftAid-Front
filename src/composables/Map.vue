@@ -1,13 +1,13 @@
 <template>
-  <div>
+  <div class="">
     <!-- Map container -->
-    <div id="map" class="mt-4" style="height: 400px; width: 450px"></div>
+    <div id="map" class="z-0 h-full border-2 border-gray-400 rounded-xl" style="height: 500px; width: 482px"></div>
     <div v-if="loading" class="mt-4">Loading...</div>
 
     <!-- Top 3 Nearest locations -->
-    <div class="mt-4" v-if="topThreeOrigins.length != 0 && isVisible">
-      <h2 class="text-lg font-semibold text-primary">Top 3 Nearest:</h2>
-      <ul class="mt-2">
+    <div class="mt-2" v-if="topThreeOrigins.length != 0 && isVisible">
+      
+      <ul class="">
         <li
           v-for="(origin, index) in topThreeOrigins"
           :key="index"
