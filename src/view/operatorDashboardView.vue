@@ -157,7 +157,7 @@
               </div>
               <div class="flex flex-col mt-5 items-center justify-center">
                 <button
-                  @click="sendPost"
+                  @click="sendPost()"
                   class="w-[85%] h-12 bg-primary text-white rounded-lg font-semibold mb-2 hover:bg-white hover:text-primary hover:border-primary border-primary border-2 transition duration-300"
                 >
                   Send
@@ -297,48 +297,63 @@ const getDetails = async (id) => {
   var type = data[0].emergency_type;
   if (data[0].emergency_type == "Fire") {
     fire.value = true;
+    getCityResponders(description, "fire");
     mapType.value = "fire_station";
   } else if (data[0].emergency_type == "Flood") {
     mapType.value = "fire_station";
+    getCityResponders(description, "fire");
     flood.value = true;
   } else if (data[0].emergency_type == "Assault") {
     mapType.value = "police";
+    getCityResponders(description, "police");
+
     assault.value = true;
   } else if (data[0].emergency_type == "Injuries") {
+    getCityResponders(description, "hospital");
+
     mapType.value = "hospital";
     injuries.value = true;
   } else if (data[0].emergency_type == "Biohazard") {
+    getCityResponders(description, "hospital");
+
     mapType.value = "hospital";
     biohazard.value = true;
   } else if (data[0].emergency_type == "Others") {
+    getCityResponders(description, "hospital");
+
     mapType.value = "police";
     others.value = true;
   }
-  getCityResponders(description, type);
-
+  console.log("type", type);
   typeOfEmergency.value.push({ emergency: data[0].emergency_type });
 };
 
-const getCityResponders = async (description) => {
+const getCityResponders = async (description, type) => {
   const location_name = detectLocation(description);
   const city = await location_city(location_name);
 
   for (var i = 0; i < responders.value.length; i++) {
     if (
       responders.value[i].location == city &&
-      responders.value[i].type == "fire_station"
+      responders.value[i].type == "fire_station" &&
+      type == "fire"
     ) {
       city_responders.value.push({ eru: responders.value[i].name });
+      break;
     } else if (
       responders.value[i].location == city &&
-      responders.value[i].type == "police"
+      responders.value[i].type == "police" &&
+      type == "police"
     ) {
       city_responders.value.push({ eru: responders.value[i].name });
+      break;
     } else if (
       responders.value[i].location == city &&
-      responders.value[i].type == "hospital"
+      responders.value[i].type == "hospital" &&
+      type == "hospital"
     ) {
       city_responders.value.push({ eru: responders.value[i].name });
+      break;
     }
   }
 };
@@ -407,6 +422,7 @@ const additionalResponseTeam = async (name) => {
   }
 };
 const sendPost = async () => {
+  console.log("test");
   try {
     const operatorUserID = localStorage.getItem("operator_userId");
     const response = await fetch("http://localhost:8080/getOperator");
