@@ -48,12 +48,9 @@
                     required
                   >
                     <option disabled selected>Click to Select</option>
-                    <option value="fire">Fire Department</option>
-                    <option value="search_rescue">
-                      Search and Rescue Group
-                    </option>
-                    <option value="ngo">NGO</option>
-                    <option value="privatre">Private Sector</option>
+                    <option value="fire_station">Fire Department</option>
+                    <option value="police">Police Department</option>
+                    <option value="hospital">Hospital Department</option>
                   </select>
                 </div>
               </div>
@@ -340,24 +337,6 @@
                   required
                 />
               </div>
-
-              <div class="">
-                <div class="flex justify-start items-start">
-                  <label for="phone" class="block mb-2 text-sm font-medium"
-                    >Zip Code</label
-                  >
-                </div>
-
-                <input
-                  v-modle="zipcode"
-                  type="tel"
-                  id="zipcode"
-                  class="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5"
-                  placeholder="6000"
-                  pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}"
-                  required
-                />
-              </div>
             </div>
             <div class="mb-6 flex flex-row gap-7">
               <div class="w-[100%]">
@@ -390,20 +369,6 @@
                   id="username"
                   class="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5"
                   placeholder="John"
-                  required
-                />
-              </div>
-
-              <div class="flex flex-col w-[50%]">
-                <label for="email" class="mb-2 text-sm text-start font-medium"
-                  >Email address</label
-                >
-                <input
-                  v-model="email"
-                  type="email"
-                  id="email"
-                  class="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2.5"
-                  placeholder="youremail@gmail.com"
                   required
                 />
               </div>
@@ -602,6 +567,7 @@ const submitOperator = async () => {
 const submitResponder = async () => {
   try {
     const formData = new FormData();
+    submitResponderUnit();
 
     if (password.value != confirm_password.value) {
       errorMessage.value = "Passwords do not match";
@@ -619,6 +585,36 @@ const submitResponder = async () => {
 
       const response = await axios.post(
         "http://localhost:8080/addResponder",
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+    }
+  } catch (error) {
+    if (!image.value) {
+      errorMessage.value = "Insert Image!";
+    }
+    console.log("Error:", error);
+  }
+};
+
+const submitResponderUnit = async () => {
+  try {
+    const formData = new FormData();
+
+    if (password.value != confirm_password.value) {
+      errorMessage.value = "Passwords do not match";
+    } else {
+      formData.append("name", institution.value);
+      formData.append("location", city.value);
+      formData.append("phone_number", mobile_number.value);
+      formData.append("type", department.value);
+
+      const response = await axios.post(
+        "http://localhost:8080/addResponderUnit",
         formData,
         {
           headers: {

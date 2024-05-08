@@ -217,6 +217,7 @@
                       :emergency="post.emergency"
                       :date="post.timestamp"
                       :time="post.time"
+                      :description="post.description"
                     />
                   </td>
                 </tr>
@@ -228,6 +229,7 @@
       </div>
     </div>
   </div>
+  
 </template>
 <script setup>
 import OperatorPieChart from "../composables/Charts/OperatorPieChart.vue";
