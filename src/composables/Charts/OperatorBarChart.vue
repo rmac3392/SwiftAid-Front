@@ -1,5 +1,5 @@
 <template>
-  <div class="h-[90%] w-full flex items-center justify-center">
+  <div class="h-[100%] w-full flex items-center justify-center">
     <div class="h-full flex w-[100%]">
       <div class="w-[100%]">
         <div class="h-full pt-3 flex items-center justify-center">
