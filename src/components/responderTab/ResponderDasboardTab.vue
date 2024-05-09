@@ -1,177 +1,281 @@
 <template>
-  <div class="flex h-[87%] w-full">
-    <div class="w-[100%] h-full pb-4 flex space-x-5 mt-5">
-      <div
-        class="w-[33%] h-full pl-3 pr-3 pb-3 bg-gray-100 border-2 border-white rounded-lg"
-      >
+  <div class="flex h-full w-full">
+    <div class="w-[100%] h-full flex space-x-5">
+      <div class="w-[28%] h-full bg-white rounded-lg">
         <div
-          class="text-primary font-bold text-2xl flex text-center justify-center items-center mt-7 mb-8"
+          class="text-white p-4 rounded-t-lg bg-primary font-bold text-2xl flex text-center justify-center items-center"
         >
           EMERGENCY REPORTS
         </div>
 
-        <div class="space-y-5 w-[95%] mx-auto">
+        <div class="px-4 pt-4 space-y-4 w-full">
           <testAlert
             v-for="(post, index) in posts"
             @click="getDetails(post.id)"
-            :location="`${post.address}, ${post.city}`"
+            :location="`${post.city} City`"
             :type="post.type"
             :time="post.time"
           />
         </div>
       </div>
-
-      <div class="w-[33%] h-[93.5%]">
-        <div class="w-[100%] h-[107%] rounded-lg flex bg-gray-100 flex-col">
-          <div
-            class="text-primary font-bold text-2xl flex text-center justify-center mx-auto mt-8 mb-6"
-          >
-            EMERGENCY DETAILS
-          </div>
-          <div v-if="postID" class="">
-            <div class="h-[100%] w-[92%] mx-auto">
-              <div class="w-full h-[560px] p-2 font-serif">
+      <div class="w-[72%] h-full">
+        <div class="flex h-[15%] pb-5 gap-5">
+          <div class="bg-white w-1/4 h-full rounded-lg p-5 flex shadow-lg">
+            <div class="h-full w-[40%]">
+              <div
+                class="bg-primary h-full rounded-lg flex items-center justify-center text-white"
+              >
+                <mdicon
+                  class="origin-center"
+                  name="ProgressUpload"
+                  :width="50"
+                  :height="50"
+                />
+              </div>
+            </div>
+            <div class="h-full pl-3 w-[60%]">
+              <div class="h-full">
                 <div
-                  class="bg-white h-[100%] drop-shadow-lg shadow-lg py-8 px-10"
+                  class="h-[65%] flex justify-center font-semibold items-end text-4xl"
                 >
-                  <div class="h-[20%] flex">
-                    <div
-                      class="h-full w-[22%] flex items-center justify-center"
-                    >
-                      <img src="../../assets/ndrmc.png" alt="" />
-                    </div>
-                    <div
-                      class="h-full w-[56%] text-[0.55rem] flex flex-col items-center font-medium justify-center gap-1"
-                    >
-                      <div class="leading-[0.58rem]">
-                        Republic of the Philippines
-                      </div>
-                      <div class="leading-[0.58rem]">N.D.R.R.M.C</div>
-                      <div class="leading-[0.58rem]">SWIFTAID</div>
-                      <div class="leading-[0.58rem] font-bold">
-                        EMERGENCY DISPATCH CENTER
-                      </div>
-                      <div class="leading-[0.58rem]">Cebu City</div>
-                    </div>
-                    <div
-                      class="h-full w-[22%] flex justify-center items-center"
-                    >
-                      <img
-                        src="../../assets/SWIFTAID_logo.png"
-                        alt=""
-                        width="48"
-                      />
-                    </div>
-                  </div>
-                  <div class="h-[30%] text-[0.60rem] mt-3">
-                    <div class="font-bold ml-2">INCIDENT REPORT</div>
-                    <div class="pl-8 font-medium space-y-1">
-                      <div class="flex">
-                        <div class="w-[30%]">EMERGENCY TYPE</div>
-                        <div class="w-[20%] text-center">:</div>
-                        <div class="w-[50%]">{{ emergency }}</div>
-                      </div>
-                      <div class="flex">
-                        <div class="w-[30%]">RESPONDER</div>
-                        <div class="w-[20%] text-center">:</div>
-                        <div class="w-[50%]">
-                          {{ responder }} 
-                        </div>
-                      </div>
-                      <div class="flex">
-                        <div class="w-[30%]">OPERATOR</div>
-                        <div class="w-[20%] text-center">:</div>
-                        <div class="w-[50%]">{{ operator }}</div>
-                      </div>
-                      <div class="flex">
-                        <div class="w-[30%]">DATE</div>
-                        <div class="w-[20%] text-center">:</div>
-                        <div class="w-[50%]">{{ date }}</div>
-                      </div>
-                      <div class="flex">
-                        <div class="w-[30%]">TIME</div>
-                        <div class="w-[20%] text-center">:</div>
-                        <div class="w-[50%]">{{ time_ref }}</div>
-                      </div>
-                    </div>
-                    <hr class="border border-gray-800 mt-3" />
-                  </div>
-                  <div
-                    class="h-[40%] pt-5 pl-3 font-medium text-xs text-justify"
-                  >
-                    <div v-if="postDetails" class="leading-3 text-[0.68rem]">
-                      <strong>Post:</strong> <br />{{ postDetails }}
-                    </div>
-                    <br />
-                    <div
-                      v-if="additionalDescription"
-                      class="leading-3 text-[0.68rem]"
-                    >
-                      <strong>Additional Description:</strong> <br />{{
-                        additionalDescription
-                      }}
-                    </div>
-                    <br />
-                    <div
-                      v-if="eru.length != 0"
-                      class="leading-3 text-[0.68rem]"
-                    >
-                      <strong>Deployable Units:</strong>
-                      <p v-for="(unit, index) in eru">
-                        {{ unit }}
-                      </p>
-                    </div>
-                  </div>
-                  <div class="h-[10%] font-medium text-[0.60rem]">
-                    <div class="leading-[0.60rem] text-end font-bold">
-                      {{ operator }}
-                    </div>
-                    <div class="leading-[0.60rem] text-end">
-                      Dispatch Operator
-                    </div>
-                  </div>
+                  13
                 </div>
-                <div class="flex-row flex justify-center gap-10 mt-[10%]">
-                  <div class="flex items-center justify-center">
-                    <button @click="dismiss"
-                      class="btn bg-white text-primary hover:bg-primary hover:text-white border-primary px-10"
-                    >
-                      Dismiss
-                    </button>
-                  </div>
-                  <div class="flex items-center justify-center">
-                    <button @click="acknowledgePost()"
-                      class="btn bg-primary text-white hover:bg-white hover:text-primary hover:border-primary px-6"
-                    >
-                      Acknowledge
-                    </button>
-                  </div>
+                <div class="h-[35%] flex justify-center items-start text-sm">
+                  Received
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="bg-white w-1/4 h-full rounded-lg p-5 flex shadow-lg">
+            <div class="h-full w-[40%]">
+              <div
+                class="bg-primary h-full rounded-lg flex items-center justify-center text-white"
+              >
+                <mdicon
+                  class="origin-center"
+                  name="ProgressClose"
+                  :width="50"
+                  :height="50"
+                />
+              </div>
+            </div>
+            <div class="h-full pl-3 w-[60%]">
+              <div class="h-full">
+                <div
+                  class="h-[65%] flex justify-center font-semibold items-end text-4xl"
+                >
+                  12
+                </div>
+                <div class="h-[35%] flex justify-center items-start text-sm">
+                  Dismissed
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="bg-white w-1/4 h-full rounded-lg p-5 flex shadow-lg">
+            <div class="h-full w-[40%]">
+              <div
+                class="bg-primary h-full rounded-lg flex items-center justify-center text-white"
+              >
+                <mdicon
+                  class="origin-center"
+                  name="ProgressCheck"
+                  :width="50"
+                  :height="50"
+                />
+              </div>
+            </div>
+            <div class="h-full pl-3 w-[60%]">
+              <div class="h-full">
+                <div
+                  class="h-[65%] flex justify-center font-semibold items-end text-4xl"
+                >
+                  11
+                </div>
+                <div class="h-[35%] flex justify-center items-start text-sm">
+                  Acknowledged
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="bg-white w-1/4 h-full rounded-lg p-5 flex shadow-lg">
+            <div class="h-full w-[40%]">
+              <div
+                class="bg-primary h-full rounded-lg flex items-center justify-center text-white"
+              >
+                <mdicon
+                  class="origin-center"
+                  name="ProgressQuestion"
+                  :width="50"
+                  :height="50"
+                />
+              </div>
+            </div>
+            <div class="h-full pl-3 w-[60%]">
+              <div class="h-full">
+                <div
+                  class="h-[65%] flex justify-center font-semibold items-end text-4xl"
+                >
+                  10
+                </div>
+                <div class="h-[35%] flex justify-center items-start text-sm">
+                  Pending Reports
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-      <div class="w-[33%] h-[93.5%]">
-        <div class="w-[100%] h-[107%] rounded-lg flex bg-gray-100 flex-col">
-          <div
-            class="text-primary font-bold text-2xl flex text-center justify-center my-8 mx-auto"
-          >
-            EMERGENCY LOCATION
-          </div>
-          <div>
-            <div class="h-[545px]">
-              <div class="flex items-center justify-center h-full">
-                <!-- MAP -->
-                <Map
-                  :inputText="postDetails"
-                  :type="mapType"
-                  :isVisible="false"
-                />
-                <!-- END MAP -->
+        <div class="flex w-full h-[85%]">
+          <div class="w-1/2 bg-white mr-3 h-full rounded-lg">
+            <div
+              class="text-white rounded-t-lg p-4 font-bold text-2xl flex text-center justify-center mx-auto bg-primary"
+            >
+              EMERGENCY DETAILS
+            </div>
+            <!-- v-if="postID" inside the div below -->
+            <div v-if="postID"  class="h-[85%] w-full px-7 pt-3">
+              <div class="h-full w-full">
+                <div class="w-full h-full p-2 font-serif">
+                  <div
+                    class="bg-white h-full border drop-shadow-lg shadow-lg py-8 px-10"
+                  >
+                    <div class="h-[20%] flex">
+                      <div
+                        class="h-full w-[22%] flex items-center justify-center"
+                      >
+                        <img src="../../assets/ndrmc.png" alt="" />
+                      </div>
+                      <div
+                        class="h-full w-[56%] text-[0.55rem] flex flex-col items-center font-medium justify-center gap-1"
+                      >
+                        <div class="leading-[0.58rem]">
+                          Republic of the Philippines
+                        </div>
+                        <div class="leading-[0.58rem]">N.D.R.R.M.C</div>
+                        <div class="leading-[0.58rem]">SWIFTAID</div>
+                        <div class="leading-[0.58rem] font-bold">
+                          EMERGENCY DISPATCH CENTER
+                        </div>
+                        <div class="leading-[0.58rem]">Cebu City</div>
+                      </div>
+                      <div
+                        class="h-full w-[22%] flex justify-center items-center"
+                      >
+                        <img
+                          src="../../assets/SWIFTAID_logo.png"
+                          alt=""
+                          width="48"
+                        />
+                      </div>
+                    </div>
+                    <div class="h-[30%] text-[0.60rem] mt-3">
+                      <div class="font-bold ml-2">INCIDENT REPORT</div>
+                      <div class="pl-8 font-medium space-y-1">
+                        <div class="flex">
+                          <div class="w-[30%]">EMERGENCY TYPE</div>
+                          <div class="w-[20%] text-center">:</div>
+                          <div class="w-[50%]">{{ emergency }}</div>
+                        </div>
+                        <div class="flex">
+                          <div class="w-[30%]">RESPONDER</div>
+                          <div class="w-[20%] text-center">:</div>
+                          <div class="w-[50%]">
+                            {{ responder }}
+                          </div>
+                        </div>
+                        <div class="flex">
+                          <div class="w-[30%]">OPERATOR</div>
+                          <div class="w-[20%] text-center">:</div>
+                          <div class="w-[50%]">{{ operator }}</div>
+                        </div>
+                        <div class="flex">
+                          <div class="w-[30%]">DATE</div>
+                          <div class="w-[20%] text-center">:</div>
+                          <div class="w-[50%]">{{ date }}</div>
+                        </div>
+                        <div class="flex">
+                          <div class="w-[30%]">TIME</div>
+                          <div class="w-[20%] text-center">:</div>
+                          <div class="w-[50%]">{{ time_ref }}</div>
+                        </div>
+                      </div>
+                      <hr class="border border-gray-800 mt-3" />
+                    </div>
+                    <div
+                      class="h-[40%] pt-5 pl-3 font-medium text-xs text-justify"
+                    >
+                      <div v-if="postDetails" class="leading-3 text-[0.68rem]">
+                        <strong>Post:</strong> <br />{{ postDetails }}
+                      </div>
+                      <br />
+                      <div
+                        v-if="additionalDescription"
+                        class="leading-3 text-[0.68rem]"
+                      >
+                        <strong>Additional Description:</strong> <br />{{
+                          additionalDescription
+                        }}
+                      </div>
+                      <br />
+                      <div
+                        v-if="eru.length != 0"
+                        class="leading-3 text-[0.68rem]"
+                      >
+                        <strong>Deployable Units:</strong>
+                        <p v-for="(unit, index) in eru">
+                          {{ unit }}
+                        </p>
+                      </div>
+                    </div>
+                    <div class="h-[10%] font-medium text-[0.60rem]">
+                      <div class="leading-[0.60rem] text-end font-bold">
+                        {{ operator }}
+                      </div>
+                      <div class="leading-[0.60rem] text-end">
+                        Dispatch Operator
+                      </div>
+                    </div>
+                  </div>
+                  <!-- End for paper -->
+                </div>
               </div>
-              <div class="flex flex-col mt-7 items-center justify-center">
-                <div class="flex items-center justify-center mt-3"></div>
+            </div>
+          </div>
+          <div class="w-1/2 bg-white h-full ml-2 rounded-lg">
+            <div
+              class="text-white bg-primary font-bold text-2xl flex text-center justify-center rounded-t-lg p-4 mx-auto"
+            >
+              EMERGENCY LOCATION
+            </div>
+            <div>
+              <div class="h-[550px]">
+                <div class="flex items-center justify-center h-full">
+                  <!-- MAP -->
+                  <Map
+                    :inputText="postDetails"
+                    :type="mapType"
+                    :isVisible="false"
+                  />
+                  <!-- END MAP -->
+                </div>
+
+                <div
+                  class="flex justify-center items-center h-[10%] px-5 gap-2"
+                >
+                  <button
+                    @click="dismiss"
+                    class="btn bg-white text-primary hover:bg-primary hover:text-white border-primary px-10 w-1/2"
+                  >
+                    Dismiss
+                  </button>
+
+                  <button
+                    @click="acknowledgePost()"
+                    class="btn bg-primary text-white hover:bg-white hover:text-primary hover:border-primary px-6 w-1/2"
+                  >
+                    Acknowledge
+                  </button>
+                </div>
               </div>
             </div>
           </div>
@@ -208,9 +312,9 @@ const singlePost = async (id) => {
   const response = await fetch(`http://localhost:8080/getSinglePostTeam/${id}`);
   const data = await response.json();
   let responderName = await getResponder();
-  for(var i = 0 ; i < data.length; i ++){
-    if(data[i].name==responderName){
-      return data[i].name
+  for (var i = 0; i < data.length; i++) {
+    if (data[i].name == responderName) {
+      return data[i].name;
     }
   }
 };
@@ -242,7 +346,7 @@ const getPost = async () => {
       if (data[i].status == "Sent") {
         const singlePostName = await singlePost(data[i].post_id);
         const responderName = await getResponder();
-        
+
         if (singlePostName == responderName) {
           const timestamp = new Date(data[i].timestamp);
           const months = [
@@ -355,12 +459,10 @@ const getSingleOperator = async (id) => {
   return `${data[0].first_name} ${data[0].last_name}`;
 };
 
-
 const acknowledgePost = async () => {
   const post_report = await getSinglePostReport(postID.value);
   var operator_id = post_report.operator_id;
   try {
-
     await axios.put(`http://localhost:8080/updatePost/${postID.value}`, {
       responder_id: localStorage.getItem("responder_userId"),
       operator_id: operator_id,
@@ -369,7 +471,7 @@ const acknowledgePost = async () => {
     });
 
     await axios.put(`http://localhost:8080/acknowledgePost/${postID.value}`);
-        
+
     window.location.reload();
   } catch (error) {
     console.error("Error acknowledging post:", error);
@@ -379,6 +481,5 @@ const acknowledgePost = async () => {
 const dismiss = async () => {
   await axios.put(`http://localhost:8080/denyPost/${postID.value}`);
   window.location.reload();
-}
-
+};
 </script>

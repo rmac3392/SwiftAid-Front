@@ -45,7 +45,10 @@
 
         <div
           :class="currentTab === 3 ? 'active-tab' : 'general-tab'"
-          @click="showModal(); isClicked=true"
+          @click="
+            showModal();
+            isClicked = true;
+          "
         >
           <div class="flex gap-2 cursor-pointer">
             <div>
@@ -57,7 +60,12 @@
       </div>
     </div>
     <div class="w-[80%]">
-      <dialog v-if="isClicked==true" id="my_modal_3" class="modal" ref="myModal">
+      <dialog
+        v-if="isClicked == true"
+        id="my_modal_3"
+        class="modal"
+        ref="myModal"
+      >
         <div class="modal-box">
           <form method="dialog">
             <button
@@ -80,12 +88,13 @@
           </div>
         </div>
       </dialog>
+
       <div class="h-[13%] w-full p-5">
         <div class="flex w-full h-full bg-white rounded-lg shadow-lg">
           <div class="w-[77%] p-3"></div>
           <div class="flex w-[23%]">
             <div class="w-[25%] flex items-center justify-end">
-              <img :src="profile">
+              <img :src="profile" />
             </div>
             <div class="w-[75%]">
               <div
@@ -179,13 +188,17 @@ const operatorAuth = async () => {
 };
 const profile = ref(null);
 
-const image = async () =>{
-  const response = await fetch(`http://localhost:8080/getUserImage/${localStorage.getItem("operator_userId")}`);
+const image = async () => {
+  const response = await fetch(
+    `http://localhost:8080/getUserImage/${localStorage.getItem(
+      "operator_userId"
+    )}`
+  );
   const data = await response.json();
-  
+
   var image = await convertBlob(data[0].image.data);
   profile.value = image;
-}
+};
 image();
 
 const showModal = () => {
@@ -197,20 +210,20 @@ const showModal = () => {
 const logout = () => {
   localStorage.clear();
   router.push("/");
-}
+};
 
 const convertBlob = (image) => {
-      return new Promise((resolve, reject) => {
-        if (image) {
-          const blob = new Blob([new Uint8Array(image)], { type: "image/jpeg" });
-          const reader = new FileReader();
-          reader.readAsDataURL(blob);
-          reader.onloadend = () => {
-            const dataURL = reader.result;
-            resolve(dataURL);
-          };
-        }
-      });
+  return new Promise((resolve, reject) => {
+    if (image) {
+      const blob = new Blob([new Uint8Array(image)], { type: "image/jpeg" });
+      const reader = new FileReader();
+      reader.readAsDataURL(blob);
+      reader.onloadend = () => {
+        const dataURL = reader.result;
+        resolve(dataURL);
+      };
+    }
+  });
 };
 
 onMounted(() => {
