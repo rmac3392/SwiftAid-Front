@@ -14,7 +14,7 @@
               <img src="../assets/ndrmc.png" alt="" />
             </div>
             <div
-              class="h-full w-[56%] text-[0.55rem] flex flex-col items-center font-medium justify-center "
+              class="h-full w-[56%] text-[0.55rem] flex flex-col items-center font-medium justify-center"
             >
               <div class="leading-[0.58rem]">Republic of the Philippines</div>
               <div class="leading-[0.58rem]">N.D.R.R.M.C</div>
@@ -34,7 +34,7 @@
               <div class="flex">
                 <div class="w-[30%]">EMERGENCY TYPE</div>
                 <div class="w-[20%] text-center">:</div>
-                <div class="w-[50%]">{{emergency}}</div>
+                <div class="w-[50%]">{{ emergency }}</div>
               </div>
               <div class="flex">
                 <div class="w-[30%]">RESPONDER</div>
@@ -51,21 +51,30 @@
               <div class="flex">
                 <div class="w-[30%]">DATE</div>
                 <div class="w-[20%] text-center">:</div>
-                <div class="w-[50%]">{{date}}</div>
+                <div class="w-[50%]">{{ date }}</div>
               </div>
               <div class="flex">
                 <div class="w-[30%]">TIME</div>
                 <div class="w-[20%] text-center">:</div>
-                <div class="w-[50%]">{{time}}</div>
+                <div class="w-[50%]">{{ time }}</div>
               </div>
             </div>
-            <hr class="border border-gray-800">
+            <hr class="border border-gray-800" />
           </div>
-          <div class="h-[40%]  pt-2 pl-8 font-medium text-[0.55rem]">
-            <div class="leading-3"><Strong>User Description:</Strong> <p>{{description}}</p></div>
-            <br>
-            <div class="leading-3"><Strong>Additional Description:</Strong><p>{{additionalDescription}}</p></div>
-            <br>
+          <div class="h-[40%] pt-2 pl-8 font-medium text-[0.55rem]">
+            <div class="leading-3">
+              <Strong>User Description:</Strong>
+              <p>{{ description }}</p>
+            </div>
+            <br />
+            <div class="leading-3">
+              <Strong>Additional Description:</Strong>
+              <p>{{ additionalDescription }}</p>
+            </div>
+            <br />
+            <div class="leading-3">
+              3. Lorem ipsum dolor sit amet consectetur adipisicing elit.
+            </div>
           </div>
           <div class="h-[10%] font-medium text-[0.55rem]">
             <div class="leading-[0.55rem] text-end font-bold">{{operator}}</div>
@@ -79,9 +88,11 @@
           <button class="btn btn-primary rounded-xl w-full btn-md">Send</button>
         </div>
         <div class="w-1/2 flex justify-center items-center p-3">
-          <button class="btn btn-primary rounded-xl w-full btn-md">
-            Print
-          </button>
+          <router-link class="btn btn-primary rounded-xl w-full btn-md" to="/print" target="_blank">
+            <button class="">
+              Print
+            </button>
+          </router-link>
         </div>
       </div>
     </div>
@@ -94,10 +105,10 @@
 import { ref } from "vue";
 const dialog = ref();
 const props = defineProps({
-  emergency : String,
+  emergency: String,
   responder: String,
-  description:String,
-  additionalDescription:String,
+  description: String,
+  additionalDescription: String,
   operator: String,
   date: String,
   time: String,
