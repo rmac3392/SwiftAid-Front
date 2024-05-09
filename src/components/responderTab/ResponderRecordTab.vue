@@ -149,24 +149,30 @@ const getPost = async () => {
     hours = hours % 12;
     hours = hours ? hours : 12; 
     const time = hours + ':' + (minutes < 10 ? '0' : '') + minutes + ' ' + ampm;
-
     const singlePost = await getSinglePostReport(data[i].post_id);
-    const added_description = singlePost.additional_description;
-    const operator = await getOperator(singlePost.operator_id);
 
-    if(localStorage.getItem("responder_userId")==singlePost.responder_id&&data[i].status=='Acknowledged'||singlePost.responder_id&&data[i].status=='Cancelled'){
-      posts.value.push({
-      id: data[i].post_id,
-      location: data[i].address,
-      emergency: data[i].emergency_type,
-      description: data[i].description,
-      operator: operator,
-      added_description:added_description ,
-      status: data[i].status,
-      timestamp: `${monthName} ${day}, ${year}`,
-      time: time
-    });
+    
+    if(singlePost.operator_id){
+
+      const added_description = singlePost.additional_description;
+      const operator = await getOperator(singlePost.operator_id);
+      let currentResponderID = localStorage.getItem("responder_userId");
+
+      if(currentResponderID==singlePost.responder_id&&data[i].status=='Acknowledged'||currentResponderID==singlePost.responder_id&&data[i].status=='Cancelled'){
+        posts.value.push({
+          id: data[i].post_id,
+          location: data[i].address,
+          emergency: data[i].emergency_type,
+          description: data[i].description,
+          operator: operator,
+          added_description:added_description ,
+          status: data[i].status,
+          timestamp: `${monthName} ${day}, ${year}`,
+          time: time
+        });
+      }
     }
+
 
 
 

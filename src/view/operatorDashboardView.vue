@@ -6,7 +6,7 @@
       <div class="font-semibold text-xl text-primary">Emergency Alert :</div>
 
       <!-- alert -->
-      <div v-for="(post, index) in posts.slice().reverse()"
+      <div v-for="(post, index) in posts"
       >
         <testAlert
         @click="getDetails(post.id)"
@@ -164,7 +164,7 @@
               class="flex items-center h-[5%] gap-4 justify-center"
             >
             <button
-                @click="denyPost(postID.value)"
+                @click="denyPost()"
                 class="w-[85%] h-12 bg-primary text-white rounded-lg font-semibold mb-2 hover:bg-white hover:text-primary hover:border-primary border-primary border-2 transition duration-300"
               >
                 Discard
@@ -468,9 +468,9 @@ const sentPost = async (id) => {
   }
 };
 
-const denyPost = async (id) => {
+const denyPost = async () => {
   try {
-    const response = await axios.put(`http://localhost:8080/denyPost/${id}`);
+    const response = await axios.put(`http://localhost:8080/denyPost/${postID.value}`);
     window.location.reload();
   } catch (error) {
     console.error(
