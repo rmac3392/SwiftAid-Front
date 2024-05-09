@@ -85,12 +85,7 @@
           <div class="w-[77%] p-3"></div>
           <div class="flex w-[23%]">
             <div class="w-[25%] flex items-center justify-end">
-              <mdicon
-                class="text-primary"
-                name="account-circle"
-                :width="70"
-                :height="70"
-              />
+              <img :src="profile">
             </div>
             <div class="w-[75%]">
               <div
@@ -182,6 +177,16 @@ const operatorAuth = async () => {
     }
   }
 };
+const profile = ref(null);
+
+const image = async () =>{
+  const response = await fetch(`http://localhost:8080/getUserImage/${localStorage.getItem("operator_userId")}`);
+  const data = await response.json();
+  
+  var image = await convertBlob(data[0].image.data);
+  profile.value = image;
+}
+image();
 
 const showModal = () => {
   if (myModal.value) {
@@ -193,6 +198,20 @@ const logout = () => {
   localStorage.clear();
   router.push("/");
 }
+
+const convertBlob = (image) => {
+      return new Promise((resolve, reject) => {
+        if (image) {
+          const blob = new Blob([new Uint8Array(image)], { type: "image/jpeg" });
+          const reader = new FileReader();
+          reader.readAsDataURL(blob);
+          reader.onloadend = () => {
+            const dataURL = reader.result;
+            resolve(dataURL);
+          };
+        }
+      });
+};
 
 onMounted(() => {
   showModal(); // Optionally show the modal on component mount

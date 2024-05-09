@@ -44,6 +44,18 @@ const router = createRouter({
             component: () =>
                 import ("../pages/Post.vue"),
         },
+        {
+            path: "/Twitter",
+            name: "Twitter",
+            component: () =>
+                import ("../pages/Twitter.vue"),
+        },
+        {
+            path: "/SearchMap",
+            name: "SearchMap",
+            component: () =>
+                import ("../pages/SearchMap.vue"),
+        },
     ],
 });
 

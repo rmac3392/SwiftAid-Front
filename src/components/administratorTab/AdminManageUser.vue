@@ -144,7 +144,7 @@ onMounted(() => {
   getResponder();
   initFlowbite();
 });
-const selectedView = ref();
+const selectedView = ref('all');
 const userData = ref([]);
 
 const getOperator = async () => {

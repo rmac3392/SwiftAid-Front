@@ -75,7 +75,7 @@
                         <div class="w-[30%]">RESPONDER</div>
                         <div class="w-[20%] text-center">:</div>
                         <div class="w-[50%]">
-                          {{ responder }} Bureau of Fire Protection
+                          {{ responder }} 
                         </div>
                       </div>
                       <div class="flex">
@@ -133,14 +133,14 @@
                 </div>
                 <div class="flex-row flex justify-center gap-10 mt-[10%]">
                   <div class="flex items-center justify-center">
-                    <button
+                    <button @click="dismiss"
                       class="btn bg-white text-primary hover:bg-primary hover:text-white border-primary px-10"
                     >
                       Dismiss
                     </button>
                   </div>
                   <div class="flex items-center justify-center">
-                    <button
+                    <button @click="acknowledgePost()"
                       class="btn bg-primary text-white hover:bg-white hover:text-primary hover:border-primary px-6"
                     >
                       Acknowledge
@@ -184,7 +184,7 @@
 <script setup>
 import TestAlert from "../../testComposables/testAlert.vue";
 import Map from "../../composables/Map.vue";
-
+import axios from "axios";
 import { ref, onMounted } from "vue";
 
 onMounted(() => {
@@ -207,17 +207,25 @@ const time_ref = ref();
 const singlePost = async (id) => {
   const response = await fetch(`http://localhost:8080/getSinglePostTeam/${id}`);
   const data = await response.json();
-  return data[0].name;
+  let responderName = await getResponder();
+  for(var i = 0 ; i < data.length; i ++){
+    if(data[i].name==responderName){
+      return data[i].name
+    }
+  }
 };
 const singlePostTeam = async (id) => {
   const response = await fetch(``);
 };
+const responder = ref();
+
 const getResponder = async () => {
   const response = await fetch("http://localhost:8080/getResponder");
   const data = await response.json();
 
   for (var i = 0; i < data.length; i++) {
     if (data[i].user_id == localStorage.getItem("responder_userId")) {
+      responder.value = data[i].institution;
       return data[i].institution;
     }
   }
@@ -234,7 +242,7 @@ const getPost = async () => {
       if (data[i].status == "Sent") {
         const singlePostName = await singlePost(data[i].post_id);
         const responderName = await getResponder();
-
+        
         if (singlePostName == responderName) {
           const timestamp = new Date(data[i].timestamp);
           const months = [
@@ -346,4 +354,31 @@ const getSingleOperator = async (id) => {
 
   return `${data[0].first_name} ${data[0].last_name}`;
 };
+
+
+const acknowledgePost = async () => {
+  const post_report = await getSinglePostReport(postID.value);
+  var operator_id = post_report.operator_id;
+  try {
+
+    await axios.put(`http://localhost:8080/updatePost/${postID.value}`, {
+      responder_id: localStorage.getItem("responder_userId"),
+      operator_id: operator_id,
+      additional_description: additionalDescription.value,
+      post_id: postID.value,
+    });
+
+    await axios.put(`http://localhost:8080/acknowledgePost/${postID.value}`);
+        
+    window.location.reload();
+  } catch (error) {
+    console.error("Error acknowledging post:", error);
+  }
+};
+
+const dismiss = async () => {
+  await axios.put(`http://localhost:8080/denyPost/${postID.value}`);
+  window.location.reload();
+}
+
 </script>
