@@ -25,10 +25,13 @@
               <td class="border border-gray-500">
                 {{ post.emergency }}
               </td>
-              <td class="border border-gray-500">{{post.description}}</td>
-              <td class="border border-gray-500">{{post.status}}</td>
-              <td class="border border-gray-500">{{post.timestamp}}</td>
-              <td class="border border-gray-500">
+              <td class="border border-gray-300">{{post.description}}</td>
+              <td class="border border-gray-300">{{post.status}}</td>
+              <td class="border border-gray-300">{{post.timestamp}}</td>
+              <td class="border border-gray-300">
+                <button 
+                class="text-start item-start justify-start flex"
+                @click="print(post.emergency,responder,post.operator,post.timestamp,post.time,post.description,post.added_description)">
                 <dialogAction 
                   :emergency="post.emergency"
                   :date="post.timestamp"
@@ -38,6 +41,7 @@
                   :operator="post.operator"
                   :responder="responder"
                 />
+              </button>
               </td>
             </tr>
 
@@ -114,6 +118,17 @@ const getResponder = async () => {
     }
   }
 };
+
+const print = (emergency,responder,operator,date,time,description,additional_description) =>{
+  localStorage.setItem('l_emergency',emergency);
+  localStorage.setItem('l_responder',responder);
+  localStorage.setItem('l_operator',operator);
+  localStorage.setItem('l_date',date);
+  localStorage.setItem('l_time',time);
+  localStorage.setItem('l_description',description);
+  localStorage.setItem('l_additional_description',additional_description);
+}
+
 
 
 

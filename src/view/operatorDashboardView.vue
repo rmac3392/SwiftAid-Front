@@ -477,6 +477,14 @@ const sentPost = async (id) => {
 const denyPost = async () => {
   try {
     const response = await axios.put(`http://localhost:8080/denyPost/${postID.value}`);
+    const operatorUserID = localStorage.getItem("operator_userId");
+
+    await axios.put(`http://localhost:8080/updatePost/${postID.value}`, {
+          responder_id: null,
+          operator_id: operatorUserID,
+          additional_description: additionalDescription.value,
+          post_id: postID.value,
+        });
     window.location.reload();
   } catch (error) {
     console.error(

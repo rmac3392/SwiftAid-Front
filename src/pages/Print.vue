@@ -27,27 +27,27 @@
               <div class="flex leading-10">
                 <div class="w-[30%]">EMERGENCY TYPE</div>
                 <div class="w-[20%] text-center">:</div>
-                <div class="w-[50%]">{{ emergency }} Fire</div>
+                <div class="w-[50%]">{{ emergency }}</div>
               </div>
               <div class="flex leading-10">
                 <div class="w-[30%]">RESPONDER</div>
                 <div class="w-[20%] text-center">:</div>
-                <div class="w-[50%]">BFP region VII</div>
+                <div class="w-[50%]"> {{responder}} </div>
               </div>
               <div class="flex leading-10">
                 <div class="w-[30%]">OPERATOR</div>
                 <div class="w-[20%] text-center">:</div>
-                <div class="w-[50%]">Ryan James Macawili</div>
+                <div class="w-[50%]"> {{operator}} </div>
               </div>
               <div class="flex leading-10">
                 <div class="w-[30%]">DATE</div>
                 <div class="w-[20%] text-center">:</div>
-                <div class="w-[50%]">{{ date }}May 09 2024</div>
+                <div class="w-[50%]">{{ date }}</div>
               </div>
               <div class="flex leading-10">
                 <div class="w-[30%]">TIME</div>
                 <div class="w-[20%] text-center">:</div>
-                <div class="w-[50%]">{{ time }}9:00 am</div>
+                <div class="w-[50%]">{{ time }}</div>
               </div>
             </div>
             <br>
@@ -57,25 +57,20 @@
             <div class="">
               <Strong class=" leading-8">POST DESCRIPTION :</Strong>
               
-              <p>{{ description }}</p>
-              <p class="pl-8">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut harum, a pariatur voluptatum adipisci excepturi voluptates! Vitae fuga minus sapiente odit aut velit dignissimos modi, blanditiis corrupti fugit neque exercitationem.</p>
+              <p class="pl-8">{{ description }}</p>
             </div>
             <br />
             <div class="">
               <Strong class="leading-8">ADDITIONAL DESCRIPTION :</Strong>
               <p>{{ additionalDescription }}</p>
 
-              <p class="pl-8">Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel ad praesentium a. Non, adipisci, doloremque eveniet impedit culpa voluptas, itaque facilis alias fugiat iure voluptatum deleniti praesentium eaque excepturi nihil.</p>
             </div>
             <br />
-            <div class="">
-                <Strong class="leading-8">Additional Description:</Strong>
-              <p class="pl-8">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil ut fugiat illum quae accusamus, eum dolor! Maiores atque magni fugiat hic esse animi tenetur asperiores, consequatur culpa ullam vel tempore!</p>
-            </div>
+
           </div>
           <div class="h-[10%] font-medium text-sm">
             <div class=" text-end font-bold">
-              RYAN JAMES MACAWILI
+              {{operator}}
             </div>
             <div class="leading-4 text-end">Dispatch Operator</div>
           </div>
@@ -94,15 +89,14 @@
 <script setup>
 import { onMounted } from 'vue';
 
-const props = defineProps({
-  emergency: String,
-  responder: String,
-  description: String,
-  additionalDescription: String,
-  operator: String,
-  date: String,
-  time: String,
-});
+
+var emergency = localStorage.getItem('l_emergency')
+var responder = localStorage.getItem('l_responder')
+var operator = localStorage.getItem('l_operator')  
+var date = localStorage.getItem('l_date')
+var time = localStorage.getItem('l_time')
+var description = localStorage.getItem('l_description')
+var additionalDescription = localStorage.getItem('l_additional_description')
 
 onMounted(() => {
   setTimeout(() => {

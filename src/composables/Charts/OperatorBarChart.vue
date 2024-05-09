@@ -67,11 +67,13 @@ const chartData = ref({
   ],
   datasets: [
     {
-      data: [],
-      backgroundColor: ["#2b2d56"],
+      label: "Monthly Report",
+      data: [0, 0, 0, 0, 0, 0, 0, 0], // Initialize with zeros
+      backgroundColor: ["#2b2d56","#2b2d56","#2b2d56","#2b2d56","#2b2d56","#fefefe","#fefefe","#2b2d56",],
     },
   ],
 });
+
 
 const chartKey = ref(0);
 

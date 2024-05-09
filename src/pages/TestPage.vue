@@ -94,7 +94,9 @@
           <div class="w-[77%] p-3"></div>
           <div class="flex w-[23%]">
             <div class="w-[25%] flex items-center justify-end">
-              <img :src="profile" />
+              <img 
+              class="rounded-full h-[90%]"
+              :src="profile">
             </div>
             <div class="w-[75%]">
               <div

@@ -33,29 +33,29 @@
             <div class="pl-8 font-medium">
               <div class="flex">
                 <div class="w-[30%]">EMERGENCY TYPE</div>
-                <div class="w-[20%] text-center">:</div>
+                <div class="w-[20%] item-center justify-center flex">:</div>
                 <div class="w-[50%]">{{ emergency }}</div>
               </div>
               <div class="flex">
                 <div class="w-[30%]">RESPONDER</div>
-                <div class="w-[20%] text-center">:</div>
+                <div class="w-[20%] item-center justify-center flex">:</div>
                 <div class="w-[50%]">
                   {{ responder && responder.length > 27 ? `${responder.substring(0, 24)}...` : responder }}
                 </div>
                               </div>
               <div class="flex">
                 <div class="w-[30%]">OPERATOR</div>
-                <div class="w-[20%] text-center">:</div>
+                <div class="w-[20%] item-center justify-center flex">:</div>
                 <div class="w-[50%]"> {{operator}} </div>
               </div>
               <div class="flex">
                 <div class="w-[30%]">DATE</div>
-                <div class="w-[20%] text-center">:</div>
+                <div class="w-[20%] item-center justify-center flex">:</div>
                 <div class="w-[50%]">{{ date }}</div>
               </div>
               <div class="flex">
                 <div class="w-[30%]">TIME</div>
-                <div class="w-[20%] text-center">:</div>
+                <div class="w-[20%] item-center justify-center flex">:</div>
                 <div class="w-[50%]">{{ time }}</div>
               </div>
             </div>
@@ -72,9 +72,7 @@
               <p>{{ additionalDescription }}</p>
             </div>
             <br />
-            <div class="leading-3">
-              3. Lorem ipsum dolor sit amet consectetur adipisicing elit.
-            </div>
+
           </div>
           <div class="h-[10%] font-medium text-[0.55rem]">
             <div class="leading-[0.55rem] text-end font-bold">{{operator}}</div>
