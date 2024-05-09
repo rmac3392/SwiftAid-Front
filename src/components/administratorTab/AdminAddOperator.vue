@@ -587,6 +587,7 @@ const submitOperator = async () => {
           },
         }
       );
+      window.location.reload();
     }
   } catch (error) {
     if (!image.value) {

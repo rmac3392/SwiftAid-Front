@@ -67,7 +67,7 @@ const posts = ref([
     location: "123 Main St",
     emergency: "Fire",
     description: "Building on fire",
-    status: "Active",
+    status: "Acknowledged",
     timestamp: "May 9, 2024",
     time: "12:00 PM"
   },
@@ -75,7 +75,7 @@ const posts = ref([
     location: "456 Elm St",
     emergency: "Flood",
     description: "Street flooded",
-    status: "Resolved",
+    status: "Acknowledged",
     timestamp: "May 8, 2024",
     time: "12:00 PM"
   },
@@ -83,7 +83,7 @@ const posts = ref([
     location: "789 Oak St",
     emergency: "Assault",
     description: "Physical altercation",
-    status: "Active",
+    status: "Dismissed",
     timestamp: "May 7, 2024",
     time: "12:00 PM"
   },
@@ -91,7 +91,7 @@ const posts = ref([
     location: "101 Pine St",
     emergency: "Injuries",
     description: "Multiple injuries reported",
-    status: "Active",
+    status: "Acknowledged",
     timestamp: "May 6, 2024",
     time: "12:00 PM"
   },
@@ -99,7 +99,7 @@ const posts = ref([
     location: "111 Maple St",
     emergency: "Biohazard",
     description: "Chemical spill",
-    status: "Resolved",
+    status: "Dismissed",
     timestamp: "May 5, 2024",
     time: "12:00 PM"
   }
@@ -135,13 +135,13 @@ const print = (emergency,responder,operator,date,time,description,additional_des
 const getSinglePostReport = async (id) => {
   const response = await fetch(`http://localhost:8080/getSinglePostReport/${id}`);
   const data = await response.json();
-
   return data[0];
 }
 
 const getOperator = async (id) => {
   const response = await fetch(`http://localhost:8080/getSingleOperator/${id}`);
   const data = await response.json()
+  console.log(id)
   return `${data[0].first_name} ${data[0].last_name}`;
 }
 
@@ -168,12 +168,16 @@ const getPost = async () => {
 
     
     if(singlePost.operator_id){
-
       const added_description = singlePost.additional_description;
       const operator = await getOperator(singlePost.operator_id);
       let currentResponderID = localStorage.getItem("responder_userId");
-
+      let status = null;
       if(currentResponderID==singlePost.responder_id&&data[i].status=='Acknowledged'||currentResponderID==singlePost.responder_id&&data[i].status=='Cancelled'){
+        status = data[i].status
+        console.log("im true")
+        if(data[i].status =='Cancelled'){
+          status='Dismissed';
+        }
         posts.value.push({
           id: data[i].post_id,
           location: data[i].address,
@@ -181,7 +185,7 @@ const getPost = async () => {
           description: data[i].description,
           operator: operator,
           added_description:added_description ,
-          status: data[i].status,
+          status: status,
           timestamp: `${monthName} ${day}, ${year}`,
           time: time
         });

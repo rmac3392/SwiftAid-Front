@@ -100,8 +100,8 @@
           <div class="flex w-[25%]">
             <div class="w-[25%] flex items-center">
               <img
-                class="ml-[20%]"
-                src="../../src/assets/logo.png"
+                class="ml-[20%] rounded-full h-[85%]"
+                :src="profile"
                 alt="logo"
               />
             </div>
@@ -150,7 +150,7 @@ auth.value = localStorage.getItem("responderAuth");
 const tab = ref(0);
 const institution = ref();
 const router = useRouter();
-
+const profile = ref(null);
 const isClicked = ref(false);
 const myModal = ref(null);
 
@@ -187,7 +187,35 @@ const responderAuth = async () => {
   }
 };
 
+const image = async () =>{
+  const id = localStorage.getItem("responder_userId");
+  const response = await fetch(`http://localhost:8080/getUserImage/${id}`)
+  const data = await response.json();
+
+  const imageBlob = data[0].image.data;
+  profile.value = await convertBlob(imageBlob);
+
+}
+
+
+
+const convertBlob = (image) => {
+      return new Promise((resolve, reject) => {
+        if (image) {
+          const blob = new Blob([new Uint8Array(image)], { type: "image/jpeg" });
+          const reader = new FileReader();
+          reader.readAsDataURL(blob);
+          reader.onloadend = () => {
+            const dataURL = reader.result;
+            resolve(dataURL);
+          };
+        }
+      });
+    };
+
+
 onMounted(() => {
-  showModal(); // Optionally show the modal on component mount
+  showModal(); 
+  image();
 });
 </script>

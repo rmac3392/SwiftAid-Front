@@ -52,6 +52,8 @@
             <div class="w-[55%] font-500 ml-2 flex flex-col my-auto gap-y-1">
               <p class="text-sm my-2">{{ user.name }}</p>
               <p class="text-sm">{{ user.number }}</p>
+              <p class="text-sm">Status: {{user.status}}</p>
+
               <p class="drop-shadow-lg my-2 font-bold text-sm text-primary">
                 {{ user.role }}
               </p>
@@ -64,20 +66,40 @@
                 class="py-2 text-sm text-gray-700 dark:text-gray-200"
                 aria-labelledby="dropdownDots"
               >
-                <button
-                  @click="showEditModal(index++); getDetails(user.id,user.role)"
-                  data-modal-target="popup-modal1"
-                  data-modal-toggle="popup-modal1"
-                  class="block px-2 py-2 ml-[-20%] hover:bg-primary rounded-md hover:text-white text-xs font-500 text-primary cursor-pointer"
-                >
-                  <!-- <button
-                      
-                      class="block text-primary text-xs font-500"
-                      type="button"
-                    > -->
-                  Edit Account
-                  <!-- </button> -->
-                </button>
+              <button                 v-if="user.role=='System Operator'"
+              @click="getDetails(user.id,user.role)" >
+
+                <EditAction
+                :op_id="user.id"
+                :user_id="user.user_id"
+                :role="user.role"
+                :first_name="user.first_name"
+                :last_name="user.last_name"
+                :number="user.number"
+                :email="user.email"
+                :image="user.image"
+                :status="user.status"
+
+                />
+              </button>
+
+              <button v-if="user.role=='Responder'"
+              @click="getDetails(user.id,user.role)" >
+
+                <EditAction
+                :res_id="user.res_id"
+                :institution="user.name"
+                :user_id="user.user_id"
+                :role="user.role"
+                :number="user.number"
+                :city="user.city"
+                :address="user.address"
+                :image="user.image"
+                :status="user.status"
+
+                />
+              </button>
+
                 <!-- <div
                   @click="showDeleteModal()"
                   class="block px-1 py-2 hover:bg-gray-100 text-xs font-500 text-red-700 cursor-pointer text-center"
@@ -90,16 +112,13 @@
         </div>
       </div>
     </div>
-    <!-- Modal -->
-    <edit-account v-if="editAccountVisible"
-     :first_name="first_name"
-     :last_name="last_name"
-    ></edit-account>
+  
   </div>
 </template>
 <script setup>
 import DeleteRecord from "../../composables/DeleteRecord.vue";
 import EditAccount from "../../composables/EditAccount.vue";
+import EditAction from "../../composables/EditAction.vue";
 
 const editAccountVisible = ref(false);
 
@@ -134,15 +153,22 @@ const getOperator = async () => {
       const name = `${data[i].first_name} ${data[i].last_name} `;
       const number = `${data[i].mobile_number}`;  
       const id = data[i].user_id;
-      
+
+      const userResponse = await fetch(`http://localhost:8080/getSingleUser/${id}`)
+      const userDatas = await userResponse.json();
+
       const response = await fetch(`http://localhost:8080/getUserImage/${id}`);
       const imageData = await response.json();
       const image = await convertBlob(imageData[0].image?.data) ;
-      console.log(data[i].user_id,image)
           userData.value.push({
-            id: data[i].user_id,
+            id: data[i].operator_id,
+            user_id:data[i].user_id,
             name: name,
+            status: userDatas[0].status,
+            first_name: data[i].first_name,
+            last_name: data[i].last_name,
             number: number,
+            email:data[0].email,
             role: `System Operator`,
             image: image,
             role_selection: "operator",
@@ -155,36 +181,37 @@ const getOperator = async () => {
   }
 };
 
+
 const getResponder = async () => {
   try {
     const response = await fetch(`http://localhost:8080/getResponder`);
     const data = await response.json();
-    const lth = data.length;
-    for (var i = 0; i < lth-1; i++) {
-      const name = `${data[i].institution} `;
-      const number = `${data[i].mobile_number}`;
-      const id = data[i].user_id;
+    for(var i = 0 ; i < data.length ;i ++){
+      var id = data[i].user_id;
 
-      const response = await fetch(`http://localhost:8080/getUserImage/${id}`);
-      const imageData = await response.json();
-      const image = imageData[0].image?.data;
-      if (image) {
-        const blob = new Blob([new Uint8Array(image)], { type: "image/jpeg" });
-        const reader = new FileReader();
-        reader.readAsDataURL(blob);
-        reader.onloadend = () => {
-          const dataURL = reader.result;
-          console.log("Data i " , data[i].responder_id)
-          userData.value.push({
-            id: data[i].responder_id,
-            name: name,
-            number: number,
+      const imageResponse = await fetch(`http://localhost:8080/getUserImage/${id}`);
+      const imageData = await imageResponse.json()
+      const image = await convertBlob(imageData[0].image.data)
+
+      const userResponse = await fetch(`http://localhost:8080/getSingleUser/${id}`)
+      const userDatas = await userResponse.json();
+      
+        userData.value.push({
+            id: data[i].operator_id,
+            res_id:data[i].responder_id,
+            user_id:data[i].user_id,
+            name: data[i].institution,
+            status:userDatas[0].status,
+            address:data[i].address,
+            number: data[i].mobile_number,
+            city: data[i].city,
+            email:data[0].email,
             role: `Responder`,
-            image: dataURL,
+            image: image,
             role_selection: "responder",
           });
-        };
-      }
+      
+
     }
   } catch (error) {
     console.log("Error: ", error);
@@ -224,22 +251,11 @@ const email = ref();
 const password = ref();
 
 const getDetails = async (id,role) => {
-
   if(role=='System Operator'){
     const data = await getSingleOperator(id);
-    localStorage.setItem('current_role','System Operator');
-    console.log(    localStorage.getItem('current_role'))
-    localStorage.setItem('op_id',data.operator_id);
-    localStorage.setItem('op_firstname',data.first_name);
-    localStorage.setItem('op_lastname',data.last_name);
-    localStorage.setItem('op_number',data.mobile_number);
-
   }
   else if(role=='Responder'){
-    localStorage.setItem('current_role','Responder');
-    console.log(    localStorage.getItem('current_role'))
 
-    const data = await getSingleResponder(id);
 
   } 
 }

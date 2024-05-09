@@ -399,6 +399,8 @@ const submitResponder = async () => {
           },
         }
       );
+      window.location.reload();
+
     }
   } catch (error) {
     if (!image.value) {
