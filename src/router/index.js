@@ -45,6 +45,12 @@ const router = createRouter({
                 import ("../pages/Post.vue"),
         },
         {
+            path: "/print",
+            name: "print",
+            component: () =>
+                import ("../pages/Print.vue"),
+        },
+        {
             path: "/Twitter",
             name: "Twitter",
             component: () =>

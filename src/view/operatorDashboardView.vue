@@ -6,17 +6,15 @@
       <div class="font-semibold text-xl text-primary">Emergency Alert :</div>
 
       <!-- alert -->
-      <div v-for="(post, index) in posts"
-      >
-        <testAlert
-        @click="getDetails(post.id)"
-        v-if="post.id!=postID"
+      <testAlert
+      :class="{ 'hidden': alertVisibility[index] }"
+        v-for="(post, index) in posts.slice().reverse()"
+        @click="getDetails(post.id),hideAlert(index)"
         :location="`${post.city}`+' City'"
         :type="post.type"
         :time="post.time"
-      />
-      </div>
-
+        
+      />  
     </div>
     <div class="h-full w-[72%] ml-2">
       <div class="flex h-[15%] pb-5 gap-5">
@@ -191,10 +189,18 @@ import stringSimilarity from "string-similarity";
 import { ref, onMounted, watch } from "vue";
 import axios from "axios";
 
+const alertVisibility = ref([]); // Array to track visibility of each alert
+
+const hideAlert = (index) => {
+  alertVisibility.value[index] = true; // Set visibility to true when alert is clicked
+};
+
+
 onMounted(() => {
   initializeDataFetching();
   getLocations();
   getResponders();
+  alertVisibility.value = Array(posts.length).fill(false);
 });
 
 const posts = ref([]);
