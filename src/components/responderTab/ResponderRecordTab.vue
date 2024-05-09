@@ -1,34 +1,34 @@
   <template>
-  <div class="flex flex-col gap-3 items-center justify-center h-[60%] mt-[8%]">
-    <div class="bg-white rounded-lg mt-2 shadow-lg h-1/2 p-5">
+  <div class="flex  h-full w-full  ">
+    <div class="bg-white rounded-lg mt-2 shadow-lg w-full p-5">
       <div class="overflow-auto h-full">
         <table
-          class="table border border-gray-300 table-pin-rows table-pin-cols"
+          class="table table-zebra border border-gray-500 table-pin-rows table-pin-cols"
         >
           <!-- head -->
           <thead class="text-primary">
             <tr>
               <th></th>
-              <th class="border border-gray-300">Location</th>
-              <th class="border border-gray-300">Type of Emergency</th>
-              <th class="border border-gray-300">Description</th>
-              <th class="border border-gray-300">Status</th>
-              <th class="border border-gray-300">Timestamp</th>
-              <th class="border border-gray-300">Action</th>
+              <th class="border border-gray-500">Location</th>
+              <th class="border border-gray-500">Type of Emergency</th>
+              <th class="border border-gray-500">Description</th>
+              <th class="border border-gray-500">Status</th>
+              <th class="border border-gray-500">Timestamp</th>
+              <th class="border border-gray-500">Action</th>
             </tr>
           </thead>
           <tbody class="">
             <!-- row 1 -->
             <tr class="hover" v-for="(post,index) in posts">
-              <th class="border border-gray-300">{{index+1}}</th>
-              <td class="border border-gray-300">{{post.location}}</td>
-              <td class="border border-gray-300">
+              <th class="border border-gray-500">{{index+1}}</th>
+              <td class="border border-gray-500">{{post.location}}</td>
+              <td class="border border-gray-500">
                 {{ post.emergency }}
               </td>
-              <td class="border border-gray-300">{{post.description}}</td>
-              <td class="border border-gray-300">{{post.status}}</td>
-              <td class="border border-gray-300">{{post.timestamp}}</td>
-              <td class="border border-gray-300">
+              <td class="border border-gray-500">{{post.description}}</td>
+              <td class="border border-gray-500">{{post.status}}</td>
+              <td class="border border-gray-500">{{post.timestamp}}</td>
+              <td class="border border-gray-500">
                 <dialogAction 
                   :emergency="post.emergency"
                   :date="post.timestamp"
