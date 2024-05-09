@@ -12,8 +12,8 @@
           <img v-if="type==='Flood'" src="../assets/flood.svg" class="h-[30px]w-[30px] p-2"  alt="">
           <img v-if="type==='Biohazard'" src="../assets/biohazard.svg" class="h-[30px]w-[30px] p-2"  alt="">
           <img v-if="type==='Injuries'" src="../assets/injuries.svg" class="h-[30px]w-[30px] p-2"  alt="">
-          <img v-if="type==='Assault'" src="../assets/fire.svg" class="h-[30px]w-[30px] p-2"  alt="">
-          <img v-if="type==='Other'" src="../assets/fire.svg" class="h-[30px]w-[30px] p-2"  alt="">
+          <img v-if="type==='Assault'" src="../assets/assault.svg" class="h-[30px]w-[30px] p-2"  alt="">
+          <img v-if="type==='Others'" src="../assets/other.svg" class="h-[30px]w-[30px] p-2"  alt="">
         </div>
       </div>
       <div class="w-[67%] ml-1 font-normal cursor-pointer">

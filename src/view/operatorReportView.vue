@@ -139,12 +139,22 @@
         <div
           class="bg-white rounded-lg mb-3 shadow-lg h-1/2 flex items-center justify-center"
         >
-          <OperatorPieChart />
+          <OperatorPieChart 
+          :red="pending"
+          :blue="acknowledged"
+          />
         </div>
         <div
           class="bg-white rounded-lg mt-2 shadow-lg h-1/2 flex items-center justify-center"
         >
-          <OperatorPieChart />
+          <OperatorPieChart2 
+          :fire="fireCount"
+          :flood="floodCount"
+          :injuries="injuriesCount"
+          :assault="assaultCount"
+          :biohazard="biohazardCount"
+          :others="othersCount"
+          />
         </div>
       </div>
       <div class="w-[72%] ml-2 flex flex-col">
@@ -208,6 +218,8 @@
 </template>
 <script setup>
 import OperatorPieChart from "../composables/Charts/OperatorPieChart.vue";
+import OperatorPieChart2 from "../composables/Charts/SixPieChart.vue";
+
 import OperatorBarChart from "../composables/Charts/OperatorBarChart.vue";
 import dialogAction from "../composables/dialogAction.vue";
 import { ref, onMounted } from "vue";
@@ -234,6 +246,10 @@ const may = ref(0);
 const jun = ref(0);
 const jul = ref(0);
 const aug = ref(0);
+
+//status referencers
+const acknowledged = ref(0);
+const pending = ref(0);
 
 const getPost = async () => {
   const response = await fetch("http://localhost:8080/getPost");
@@ -278,6 +294,14 @@ const getPost = async () => {
       time: time,
     });
 
+    if(data[i].status=='Pending'){
+      pending.value++;
+    }
+    if(data[i].status=='Acknowledged'){
+      acknowledged.value++;
+    }
+
+
     if (data[i].emergency_type == "Fire") {
       fireCount.value++;
     }
@@ -320,6 +344,8 @@ const getPost = async () => {
     if (monthName == "August") {
       aug.value++;
     }
+
+    
   }
 };
 </script>

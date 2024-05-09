@@ -6,13 +6,17 @@
       <div class="font-semibold text-xl text-primary">Emergency Alert :</div>
 
       <!-- alert -->
-      <testAlert
-        v-for="(post, index) in posts.slice().reverse()"
+      <div v-for="(post, index) in posts.slice().reverse()"
+      >
+        <testAlert
         @click="getDetails(post.id)"
+        v-if="post.id!=postID"
         :location="`${post.city}`+' City'"
         :type="post.type"
         :time="post.time"
       />
+      </div>
+
     </div>
     <div class="h-full w-[72%] ml-2">
       <div class="flex h-[15%] pb-5 gap-5">
@@ -322,12 +326,10 @@ const getDetails = async (id) => {
     mapType.value = "hospital";
     biohazard.value = true;
   } else if (data[0].emergency_type == "Others") {
-    getCityResponders(description, "hospital");
-
+    getCityResponders(description, "police");
     mapType.value = "police";
     others.value = true;
   }
-  console.log("type", type);
   typeOfEmergency.value.push({ emergency: data[0].emergency_type });
 };
 
@@ -342,21 +344,21 @@ const getCityResponders = async (description, type) => {
       type == "fire"
     ) {
       city_responders.value.push({ eru: responders.value[i].name });
-      break;
+      
     } else if (
       responders.value[i].location == city &&
       responders.value[i].type == "police" &&
       type == "police"
     ) {
       city_responders.value.push({ eru: responders.value[i].name });
-      break;
+      
     } else if (
       responders.value[i].location == city &&
       responders.value[i].type == "hospital" &&
       type == "hospital"
     ) {
       city_responders.value.push({ eru: responders.value[i].name });
-      break;
+      
     }
   }
 };

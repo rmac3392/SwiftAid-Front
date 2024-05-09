@@ -39,12 +39,14 @@
               <div class="flex">
                 <div class="w-[30%]">RESPONDER</div>
                 <div class="w-[20%] text-center">:</div>
-                <div class="w-[50%]">BFP region VII</div>
-              </div>
+                <div class="w-[50%]">
+                  {{ responder && responder.length > 27 ? `${responder.substring(0, 24)}...` : responder }}
+                </div>
+                              </div>
               <div class="flex">
                 <div class="w-[30%]">OPERATOR</div>
                 <div class="w-[20%] text-center">:</div>
-                <div class="w-[50%]">Ryan James Macawili</div>
+                <div class="w-[50%]"> {{operator}} </div>
               </div>
               <div class="flex">
                 <div class="w-[30%]">DATE</div>
@@ -64,10 +66,9 @@
             <br>
             <div class="leading-3"><Strong>Additional Description:</Strong><p>{{additionalDescription}}</p></div>
             <br>
-            <div class="leading-3">3. Lorem ipsum dolor sit amet consectetur adipisicing elit.</div>
           </div>
           <div class="h-[10%] font-medium text-[0.55rem]">
-            <div class="leading-[0.55rem] text-end font-bold">RYAN JAMES MACAWILI</div>
+            <div class="leading-[0.55rem] text-end font-bold">{{operator}}</div>
             <div class="leading-[0.55rem] text-end">Dispatch Operator</div>
           </div>
         </div>

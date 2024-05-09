@@ -131,6 +131,7 @@ const responderAuth  = async () => {
   for(var i = 0; i < data.length; i++){
     if(localStorage.getItem("responder_userId") == data[i].user_id){
       institution.value = data[i].institution;
+      localStorage.setItem('current_responder',data[i].institution);
       break;    
     }
   }

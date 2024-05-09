@@ -82,6 +82,7 @@ const searchRoute = async () => {
   console.log(destinationQuery);
 
   // Filter out empty origin inputs
+  console.log(responders.value)
   const originQueries = responders.value
     .filter(
       (responder) =>
