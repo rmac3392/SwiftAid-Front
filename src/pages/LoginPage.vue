@@ -157,26 +157,45 @@ const login = async () => {
 
           if(data[i].role=="admin"){
 
-            localStorage.setItem("admin_userId",`${data[i].user_id}`);
-            localStorage.setItem("adminAuth",true);
-            localStorage.setItem("auth",true);
-;           router.push("/AdministratorPage");
+            if(data[i].status=='Enabled'){
+              localStorage.setItem("admin_userId",`${data[i].user_id}`);
+              localStorage.setItem("adminAuth",true);
+              localStorage.setItem("auth",true);
+              router.push("/AdministratorPage");
+            }
+            else{
+              errorMessage.value = "You are disabled";
+            }
+
 
           }
           else if(data[i].role=="operator"){
+            if(data[i].status=='Enabled'){
+              localStorage.setItem("operator_userId",`${data[i].user_id}`);
+              localStorage.setItem("operatorAuth",true);
+              localStorage.setItem("auth",true);
+              router.push("/OperatorPage");
+            }
+            else{
+              errorMessage.value = "You are disabled";
+            }
 
-            localStorage.setItem("operator_userId",`${data[i].user_id}`);
-            localStorage.setItem("operatorAuth",true);
-            localStorage.setItem("auth",true);
-            router.push("/OperatorPage");
+
 
           }
           else if(data[i].role=="responder"){
 
-            localStorage.setItem("responder_userId",`${data[i].user_id}`);
-            localStorage.setItem("responderAuth",true);
-            localStorage.setItem("auth",true);
-            router.push("/ResponderPage");
+            if(data[i].status=='Enabled'){
+              localStorage.setItem("responder_userId",`${data[i].user_id}`);
+              localStorage.setItem("responderAuth",true);
+              localStorage.setItem("auth",true);
+              router.push("/ResponderPage");
+            }
+            else{
+              errorMessage.value = "You are disabled";
+            }
+
+
 
 
           }

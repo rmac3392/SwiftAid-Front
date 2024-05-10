@@ -200,12 +200,20 @@
                   <td class="border border-gray-300">{{ post.status }}</td>
                   <td class="border border-gray-300">{{ post.timestamp }}</td>
                   <td class="border border-gray-300">
-                    <dialogAction
+                    <button 
+                    class="text-start item-start justify-start flex"
+                    @click="print(post.emergency,post.responder,post.operator,post.timestamp,post.time,post.description,post.additionalDescription)">
+                      <dialogAction 
                       :emergency="post.emergency"
                       :date="post.timestamp"
                       :time="post.time"
                       :description="post.description"
-                    />
+                      :additionalDescription="post.additionalDescription"
+                      :operator="post.operator"
+                      :responder="post.responder"
+
+                      />
+                  </button>
                   </td>
                 </tr>
               </tbody>
@@ -251,6 +259,40 @@ const aug = ref(0);
 const acknowledged = ref(0);
 const pending = ref(0);
 
+const getSinglePostReport = async (id) => {
+  const response = await fetch(`http://localhost:8080/getSinglePostReport/${id}`);
+  const data = await response.json();
+  return data[0];
+}
+
+const getSingleOperator = async (id) => {
+  const response = await fetch(`http://localhost:8080/getSingleOperator/${id}`);
+  const data = await response.json();
+  return `${data[0].first_name} ${data[0].last_name}`;  
+}
+
+const getSingleResponder = async (id) => {
+  const response = await fetch(`http://localhost:8080/getResponder`);
+  const data = await response.json();
+  for(var i = 0 ; i < data.length ; i ++){
+    if(id == data[i].responder_id){
+      return data[i].institution;
+    }
+  }
+ 
+}
+
+const print = (emergency,responder,operator,date,time,description,additional_description) =>{
+  localStorage.setItem('l_emergency',emergency);
+  localStorage.setItem('l_responder',responder);
+  localStorage.setItem('l_operator',operator);
+  localStorage.setItem('l_date',date);
+  localStorage.setItem('l_time',time);
+  localStorage.setItem('l_description',description);
+  localStorage.setItem('l_additional_description',additional_description);
+}
+
+
 const getPost = async () => {
   const response = await fetch("http://localhost:8080/getPost");
   const data = await response.json();
@@ -284,15 +326,26 @@ const getPost = async () => {
     hours = hours ? hours : 12;
     const time = hours + ":" + (minutes < 10 ? "0" : "") + minutes + " " + ampm;
 
-    posts.value.push({
-      id: data[i].post_id,
-      location: data[i].address,
-      emergency: data[i].emergency_type,
-      description: data[i].description,
-      status: data[i].status,
-      timestamp: `${monthName} ${day}, ${year}`,
-      time: time,
-    });
+    const singlePost = await getSinglePostReport(data[i].post_id);
+  
+    if(singlePost.operator_id){
+      const operator = await getSingleOperator(singlePost.operator_id);
+      const responder = await getSingleResponder(singlePost.responder_id);
+      posts.value.push({
+        id: data[i].post_id,
+        location: data[i].address,
+        emergency: data[i].emergency_type,
+        description: data[i].description,
+        status: data[i].status,
+        additionalDescription: singlePost.additional_description || 'Not Determined',
+        timestamp: `${monthName} ${day}, ${year}`,
+        time: time,
+        operator: operator || 'Not Determined',
+        responder: responder || 'Not Determined'
+      });
+      
+    }
+
 
     if(data[i].status=='Pending'){
       pending.value++;

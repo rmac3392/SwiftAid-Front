@@ -232,7 +232,21 @@
   const postText = async () => {
   try {
     updateDateTime();
-    let modifiedText = text.value.replace(/sunog/gi, "wildfire").replace(/bombero/gi, "firefighters");
+    let modifiedText = text.value.replace(/sunog/gi, "wildfire")
+                                  .replace(/bombero/gi, "firefighters")
+
+                                  .replace(/dunggab/gi, "violent stabbing police")
+                                  .replace(/kulata/gi, "violent stabbing police")
+
+                                  .replace(/baha/gi, "storm flood")
+
+                                  .replace(/nabali/gi, "accident")
+                                  .replace(/disgrasya/gi, "accident")
+                                  .replace(/bangga/gi, "accident")
+
+
+                                  ;
+
     const serverResponse = await axios.post("http://localhost:5000/predict", {
       text: modifiedText,
     });
@@ -243,7 +257,7 @@
       if(result.value.type=='Other'){
         finalType = 'Others'
       }
-      post(modifiedText, finalType);
+      post(text.value, finalType);
       console.log(
         "Data sent to flask backend",
         modifiedText,

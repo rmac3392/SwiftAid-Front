@@ -38,7 +38,7 @@
                 <div
                   class="h-[65%] flex justify-center font-semibold items-end text-4xl"
                 >
-                  13
+                  {{ received }}
                 </div>
                 <div class="h-[35%] flex justify-center items-start text-sm">
                   Received
@@ -64,7 +64,7 @@
                 <div
                   class="h-[65%] flex justify-center font-semibold items-end text-4xl"
                 >
-                  12
+                  {{ dismissed }}
                 </div>
                 <div class="h-[35%] flex justify-center items-start text-sm">
                   Dismissed
@@ -90,7 +90,7 @@
                 <div
                   class="h-[65%] flex justify-center font-semibold items-end text-4xl"
                 >
-                  11
+                  {{ acknowledged }}
                 </div>
                 <div class="h-[35%] flex justify-center items-start text-sm">
                   Acknowledged
@@ -116,7 +116,7 @@
                 <div
                   class="h-[65%] flex justify-center font-semibold items-end text-4xl"
                 >
-                  10
+                  {{ pending }}
                 </div>
                 <div class="h-[35%] flex justify-center items-start text-sm">
                   Pending Reports
@@ -283,6 +283,36 @@
       </div>
     </div>
   </div>
+
+  <dialog ref="dialog" :id="id" class="modal">
+    <div class="modal-box h-[300px] bg-white flex flex-col rounded-lg">
+      <form method="dialog">
+        <button class="btn btn-md btn-circle btn-ghost absolute right-2 top-2">
+          ✕
+        </button>
+      </form>
+      <div>
+        <div class="relative p-4 w-[100%] mt-[3%]">
+          <div class="items-center justify-center flex mb-2">
+            <mdicon
+              class="text-red-600"
+              name="AlertOutline"
+              :width="65"
+              :height="65"
+            />
+          </div>
+          <div
+            class="text-center relative bg-white rounded-lg text-3xl font-bold text-red-600"
+          >
+            Emergency Alert
+          </div>
+          <p class="text-xl text-center tracking-wider mt-5 font-medium">
+            Please see the emergency report immediately!
+          </p>
+        </div>
+      </div>
+    </div>
+  </dialog>
 </template>
 
 <script setup>
@@ -292,7 +322,7 @@ import axios from "axios";
 import { ref, onMounted } from "vue";
 
 onMounted(() => {
-  getPost();
+  initializeDataFetching();
 });
 
 const posts = ref([]);
@@ -335,13 +365,22 @@ const getResponder = async () => {
   }
 };
 
+
+const received = ref(0);
+const dismissed = ref(0);
+const acknowledged = ref(0);
+const pending = ref(0);
+
 const getPost = async () => {
   try {
     posts.value = [];
-
+    received.value = 0 ;
+    dismissed.value = 0;
+    acknowledged.value =0;
+    pending.value = 0;
     const response = await fetch(`http://localhost:8080/getPost`);
     const data = await response.json();
-
+    var lth = 0;
     for (var i = 0; i < data.length; i++) {
       if (data[i].status == "Sent") {
         const singlePostName = await singlePost(data[i].post_id);
@@ -383,9 +422,33 @@ const getPost = async () => {
             city: data[i].city,
             zipcode: data[i].zipcode,
           });
+          lth++;
+        }
+        pending.value++;
+        received.value++;
+
+      }
+      if (data[i].status == "Cancelled") {
+        const singlePostName = await singlePost(data[i].post_id);
+        const responderName = await getResponder();
+
+        if (singlePostName == responderName) {
+          dismissed.value++;
+          received.value++;
+        }
+      }
+      if (data[i].status == "Acknowledged") {
+        const singlePostName = await singlePost(data[i].post_id);
+        const responderName = await getResponder();
+
+        if (singlePostName == responderName) {
+          acknowledged.value++;
+          received.value++;
         }
       }
     }
+
+    return lth;
   } catch (error) {
     console.log(error);
   }
@@ -479,7 +542,70 @@ const acknowledgePost = async () => {
 };
 
 const dismiss = async () => {
+  const post_report = await getSinglePostReport(postID.value);
+  var operator_id = post_report.operator_id;
+
+  await axios.put(`http://localhost:8080/updatePost/${postID.value}`, {
+      responder_id: localStorage.getItem("responder_userId"),
+      operator_id: operator_id,
+      additional_description: additionalDescription.value,
+      post_id: postID.value,
+    });
+
   await axios.put(`http://localhost:8080/denyPost/${postID.value}`);
   window.location.reload();
 };
+
+
+const dialog = ref(null);
+
+const initializeDataFetching = async () => {
+  try {
+    // Initial data fetch
+await getPost();
+    // Polling every second
+    setInterval(async () => {
+      try {
+        // const response = await fetch(`http://localhost:8080/getPost`);
+        // const data = await response.json();
+        // let lth = 0;
+        // for (var i = 0; i < data.length; i++) {
+        //   if (data[i].status == "Pending") {
+        //     lth++;
+        //   }
+        // }
+        // if (lth > posts.value.length) {
+        //   getPost();
+        //   const audio = new Audio(`src/assets/alert.mp3`);
+        //   audio.play();
+        // }
+        const response = await fetch(`http://localhost:8080/getPost`);
+        const data = await response.json();
+        let lth = 0;
+        for(var i = 0; i < data.length;i++){
+          if(data[i].status=='Sent'){
+            const singlePostName = await singlePost(data[i].post_id);
+            const responderName = await getResponder();
+
+            if (singlePostName == responderName) {
+             lth++;
+            }
+          }
+        }
+        if(lth > posts.value.length){
+          const audio = new Audio(`src/assets/alert.mp3`);
+          audio.play();
+          dialog.value.showModal();  
+          getPost();
+        }
+
+      } catch (error) {
+        console.error("Error fetching posts:", error);
+      }
+    }, 1000);
+  } catch (error) {
+    console.error("Error initializing data fetching:", error);
+  }
+};
+
 </script>

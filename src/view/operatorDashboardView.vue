@@ -323,7 +323,7 @@ const getDetails = async (id) => {
     assault.value = true;
   } else if (data[0].emergency_type == "Injuries") {
     getCityResponders(description, "hospital");
-
+    
     mapType.value = "hospital";
     injuries.value = true;
   } else if (data[0].emergency_type == "Biohazard") {
@@ -350,21 +350,21 @@ const getCityResponders = async (description, type) => {
       type == "fire"
     ) {
       city_responders.value.push({ eru: responders.value[i].name });
-      
+      return;
     } else if (
       responders.value[i].location == city &&
       responders.value[i].type == "police" &&
       type == "police"
     ) {
       city_responders.value.push({ eru: responders.value[i].name });
-      
+      return;
     } else if (
       responders.value[i].location == city &&
       responders.value[i].type == "hospital" &&
       type == "hospital"
     ) {
       city_responders.value.push({ eru: responders.value[i].name });
-      
+      return;
     }
   }
 };
@@ -433,7 +433,6 @@ const additionalResponseTeam = async (name) => {
   }
 };
 const sendPost = async () => {
-  console.log("test");
   try {
     const operatorUserID = localStorage.getItem("operator_userId");
     const response = await fetch("http://localhost:8080/getOperator");
@@ -477,6 +476,14 @@ const sentPost = async (id) => {
 const denyPost = async () => {
   try {
     const response = await axios.put(`http://localhost:8080/denyPost/${postID.value}`);
+    const operatorUserID = localStorage.getItem("operator_userId");
+
+    await axios.put(`http://localhost:8080/updatePost/${postID.value}`, {
+          responder_id: null,
+          operator_id: operatorUserID,
+          additional_description: additionalDescription.value,
+          post_id: postID.value,
+        });
     window.location.reload();
   } catch (error) {
     console.error(
@@ -563,8 +570,7 @@ const initializeDataFetching = async () => {
         }
         if (lth > posts.value.length) {
           getPost();
-          const audio = new Audio(`src/assets/alert.mp3`);
-          audio.play();
+
         }
       } catch (error) {
         console.error("Error fetching posts:", error);

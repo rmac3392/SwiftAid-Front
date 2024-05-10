@@ -63,7 +63,6 @@
   
     // Add a marker at the specified coordinates
     L.marker([lat, lon]).addTo(mapInstance)
-      .bindPopup('Your Location')
       .openPopup();
   };
   </script>
